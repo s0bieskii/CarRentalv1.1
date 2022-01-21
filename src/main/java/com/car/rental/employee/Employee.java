@@ -3,7 +3,6 @@ package com.car.rental.employee;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,9 +16,9 @@ public class Employee {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
-    String firstName;
-    String lastName;
-    String employmentPosition;
-    Double salaryPerHour;
+    private int id;
+    private String firstName;
+    private String lastName;
+    private String employmentPosition;
+    private Double salaryPerHour;
 }
