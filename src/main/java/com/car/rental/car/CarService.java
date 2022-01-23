@@ -8,10 +8,10 @@ import java.util.logging.Logger;
 public class CarService {
     public static final Logger LOGGER = Logger.getLogger(CarService.class.getName());
     private final CarRepository carRepository;
-    private final CarAddMapper carMapper;
+    private final CarToAddMapper carMapper;
 
 
-    public CarService(CarRepository carRepository, CarAddMapper carMapper){
+    public CarService(CarRepository carRepository, CarToAddMapper carMapper){
         this.carRepository=carRepository;
         this.carMapper=carMapper;
     }

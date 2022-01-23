@@ -1,5 +1,6 @@
 package com.car.rental.car;
 
+import com.car.rental.details.CarDetailsAddDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,4 +16,5 @@ public class CarAddDto {
     private String model;
     private boolean available;
     private boolean deleted;
+    private CarDetailsAddDto carDetails;
 }
