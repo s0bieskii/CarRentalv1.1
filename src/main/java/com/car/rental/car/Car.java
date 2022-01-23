@@ -4,6 +4,8 @@ import com.car.rental.details.CarDetails;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,6 +17,7 @@ import javax.persistence.OneToOne;
 @Setter
 @NoArgsConstructor
 @Entity
+@ToString
 public class Car {
 
     @Id
