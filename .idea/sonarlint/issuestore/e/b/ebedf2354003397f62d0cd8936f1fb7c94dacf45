@@ -1,0 +1,11 @@
+
+J
+java:S3416"4Update this logger to use "CarDetailsService.class".(Ûµ‘Â
+S
+java:S1068"8Remove this unused "carDetailsRepository" private field.(ı‹ÌÃøÿÿÿÿ
+V
+java:S1144";Remove this unused private "CarDetailsService" constructor.(—óµˆÿÿÿÿÿ
+Y
+java:S2629"7Use the built-in formatting to construct this argument.(¼ïĞüÿÿÿÿ8“Èÿµè/
+T
+java:S2629"7Use the built-in formatting to construct this argument.(ÿ‚ó×8«ä±µè/

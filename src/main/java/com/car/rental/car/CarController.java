@@ -2,12 +2,15 @@ package com.car.rental.car;
 
 import com.car.rental.car.dto.CarAddDto;
 import com.car.rental.car.dto.CarDto;
+import com.car.rental.car.dto.CarUpdateDto;
 import com.car.rental.utils.Config;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,5 +50,26 @@ public class CarController {
         LOGGER.info("GetMapping findBy(id) : id="+id);
         CarDto carDto=carService.findById(id);
         return ResponseEntity.ok(carDto);
+    }
+
+    //TODO zaimpelmentuj
+    @GetMapping("/search")
+    public ResponseEntity<Page<CarDto>> search(){
+        return null;
+    }
+
+
+    @PatchMapping("/{id}")
+    public ResponseEntity updateCar(@PathVariable int id, @RequestBody CarUpdateDto carDto) throws IllegalAccessException {
+        CarDto carAfterUpdate=carService.updateCar(id, carDto);
+        if(carAfterUpdate==null){
+            return ResponseEntity.badRequest().body("Car with this ID not exists");
+        }
+        return ResponseEntity.ok("Car with "+id+" successfully updated");
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteCar(@PathVariable int id){
+        return null;
     }
 }

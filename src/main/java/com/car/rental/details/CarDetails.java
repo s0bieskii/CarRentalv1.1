@@ -22,7 +22,6 @@ public class CarDetails {
     private String vin;
     private String color;
     private Integer registrationYear;
-    private String type;
     private Double price;
     private String segment;
     private Integer doors;

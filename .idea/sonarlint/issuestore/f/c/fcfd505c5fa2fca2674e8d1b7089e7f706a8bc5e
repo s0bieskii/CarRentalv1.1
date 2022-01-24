@@ -1,0 +1,6 @@
+
+v	java:S115"ZRename this constant name to match the regular expression '^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$'.(‰Ü·é8ÿÇæŒè/
+W
+java:S1118":Add a private constructor to hide the implicit public one.(Óùÿ¿8‚ÈæŒè/
+W
+java:S1075"ARefactor your code to get this URI from a customizable parameter.(‰Ü·é
