@@ -16,8 +16,8 @@ import javax.persistence.OneToOne;
 @Getter
 @Setter
 @NoArgsConstructor
-@Entity
 @ToString
+@Entity
 public class Car {
 
     @Id

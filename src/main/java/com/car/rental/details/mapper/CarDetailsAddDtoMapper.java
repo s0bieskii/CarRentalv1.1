@@ -1,5 +1,7 @@
-package com.car.rental.details;
+package com.car.rental.details.mapper;
 
+import com.car.rental.details.CarDetails;
+import com.car.rental.details.dto.CarDetailsAddDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

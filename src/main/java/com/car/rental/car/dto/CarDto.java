@@ -1,20 +1,21 @@
-package com.car.rental.car;
+package com.car.rental.car.dto;
 
-import com.car.rental.details.CarDetailsAddDto;
+import com.car.rental.details.dto.CarDetailsDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@NoArgsConstructor
 @Getter
 @Setter
+@NoArgsConstructor
 @ToString
-public class CarAddDto {
+public class CarDto {
 
+    private int id;
     private String brand;
     private String model;
     private boolean available;
     private boolean deleted;
-    private CarDetailsAddDto carDetails;
+    private CarDetailsDto carDetails;
 }

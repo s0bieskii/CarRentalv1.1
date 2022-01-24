@@ -5,6 +5,8 @@ import com.car.rental.employee.Employee;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -27,7 +29,7 @@ public class Rental {
     private String street;
     private String phone;
     private boolean deleted;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.REFRESH,orphanRemoval = true)
     private List<Car> cars;
     @OneToMany
     private List<Employee> employees;

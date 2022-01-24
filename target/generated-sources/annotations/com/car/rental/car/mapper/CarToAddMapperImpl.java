@@ -1,13 +1,15 @@
-package com.car.rental.car;
+package com.car.rental.car.mapper;
 
-import com.car.rental.details.CarDetailsAddDtoMapper;
+import com.car.rental.car.Car;
+import com.car.rental.car.dto.CarAddDto;
+import com.car.rental.details.mapper.CarDetailsAddDtoMapper;
 import javax.annotation.processing.Generated;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-01-23T12:49:15+0100",
+    date = "2022-01-23T19:35:04+0100",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 15.0.2 (Oracle Corporation)"
 )
 @Component

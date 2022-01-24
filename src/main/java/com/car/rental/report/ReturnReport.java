@@ -22,9 +22,9 @@ public class ReturnReport {
     private int id;
     private String note;
     private Boolean damaged;
-    @OneToOne
+    @OneToOne(orphanRemoval = true)
     private Car car;
-    @OneToOne
+    @OneToOne(orphanRemoval = true)
     private Employee employee;
 
 }

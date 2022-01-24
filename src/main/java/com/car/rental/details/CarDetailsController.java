@@ -1,6 +1,7 @@
 package com.car.rental.details;
 
 import com.car.rental.car.CarController;
+import com.car.rental.details.dto.CarDetailsAddDto;
 import com.car.rental.utils.Config;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -23,8 +24,9 @@ public class CarDetailsController{
 
     @PostMapping
     public ResponseEntity<Object> create(@RequestBody CarDetailsAddDto carDetailsDto){
-        LOGGER.info("Creating CarDetailsAddDto: "+carDetailsDto);
+        LOGGER.info("PostMapping requestBody :"+carDetailsDto);
         CarDetails carDetails=carDetailsService.create(carDetailsDto);
+        LOGGER.info("Car after mapping "+carDetails);
         return ResponseEntity.created(URI.create(Config.applicationPath+carDetails)).build();
     }
 }

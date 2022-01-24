@@ -1,11 +1,13 @@
-package com.car.rental.details;
+package com.car.rental.details.mapper;
 
+import com.car.rental.details.CarDetails;
+import com.car.rental.details.dto.CarDetailsAddDto;
 import javax.annotation.processing.Generated;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-01-23T12:49:15+0100",
+    date = "2022-01-23T19:35:04+0100",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 15.0.2 (Oracle Corporation)"
 )
 @Component

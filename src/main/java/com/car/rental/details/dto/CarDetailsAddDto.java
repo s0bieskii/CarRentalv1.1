@@ -1,11 +1,10 @@
-package com.car.rental.details;
+package com.car.rental.details.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import java.time.LocalDate;
-
 @NoArgsConstructor
 @Getter
 @Setter
