@@ -216,7 +216,7 @@ public class CarIntegrationTest {
     }
 
     @Test
-    void updateCarMethodShouldReturnCarWithTheSameFieldsName(){
+    void updateCarMethodShouldReturnUpdatedCarWithTheSameFieldsWhatIsInCarUpdateDto(){
         //given
         prepareDatabase();
         int id=1;
@@ -235,6 +235,26 @@ public class CarIntegrationTest {
                 ()->assertNotEquals(carBrand, returnedCar.getBrand()),
                 ()->assertNotEquals(carColor, returnedCar.getCarDetails().getColor()),
                 ()->assertNotEquals(carRegistrationYear, returnedCar.getCarDetails().getRegistrationYear())
+        );
+    }
+
+    @Test
+    void updateCarMethodShouldReturnCarWithTheSameFieldsWhenCarUpdateDtoFieldsAreNulls(){
+        //given
+        prepareDatabase();
+        int id=1;
+        CarDto rootCar=carService.findById(id);
+        String carBrand=rootCar.getBrand();
+        String carColor=rootCar.getCarDetails().getColor();
+        int carRegistrationYear=rootCar.getCarDetails().getRegistrationYear();
+        CarUpdateDto carUpdateDto=new CarUpdateDto(new CarDetailsUpdateDto());
+        //when
+        CarDto returnedCar=carService.updateCar(id, carUpdateDto);
+        //then
+        assertAll(
+                ()->assertEquals(carBrand, returnedCar.getBrand()),
+                ()->assertEquals(carColor, returnedCar.getCarDetails().getColor()),
+                ()->assertEquals(carRegistrationYear, returnedCar.getCarDetails().getRegistrationYear())
         );
     }
 
