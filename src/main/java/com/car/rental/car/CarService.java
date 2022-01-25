@@ -5,6 +5,7 @@ import com.car.rental.car.dto.CarDto;
 import com.car.rental.car.dto.CarUpdateDto;
 import com.car.rental.car.mapper.CarDtoMapper;
 import com.car.rental.car.mapper.CarToAddMapper;
+import com.car.rental.details.dto.CarDetailsAddDto;
 import com.car.rental.utils.EntityUpdater;
 import org.hibernate.Hibernate;
 import org.springframework.data.domain.Page;
@@ -31,7 +32,11 @@ public class CarService {
     }
 
     public Car addCar(CarAddDto dto) {
-        LOGGER.info("Given body to method: "+dto);
+        LOGGER.info("Given body to addCar method: "+dto);
+        if(dto.getCarDetails()==null){
+            LOGGER.info("Auto create CarDetails to added car");
+            dto.setCarDetails(new CarDetailsAddDto());
+        }
         Car carToSave=carToAddMapper.toCar(dto);
         LOGGER.info("Car after mapping "+carToSave);
         Car savedCar=carRepository.save(carToSave);
@@ -79,7 +84,16 @@ public class CarService {
         return dto;
     }
 
-    public void deleteCar(){
-
+    public boolean deleteCar(int carIdToDelete){
+        LOGGER.info("Trying to delete car with id="+carIdToDelete);
+        if(carRepository.existsById(carIdToDelete)){
+            Car car=carRepository.findById(carIdToDelete).get();
+            car.setDeleted(true);
+            carRepository.save(car);
+            LOGGER.info("Successful deleted car with id="+carIdToDelete);
+            return true;
+        }
+        LOGGER.info("Car with given id not exist");
+        return false;
     }
 }

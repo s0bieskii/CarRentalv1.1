@@ -17,4 +17,8 @@ public class CarAddDto {
     private boolean available;
     private boolean deleted;
     private CarDetailsAddDto carDetails;
+
+    public CarAddDto(CarDetailsAddDto carDetails) {
+        this.carDetails = carDetails;
+    }
 }

@@ -20,17 +20,19 @@ import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 public class CarIntegrationTest {
     @Autowired
     private CarService carService;
     @Autowired
-    private JdbcTemplate jdbcTemplate;
+        private JdbcTemplate jdbcTemplate;
 
     @BeforeEach
     void tearDown(){
@@ -105,7 +107,7 @@ public class CarIntegrationTest {
     }
 
     @Test
-    void createMethodShouldReturnInstanceOfCar(){
+    void addCarMethodShouldReturnInstanceOfCar(){
         //given
         CarAddDto carToAdd=new CarAddDto();
         //when
@@ -115,7 +117,17 @@ public class CarIntegrationTest {
     }
 
     @Test
-    void createCarShouldAutoGenerateCarId(){
+    void addCarMethodShouldReturnInstanceOfCarWithNotEmptyCarDetails(){
+        //given
+        CarAddDto carToAdd=new CarAddDto();
+        //when
+        Car returnedCar = carService.addCar(carToAdd);
+        //then
+        assertNotNull(returnedCar.getCarDetails());
+    }
+
+    @Test
+    void addCarCarShouldAutoGenerateCarId(){
         //given
         CarAddDto carToAdd=new CarAddDto();
         carToAdd.setBrand("BMW");
@@ -197,11 +209,12 @@ public class CarIntegrationTest {
     @Test
     void findAllMethodShouldReturnCarPageWithSomeCars(){
         //given
+        prepareDatabase();
         PageRequest request= PageRequest.of(0, 5);
         //when
-        Page<CarDto> emptyCarsPage= carService.getAll(request);
+        Page<CarDto> notEmptyCarsPage= carService.getAll(request);
         //then
-        assertEquals(0, emptyCarsPage.getTotalElements());
+        assertNotEquals(0, notEmptyCarsPage.getTotalElements());
     }
 
     @Test
@@ -216,11 +229,13 @@ public class CarIntegrationTest {
     }
 
     @Test
-    void updateCarMethodShouldReturnUpdatedCarWithTheSameFieldsWhatIsInCarUpdateDto(){
+    void updateCarMethodShouldReturnUpdatedCarWithTheSameFieldsWhatsInCarUpdateDto(){
         //given
-        prepareDatabase();
-        int id=1;
-        CarDto rootCar=carService.findById(id);
+        CarAddDto seedCar=new CarAddDto(new CarDetailsAddDto());
+        seedCar.setBrand("NoBrand");
+        seedCar.getCarDetails().setColor("NoColor");
+        seedCar.getCarDetails().setRegistrationYear(2000);
+        Car rootCar=carService.addCar(seedCar);
         String carBrand=rootCar.getBrand();
         String carColor=rootCar.getCarDetails().getColor();
         int carRegistrationYear=rootCar.getCarDetails().getRegistrationYear();
@@ -229,7 +244,7 @@ public class CarIntegrationTest {
         carUpdateDto.getCarDetails().setColor("TestColor");
         carUpdateDto.getCarDetails().setRegistrationYear(2010);
         //when
-        CarDto returnedCar=carService.updateCar(id, carUpdateDto);
+        CarDto returnedCar=carService.updateCar(rootCar.getId(), carUpdateDto);
         //then
         assertAll(
                 ()->assertNotEquals(carBrand, returnedCar.getBrand()),
@@ -239,17 +254,19 @@ public class CarIntegrationTest {
     }
 
     @Test
-    void updateCarMethodShouldReturnCarWithTheSameFieldsWhenCarUpdateDtoFieldsAreNulls(){
+    void updateCarMethodShouldReturnCarWithNoChangeFieldsWhenFieldsInCarUpdateDtoIsNull(){
         //given
-        prepareDatabase();
-        int id=1;
-        CarDto rootCar=carService.findById(id);
+        CarAddDto seedCar=new CarAddDto(new CarDetailsAddDto());
+        seedCar.setBrand("NoBrand");
+        seedCar.getCarDetails().setColor("NoColor");
+        seedCar.getCarDetails().setRegistrationYear(2000);
+        Car rootCar=carService.addCar(seedCar);
         String carBrand=rootCar.getBrand();
         String carColor=rootCar.getCarDetails().getColor();
         int carRegistrationYear=rootCar.getCarDetails().getRegistrationYear();
         CarUpdateDto carUpdateDto=new CarUpdateDto(new CarDetailsUpdateDto());
         //when
-        CarDto returnedCar=carService.updateCar(id, carUpdateDto);
+        CarDto returnedCar=carService.updateCar(rootCar.getId(), carUpdateDto);
         //then
         assertAll(
                 ()->assertEquals(carBrand, returnedCar.getBrand()),
@@ -258,5 +275,42 @@ public class CarIntegrationTest {
         );
     }
 
+    @Test
+    void deleteCarMethodShouldReturnTrueIfCarWithGivenIdExists(){
+        //given
+        CarAddDto carToAdd=new CarAddDto();
+        carToAdd.setBrand("BMW");
+        carToAdd.setModel("X3");
+        Car carBeforeDelete=carService.addCar(carToAdd);
+        //when
+        boolean carWithGivenIdExist =carService.deleteCar(carBeforeDelete.getId());
+        //then
+        assertTrue(carWithGivenIdExist);
+    }
+
+    @Test
+    void deleteCarMethodShouldReturnFalseIfCarWithGivenIdNotExists(){
+        //given
+        int id=Integer.MAX_VALUE;
+        //when
+        boolean carWithGivenIdExist =carService.deleteCar(id);
+        //then
+        assertFalse(carWithGivenIdExist);
+    }
+
+    @Test
+    void deletedCarShouldChangeDeleteFieldToTrue(){
+        //given
+        CarAddDto carToAdd=new CarAddDto();
+        carToAdd.setBrand("BMW");
+        carToAdd.setModel("X3");
+        Car carBeforeDelete=carService.addCar(carToAdd);
+        CarDto carAfterDelete;
+        //when
+        carService.deleteCar(carBeforeDelete.getId());
+        carAfterDelete=carService.findById(carBeforeDelete.getId());
+        //then
+        assertEquals(true, carAfterDelete.isDeleted());
+    }
 
 }

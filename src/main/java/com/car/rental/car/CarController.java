@@ -70,6 +70,9 @@ public class CarController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity deleteCar(@PathVariable int id){
-        return null;
+        if(carService.deleteCar(id)){
+            return ResponseEntity.ok().body("Car with "+id+" successfully deleted");
+        }
+        return ResponseEntity.badRequest().body("Car with given ID not exist");
     }
 }
