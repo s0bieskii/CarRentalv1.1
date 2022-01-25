@@ -2,10 +2,12 @@ package com.car.rental.car;
 
 import com.car.rental.car.dto.CarAddDto;
 import com.car.rental.car.dto.CarDto;
+import com.car.rental.car.dto.CarSearchDto;
 import com.car.rental.car.dto.CarUpdateDto;
 import com.car.rental.utils.Config;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -54,8 +56,13 @@ public class CarController {
 
     //TODO zaimpelmentuj
     @GetMapping("/search")
-    public ResponseEntity<Page<CarDto>> search(){
-        return null;
+    public ResponseEntity search(@PageableDefault(size = 6, page = 0) Pageable pageable, @RequestBody CarSearchDto carSearchDto){
+        if(carSearchDto==null){
+            return ResponseEntity.badRequest().body("carSearch body cant be null");
+        }
+        return ResponseEntity.ok(carService.search(pageable, carSearchDto));
+
+
     }
 
 

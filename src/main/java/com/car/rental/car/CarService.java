@@ -2,6 +2,7 @@ package com.car.rental.car;
 
 import com.car.rental.car.dto.CarAddDto;
 import com.car.rental.car.dto.CarDto;
+import com.car.rental.car.dto.CarSearchDto;
 import com.car.rental.car.dto.CarUpdateDto;
 import com.car.rental.car.mapper.CarDtoMapper;
 import com.car.rental.car.mapper.CarToAddMapper;
@@ -12,6 +13,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.logging.Logger;
 
 @Service
@@ -58,8 +60,12 @@ public class CarService {
         return car;
     }
 
-    public void search(){
-
+    public List<Car> search(Pageable pageable, CarSearchDto carSearchDto){
+       // List<CarDto> result=carRepository.find(carSearchDto).stream().map(carMapper::carToCarDto).collect(Collectors.toList());
+        //final int start = (int)pageable.getOffset();
+        //final int end = Math.min((start + pageable.getPageSize()), result.size());
+        //final Page<CarDto> page = new PageImpl<>(result.subList(start, end), pageable, result.size());
+            return carRepository.find(carSearchDto);
     }
 
     public CarDto updateCar(int id, CarUpdateDto carDto){
