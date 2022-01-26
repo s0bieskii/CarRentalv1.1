@@ -313,4 +313,19 @@ public class CarIntegrationTest {
         assertEquals(true, carAfterDelete.isDeleted());
     }
 
+    @Test
+    void deletedCarShouldChangeAvailableFieldToFalse(){
+        //given
+        CarAddDto carToAdd=new CarAddDto();
+        carToAdd.setBrand("BMW");
+        carToAdd.setModel("X3");
+        Car carBeforeDelete=carService.addCar(carToAdd);
+        CarDto carAfterDelete;
+        //when
+        carService.deleteCar(carBeforeDelete.getId());
+        carAfterDelete=carService.findById(carBeforeDelete.getId());
+        //then
+        assertEquals(false, carAfterDelete.isAvailable());
+    }
+
 }

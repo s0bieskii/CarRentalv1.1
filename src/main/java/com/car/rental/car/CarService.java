@@ -8,6 +8,7 @@ import com.car.rental.car.mapper.CarDtoMapper;
 import com.car.rental.car.mapper.CarToAddMapper;
 import com.car.rental.details.dto.CarDetailsAddDto;
 import com.car.rental.utils.EntityUpdater;
+import com.car.rental.utils.PageWrapper;
 import org.hibernate.Hibernate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 @Service
 public class CarService {
@@ -60,12 +62,9 @@ public class CarService {
         return car;
     }
 
-    public List<Car> search(Pageable pageable, CarSearchDto carSearchDto){
-       // List<CarDto> result=carRepository.find(carSearchDto).stream().map(carMapper::carToCarDto).collect(Collectors.toList());
-        //final int start = (int)pageable.getOffset();
-        //final int end = Math.min((start + pageable.getPageSize()), result.size());
-        //final Page<CarDto> page = new PageImpl<>(result.subList(start, end), pageable, result.size());
-            return carRepository.find(carSearchDto);
+    public Page<CarDto> search(Pageable pageable, CarSearchDto carSearchDto){
+        List<CarDto> result=carRepository.find(carSearchDto).stream().map(carMapper::carToCarDto).collect(Collectors.toList());
+            return PageWrapper.listToPage(pageable, result);
     }
 
     public CarDto updateCar(int id, CarUpdateDto carDto){
@@ -94,6 +93,7 @@ public class CarService {
         LOGGER.info("Trying to delete car with id="+carIdToDelete);
         if(carRepository.existsById(carIdToDelete)){
             Car car=carRepository.findById(carIdToDelete).get();
+            car.setAvailable(false);
             car.setDeleted(true);
             carRepository.save(car);
             LOGGER.info("Successful deleted car with id="+carIdToDelete);
