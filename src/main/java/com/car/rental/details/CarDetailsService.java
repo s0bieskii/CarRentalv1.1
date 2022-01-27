@@ -3,6 +3,7 @@ package com.car.rental.details;
 import com.car.rental.car.CarController;
 import com.car.rental.details.dto.CarDetailsAddDto;
 import com.car.rental.details.mapper.CarDetailsAddDtoMapper;
+import com.car.rental.details.repository.CarDetailsRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.logging.Logger;

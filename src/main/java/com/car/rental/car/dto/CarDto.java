@@ -1,6 +1,7 @@
 package com.car.rental.car.dto;
 
 import com.car.rental.details.dto.CarDetailsDto;
+import com.car.rental.rental.dto.RentalWithoutEmployeeDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,4 +19,5 @@ public class CarDto {
     private boolean available;
     private boolean deleted;
     private CarDetailsDto carDetails;
+    private RentalWithoutEmployeeDto rental;
 }

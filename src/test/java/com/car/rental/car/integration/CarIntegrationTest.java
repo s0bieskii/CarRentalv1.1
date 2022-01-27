@@ -4,20 +4,29 @@ import com.car.rental.car.Car;
 import com.car.rental.car.CarService;
 import com.car.rental.car.dto.CarAddDto;
 import com.car.rental.car.dto.CarDto;
+import com.car.rental.car.dto.CarSearchDto;
 import com.car.rental.car.dto.CarUpdateDto;
 import com.car.rental.details.dto.CarDetailsAddDto;
 import com.car.rental.details.dto.CarDetailsUpdateDto;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.test.jdbc.JdbcTestUtils;
 
+import javax.sql.DataSource;
 import java.time.LocalDate;
+import java.util.List;
+import java.util.stream.Collectors;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -33,10 +42,20 @@ public class CarIntegrationTest {
     private CarService carService;
     @Autowired
         private JdbcTemplate jdbcTemplate;
+    @Autowired
+        private DataSource dataSource;
 
     @BeforeEach
+    void prepareDb(){
+        ResourceDatabasePopulator resourceDatabasePopulator=new ResourceDatabasePopulator(false, false,
+                "UTF-8", new ClassPathResource("data.sql"));
+        resourceDatabasePopulator.execute(dataSource);
+    }
+
+    @AfterEach
     void tearDown(){
-        JdbcTestUtils.deleteFromTables(jdbcTemplate, "car", "car_details");
+        JdbcTestUtils.deleteFromTables(jdbcTemplate, "car", "car_details", "employee", "rental", "rental_cars",
+                                                    "rental_employees", "rents", "return_report", "users", "users_rents");
     }
 
     private void prepareDatabase(){
@@ -201,6 +220,7 @@ public class CarIntegrationTest {
         //given
         PageRequest request= PageRequest.of(0, 5);
         //when
+        tearDown(); //CLEAR DATABASE
         Page<CarDto> emptyCarsPage= carService.getAll(request);
         //then
         assertEquals(0, emptyCarsPage.getTotalElements());
@@ -209,7 +229,6 @@ public class CarIntegrationTest {
     @Test
     void findAllMethodShouldReturnCarPageWithSomeCars(){
         //given
-        prepareDatabase();
         PageRequest request= PageRequest.of(0, 5);
         //when
         Page<CarDto> notEmptyCarsPage= carService.getAll(request);
@@ -327,5 +346,163 @@ public class CarIntegrationTest {
         //then
         assertEquals(false, carAfterDelete.isAvailable());
     }
+
+    @Test
+    void searchMethodShouldReturnPageObjectWithSomeCarDtoObjects(){
+        //given
+        CarSearchDto carSearchDto=new CarSearchDto();
+        Pageable pageable=PageRequest.of(0,6);
+        //when
+        Page page=carService.search(pageable, carSearchDto);
+        //then
+        assertInstanceOf(CarDto.class, page.getContent().get(0));
+    }
+
+    @Test
+    void searchMethodWithEmptyCarSearchDtoShouldReturnAllAvailableCarsFromDatabase(){
+        //given
+        CarSearchDto carSearchDto=new CarSearchDto();
+        Pageable pageable=PageRequest.of(0,6);
+        int expectingCarQuantity=6;
+        //when
+        Page page=carService.search(pageable, carSearchDto);
+        //then
+        assertEquals(6, page.getTotalElements());
+    }
+
+    @Test
+    void searchMethodWithGivenIdFieldShouldReturnCarWithTheSameIdIfExist(){
+        //given
+        CarSearchDto carSearchDto=new CarSearchDto();
+        int expectingId=1;
+        carSearchDto.setId(expectingId);
+        Pageable pageable=PageRequest.of(0,6);
+        //when
+        Page<CarDto> page=carService.search(pageable, carSearchDto);
+        //then
+        assertAll(
+                ()->assertEquals(1,page.getContent().size(),"Check if only one item is found  "),
+                ()->assertEquals(expectingId, page.getContent().get(0).getId(), "Check if ID is the same")
+        );
+    }
+
+    @Test
+    void searchMethodWithGivenParametersWhichIsNotEqualToAnyCarInDataBaseShouldReturnEmptyPage(){
+        //given
+        CarSearchDto carSearchDto=new CarSearchDto();
+        carSearchDto.setColor("NotExistingColorInMyDatabase");
+        Pageable pageable=PageRequest.of(0,6);
+        //when
+        Page<CarDto> page=carService.search(pageable, carSearchDto);
+        //then
+        assertEquals(0, page.getTotalElements());
+    }
+
+    @Test
+    void searchMethodWithGivenBrandAndModelShouldReturnMatchingCarsDto(){
+        //given
+        CarSearchDto carSearchDto=new CarSearchDto();
+        carSearchDto.setBrand("BMW");
+        carSearchDto.setModel("X3");
+        int expectingCarQuantity=1;
+        Pageable pageable=PageRequest.of(0,6);
+        //when
+        Page<CarDto> page=carService.search(pageable, carSearchDto);
+        //then
+        assertAll(
+                ()->assertEquals(expectingCarQuantity, page.getTotalElements()),
+                ()->assertThat(page.getContent()).extracting("brand").contains("BMW"),
+                ()->assertThat(page.getContent()).extracting("model").contains("X3")
+        );
+    }
+
+    @Test
+    void searchMethodWithGivenRentalAndColorShouldReturnMatchingCarsDto(){
+        //given
+        CarSearchDto carSearchDto=new CarSearchDto();
+        carSearchDto.setColor("black");
+        carSearchDto.setRental(2);
+        int expectingCarQuantity=2;
+            Pageable pageable=PageRequest.of(0,6);
+        //when
+        Page<CarDto> page=carService.search(pageable, carSearchDto);
+        //then
+        assertAll(
+                ()->assertEquals(expectingCarQuantity, page.getTotalElements()),
+                ()->assertThat(page.getContent()).extracting("carDetails.color").contains("black"),
+                ()->assertThat(page.getContent()).extracting("rental.id").contains(2)
+        );
+    }
+
+    @Test
+    void searchMethodWithGivenMinimalRegistrationYearAndMaximalPriceShouldReturnMatchingCarsDto(){
+        //given
+        CarSearchDto carSearchDto=new CarSearchDto();
+        int year=2018;
+        double price=111.0;
+        int expectingCarQuantity=1;
+        carSearchDto.setRegistrationYear(year);
+        carSearchDto.setPrice(price);
+        Pageable pageable=PageRequest.of(0,6);
+        //when
+        Page<CarDto> page=carService.search(pageable, carSearchDto);
+        List<Integer> yearList=page.getContent().stream()
+                .map(carDto->carDto.getCarDetails().getRegistrationYear()).collect(Collectors.toList());
+        List<Double> priceList=page.getContent().stream()
+                .map(carDto -> carDto.getCarDetails().getPrice()).collect(Collectors.toList());
+        //then
+        assertAll(
+                ()->assertEquals(expectingCarQuantity, page.getTotalElements()),
+                ()->assertTrue(yearList.get(0)>=year),
+                ()->assertTrue(priceList.get(0)<=price)
+        );
+    }
+
+    @Test
+    void searchMethodWithGivenSegmentAndDoorsQuantityShouldReturnMatchingCarsDto(){
+        //given
+        CarSearchDto carSearchDto=new CarSearchDto();
+        int doors=5;
+        String segment="limousine";
+        int expectingCarQuantity=1;
+        carSearchDto.setDoors(doors);
+        carSearchDto.setSegment(segment);
+        Pageable pageable=PageRequest.of(0,6);
+        //when
+        Page<CarDto> page=carService.search(pageable, carSearchDto);
+        List<Integer> doorsList=page.getContent().stream()
+                .map(carDto->carDto.getCarDetails().getDoors()).collect(Collectors.toList());
+        //then
+        assertAll(
+                ()->assertEquals(expectingCarQuantity, page.getTotalElements()),
+                ()->assertTrue(doorsList.get(0)==doors),
+                ()->assertThat(page.getContent()).extracting("carDetails.segment")
+                        .contains(segment)
+        );
+    }
+
+    @Test
+    void searchMethodWithGivenSeatsAndFuelShouldReturnMatchingCarsDto(){
+        //given
+        CarSearchDto carSearchDto=new CarSearchDto();
+        int seats=5;
+        String fuel="diesel";
+        int expectingCarQuantity=3;
+        carSearchDto.setSeats(seats);
+        carSearchDto.setFuel(fuel);
+        Pageable pageable=PageRequest.of(0,6);
+        //when
+        Page<CarDto> page=carService.search(pageable, carSearchDto);
+        List<Integer> seatsList=page.getContent().stream()
+                .map(carDto->carDto.getCarDetails().getDoors()).collect(Collectors.toList());
+        //then
+        assertAll(
+                ()->assertEquals(expectingCarQuantity, page.getTotalElements()),
+                ()->assertTrue(seatsList.get(0)==seats),
+                ()->assertThat(page.getContent()).extracting("carDetails.fuel")
+                        .contains(fuel)
+        );
+    }
+
 
 }

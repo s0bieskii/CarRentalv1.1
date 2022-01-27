@@ -35,7 +35,7 @@ public class CarCriteriaBuilder {
             } else if(fieldName.equals("price")){
                 predicate=cb.lessThanOrEqualTo(car.get("carDetails").get(fieldName), (Double)value);
             } else if(fieldName.equals("segment")){
-                predicate=cb.greaterThanOrEqualTo(car.get("carDetails").get(fieldName), (String)value);
+                predicate=cb.equal(car.get("carDetails").get(fieldName), (String)value);
             } else if(fieldName.equals("doors")){
                 predicate=cb.equal(car.get("carDetails").get(fieldName), value);
             } else if(fieldName.equals("seats")){
@@ -44,6 +44,8 @@ public class CarCriteriaBuilder {
                 predicate=cb.equal(car.get("carDetails").get(fieldName), (String)value);
             } else if(fieldName.equals("transmission")){
                 predicate=cb.equal(car.get("carDetails").get(fieldName), (String)value);
+            } else if(fieldName.equals("registrationYear")){
+                predicate=cb.greaterThanOrEqualTo(car.get("carDetails").get(fieldName), (Integer)value);
             } else {
                 predicate=cb.equal(car.get(fieldName), value);
             }
@@ -57,7 +59,7 @@ public class CarCriteriaBuilder {
             } else if(fieldName.equals("price")){
                 predicate=cb.and(predicate, cb.lessThanOrEqualTo(car.get("carDetails").get(fieldName), (Double)value));
             } else if(fieldName.equals("segment")){
-                predicate=cb.and(predicate, cb.greaterThanOrEqualTo(car.get("carDetails").get(fieldName), (String)value));
+                predicate=cb.and(predicate, cb.equal(car.get("carDetails").get(fieldName), (String)value));
             } else if(fieldName.equals("doors")){
                 predicate=cb.and(predicate, cb.equal(car.get("carDetails").get(fieldName), value));
             } else if(fieldName.equals("seats")){

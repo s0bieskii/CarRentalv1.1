@@ -1,0 +1,12 @@
+SET GLOBAL FOREIGN_KEY_CHECKS = 0;
+truncate table car;
+truncate table car_details;
+truncate table employee;
+truncate table rental;
+truncate table rental_cars;
+truncate table rental_employee;
+truncate table rents;
+truncate table  return_report;
+truncate table users;
+truncate table users_rents;
+SET GLOBAL FOREIGN_KEY_CHECKS = 1;

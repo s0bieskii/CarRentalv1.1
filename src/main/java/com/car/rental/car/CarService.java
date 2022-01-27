@@ -6,6 +6,7 @@ import com.car.rental.car.dto.CarSearchDto;
 import com.car.rental.car.dto.CarUpdateDto;
 import com.car.rental.car.mapper.CarDtoMapper;
 import com.car.rental.car.mapper.CarToAddMapper;
+import com.car.rental.car.repository.CarRepository;
 import com.car.rental.details.dto.CarDetailsAddDto;
 import com.car.rental.utils.EntityUpdater;
 import com.car.rental.utils.PageWrapper;
@@ -63,6 +64,7 @@ public class CarService {
     }
 
     public Page<CarDto> search(Pageable pageable, CarSearchDto carSearchDto){
+        LOGGER.info("Try find cars with given parameters: "+carSearchDto);
         List<CarDto> result=carRepository.find(carSearchDto).stream().map(carMapper::carToCarDto).collect(Collectors.toList());
             return PageWrapper.listToPage(pageable, result);
     }

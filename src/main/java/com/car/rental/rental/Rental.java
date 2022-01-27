@@ -6,8 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,9 +29,9 @@ public class Rental {
     private String street;
     private String phone;
     private boolean deleted;
-    @OneToMany(cascade = CascadeType.REFRESH,orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Car> cars;
-    @OneToMany
+    @OneToMany(fetch = FetchType.EAGER)
     private List<Employee> employees;
 
 }

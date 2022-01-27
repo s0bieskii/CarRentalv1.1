@@ -1,19 +1,19 @@
 package com.car.rental.car.dto;
 
 import lombok.Getter;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
 
 @Getter
+@Setter
 @ToString
 public class CarSearchDto {
 
     private Integer id;
     private String brand;
     private String model;
-    private Boolean available;
-    private Boolean deleted;
     private Integer rental;
     private String color;
     private Integer registrationYear;
