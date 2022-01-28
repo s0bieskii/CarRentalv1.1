@@ -8,9 +8,8 @@ import com.car.rental.car.mapper.CarDtoMapper;
 import com.car.rental.car.mapper.CarToAddMapper;
 import com.car.rental.car.repository.CarRepository;
 import com.car.rental.details.dto.CarDetailsAddDto;
-import com.car.rental.utils.EntityUpdater;
+import com.car.rental.rental.repository.RentalRepository;
 import com.car.rental.utils.PageWrapper;
-import org.hibernate.Hibernate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -25,15 +24,15 @@ public class CarService {
     private final CarRepository carRepository;
     private final CarToAddMapper carToAddMapper;
     private final CarDtoMapper carMapper;
-    private final EntityUpdater entityUpdater;
+    private final RentalRepository rentalRepository;
 
-    public CarService(CarRepository carRepository, CarToAddMapper carToAddMapper, CarDtoMapper carMapper, EntityUpdater entityUpdater){
-        LOGGER.info("Creating CarService with "+CarRepository.class+"\n"+ CarToAddMapper.class+"\n"+ CarDtoMapper.class
-                +"\n"+ EntityUpdater.class);
+    public CarService(CarRepository carRepository, CarToAddMapper carToAddMapper, CarDtoMapper carMapper, RentalRepository rentalRepository){
+        LOGGER.info("Creating CarService with "+CarRepository.class+"\n"+ CarToAddMapper.class+"\n"+ CarDtoMapper.class+
+                "\n"+ RentalRepository.class);
         this.carRepository=carRepository;
         this.carToAddMapper=carToAddMapper;
         this.carMapper=carMapper;
-        this.entityUpdater=entityUpdater;
+        this.rentalRepository=rentalRepository;
     }
 
     public Car addCar(CarAddDto dto) {
@@ -69,27 +68,22 @@ public class CarService {
             return PageWrapper.listToPage(pageable, result);
     }
 
-    public CarDto updateCar(int id, CarUpdateDto carDto){
-        CarDto dto;
-        LOGGER.info("Update car with id="+id+" to: "+carDto);
-        Car car;
-        if(carRepository.existsById(id)){
-            car=carRepository.findById(id).get();
-            LOGGER.info("Car with id="+id+" exist");
-            try {
-                car=(Car)entityUpdater.updateEntity(Hibernate.unproxy(car), carDto);
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            }
-            carRepository.save(car);
-            dto=carMapper.carToCarDto(car);
-        } else {
-            LOGGER.info("Car with id="+id+" not exist");
-            return null;
-        }
-        LOGGER.info("Car after update: "+dto);
-        return dto;
+    public CarDto updateCar(CarUpdateDto carUpdate){
+        LOGGER.info("Try update car with id: "+carUpdate.getId());
+        Car carAfterUpdate;
+        CarDto carDto=null;
+       if(carRepository.existsById(carUpdate.getId())){
+           LOGGER.info("Car with given ID exist: id="+carUpdate.getId());
+           carAfterUpdate=carMapper.carUpdateToCar(carUpdate);
+           carRepository.me(carAfterUpdate);
+           carDto=carMapper.carToCarDto(carAfterUpdate);
+           LOGGER.info("Update success! Car after update: "+carMapper.carToCarDto(carAfterUpdate));
+           return carDto;
+       }
+        LOGGER.info("Car with given ID not exist"+carUpdate.getId());
+        return carDto;
     }
+
 
     public boolean deleteCar(int carIdToDelete){
         LOGGER.info("Trying to delete car with id="+carIdToDelete);

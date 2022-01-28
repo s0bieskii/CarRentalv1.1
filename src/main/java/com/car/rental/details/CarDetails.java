@@ -18,7 +18,7 @@ public class CarDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
-    int id;
+    private int id;
     private String vin;
     private String color;
     private Integer registrationYear;

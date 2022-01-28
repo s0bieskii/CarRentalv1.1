@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.net.URI;
 import java.util.logging.Logger;
@@ -40,8 +39,8 @@ public class CarController {
         return ResponseEntity.created(URI.create(Config.applicationPath+returnedCar.getId())).build();
     }
 
-    @GetMapping
-    public ResponseEntity<Page<CarDto>> getAll(@RequestParam Pageable pageable){
+    @GetMapping()
+    public ResponseEntity<Page<CarDto>> getAll(@PageableDefault(size = 6, page = 0) Pageable pageable){
         LOGGER.info("GetMapping getAll(Pageable pageable)");
         Page<CarDto> carsDto=carService.getAll(pageable);
         return ResponseEntity.ok(carsDto);
@@ -65,15 +64,14 @@ public class CarController {
 
     }
 
-
-    @PatchMapping("/{id}")
-    public ResponseEntity updateCar(@PathVariable int id, @RequestBody CarUpdateDto carDto) throws IllegalAccessException {
-        CarDto carAfterUpdate=carService.updateCar(id, carDto);
-        if(carAfterUpdate==null){
-            return ResponseEntity.badRequest().body("Car with this ID not exists");
+    @PatchMapping
+    public ResponseEntity updateCar(@RequestBody CarUpdateDto updateCar){
+        if(carService.updateCar(updateCar)!=null){
+            return ResponseEntity.noContent().build();
         }
-        return ResponseEntity.ok("Car with "+id+" successfully updated");
+        return ResponseEntity.badRequest().body("Something gone wrong with update!");
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity deleteCar(@PathVariable int id){

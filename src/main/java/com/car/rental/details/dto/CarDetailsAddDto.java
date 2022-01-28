@@ -22,10 +22,10 @@ public class CarDetailsAddDto {
     private Integer doors;
     private Integer seats;
     private String registrationNumber;
-    private int mileage;
+    private Integer mileage;
     private LocalDate inspection;
     private LocalDate insurance;
     private String fuel;
-    private double averageConsumption;
+    private Double averageConsumption;
     private String transmission;
 }

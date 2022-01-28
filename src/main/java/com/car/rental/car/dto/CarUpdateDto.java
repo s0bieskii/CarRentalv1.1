@@ -1,6 +1,6 @@
 package com.car.rental.car.dto;
 
-import com.car.rental.details.dto.CarDetailsDto;
+import com.car.rental.details.dto.CarDetailsUpdateDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,12 +10,12 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class CarDto {
+public class CarUpdateDto {
 
     private int id;
     private String brand;
     private String model;
-    private boolean available;
-    private boolean deleted;
-    private CarDetailsDto carDetails;
+    private Boolean available;
+    private Boolean deleted;
+    private CarDetailsUpdateDto carDetails;
 }

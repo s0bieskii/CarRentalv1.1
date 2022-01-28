@@ -13,11 +13,7 @@ m
 =src/test/java/com/car/rental/car/unit/CarServiceUnitTest.java,3\d\3df0aeaddd9a621627c71727edc2e420bafe1211
 [
 +src/main/java/com/car/rental/rent/Rent.java,3\b\3be97ad50a3cb5270c1f43546a7c34b58ccaad6a
-7
-pom.xml,4\4\442292b8a7efeabbe4cc176709b833b1792140ec
 e
 5src/main/java/com/car/rental/report/ReturnReport.java,d\e\de5e32aa1081a538370d979419107a891f5e0274
-c
-3src/main/java/com/car/rental/car/dto/CarAddDto.java,6\f\6f2b90c9fc10ebe5c4c840121aaf915e6b7e1483
 ^
 .src/main/java/com/car/rental/utils/Config.java,f\c\fcfd505c5fa2fca2674e8d1b7089e7f706a8bc5e

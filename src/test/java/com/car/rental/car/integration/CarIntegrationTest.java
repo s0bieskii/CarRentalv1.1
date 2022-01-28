@@ -45,6 +45,12 @@ public class CarIntegrationTest {
     @Autowired
         private DataSource dataSource;
 
+    public CarIntegrationTest(CarService carService, JdbcTemplate jdbcTemplate, DataSource dataSource){
+        this.carService=carService;
+        this.jdbcTemplate=jdbcTemplate;
+        this.dataSource=dataSource;
+    }
+
     @BeforeEach
     void prepareDb(){
         ResourceDatabasePopulator resourceDatabasePopulator=new ResourceDatabasePopulator(false, false,
@@ -236,63 +242,63 @@ public class CarIntegrationTest {
         assertNotEquals(0, notEmptyCarsPage.getTotalElements());
     }
 
-    @Test
-    void updateCarMethodShouldReturnNullIfCarWithGivenIdNotExist(){
-        //given
-        int id=Integer.MAX_VALUE;
-        CarUpdateDto carUpdateDto=new CarUpdateDto();
-        //when
-        CarDto returnedCar=carService.updateCar(id, carUpdateDto);
-        //then
-        assertNull(returnedCar);
-    }
-
-    @Test
-    void updateCarMethodShouldReturnUpdatedCarWithTheSameFieldsWhatsInCarUpdateDto(){
-        //given
-        CarAddDto seedCar=new CarAddDto(new CarDetailsAddDto());
-        seedCar.setBrand("NoBrand");
-        seedCar.getCarDetails().setColor("NoColor");
-        seedCar.getCarDetails().setRegistrationYear(2000);
-        Car rootCar=carService.addCar(seedCar);
-        String carBrand=rootCar.getBrand();
-        String carColor=rootCar.getCarDetails().getColor();
-        int carRegistrationYear=rootCar.getCarDetails().getRegistrationYear();
-        CarUpdateDto carUpdateDto=new CarUpdateDto(new CarDetailsUpdateDto());
-        carUpdateDto.setBrand("TestBrand");
-        carUpdateDto.getCarDetails().setColor("TestColor");
-        carUpdateDto.getCarDetails().setRegistrationYear(2010);
-        //when
-        CarDto returnedCar=carService.updateCar(rootCar.getId(), carUpdateDto);
-        //then
-        assertAll(
-                ()->assertNotEquals(carBrand, returnedCar.getBrand()),
-                ()->assertNotEquals(carColor, returnedCar.getCarDetails().getColor()),
-                ()->assertNotEquals(carRegistrationYear, returnedCar.getCarDetails().getRegistrationYear())
-        );
-    }
-
-    @Test
-    void updateCarMethodShouldReturnCarWithNoChangeFieldsWhenFieldsInCarUpdateDtoIsNull(){
-        //given
-        CarAddDto seedCar=new CarAddDto(new CarDetailsAddDto());
-        seedCar.setBrand("NoBrand");
-        seedCar.getCarDetails().setColor("NoColor");
-        seedCar.getCarDetails().setRegistrationYear(2000);
-        Car rootCar=carService.addCar(seedCar);
-        String carBrand=rootCar.getBrand();
-        String carColor=rootCar.getCarDetails().getColor();
-        int carRegistrationYear=rootCar.getCarDetails().getRegistrationYear();
-        CarUpdateDto carUpdateDto=new CarUpdateDto(new CarDetailsUpdateDto());
-        //when
-        CarDto returnedCar=carService.updateCar(rootCar.getId(), carUpdateDto);
-        //then
-        assertAll(
-                ()->assertEquals(carBrand, returnedCar.getBrand()),
-                ()->assertEquals(carColor, returnedCar.getCarDetails().getColor()),
-                ()->assertEquals(carRegistrationYear, returnedCar.getCarDetails().getRegistrationYear())
-        );
-    }
+//    @Test
+//    void updateCarMethodShouldReturnNullIfCarWithGivenIdNotExist(){
+//        //given
+//        int id=Integer.MAX_VALUE;
+//        CarUpdateDto carUpdateDto=new CarUpdateDto();
+//        //when
+//        CarDto returnedCar=carService.updateCar(id, carUpdateDto);
+//        //then
+//        assertNull(returnedCar);
+//    }
+//
+//    @Test
+//    void updateCarMethodShouldReturnUpdatedCarWithTheSameFieldsWhatsInCarUpdateDto(){
+//        //given
+//        CarAddDto seedCar=new CarAddDto(new CarDetailsAddDto());
+//        seedCar.setBrand("NoBrand");
+//        seedCar.getCarDetails().setColor("NoColor");
+//        seedCar.getCarDetails().setRegistrationYear(2000);
+//        Car rootCar=carService.addCar(seedCar);
+//        String carBrand=rootCar.getBrand();
+//        String carColor=rootCar.getCarDetails().getColor();
+//        int carRegistrationYear=rootCar.getCarDetails().getRegistrationYear();
+//        CarUpdateDto carUpdateDto=new CarUpdateDto(new CarDetailsUpdateDto());
+//        carUpdateDto.setBrand("TestBrand");
+//        carUpdateDto.getCarDetails().setColor("TestColor");
+//        carUpdateDto.getCarDetails().setRegistrationYear(2010);
+//        //when
+//        CarDto returnedCar=carService.updateCar(rootCar.getId(), carUpdateDto);
+//        //then
+//        assertAll(
+//                ()->assertNotEquals(carBrand, returnedCar.getBrand()),
+//                ()->assertNotEquals(carColor, returnedCar.getCarDetails().getColor()),
+//                ()->assertNotEquals(carRegistrationYear, returnedCar.getCarDetails().getRegistrationYear())
+//        );
+//    }
+//
+//    @Test
+//    void updateCarMethodShouldReturnCarWithNoChangeFieldsWhenFieldsInCarUpdateDtoIsNull(){
+//        //given
+//        CarAddDto seedCar=new CarAddDto(new CarDetailsAddDto());
+//        seedCar.setBrand("NoBrand");
+//        seedCar.getCarDetails().setColor("NoColor");
+//        seedCar.getCarDetails().setRegistrationYear(2000);
+//        Car rootCar=carService.addCar(seedCar);
+//        String carBrand=rootCar.getBrand();
+//        String carColor=rootCar.getCarDetails().getColor();
+//        int carRegistrationYear=rootCar.getCarDetails().getRegistrationYear();
+//        CarUpdateDto carUpdateDto=new CarUpdateDto(new CarDetailsUpdateDto());
+//        //when
+//        CarDto returnedCar=carService.updateCar(rootCar.getId(), carUpdateDto);
+//        //then
+//        assertAll(
+//                ()->assertEquals(carBrand, returnedCar.getBrand()),
+//                ()->assertEquals(carColor, returnedCar.getCarDetails().getColor()),
+//                ()->assertEquals(carRegistrationYear, returnedCar.getCarDetails().getRegistrationYear())
+//        );
+//    }
 
     @Test
     void deleteCarMethodShouldReturnTrueIfCarWithGivenIdExists(){
@@ -409,6 +415,7 @@ public class CarIntegrationTest {
         //when
         Page<CarDto> page=carService.search(pageable, carSearchDto);
         //then
+
         assertAll(
                 ()->assertEquals(expectingCarQuantity, page.getTotalElements()),
                 ()->assertThat(page.getContent()).extracting("brand").contains("BMW"),
@@ -475,7 +482,7 @@ public class CarIntegrationTest {
         //then
         assertAll(
                 ()->assertEquals(expectingCarQuantity, page.getTotalElements()),
-                ()->assertTrue(doorsList.get(0)==doors),
+                ()->assertEquals(doorsList.get(0), doors),
                 ()->assertThat(page.getContent()).extracting("carDetails.segment")
                         .contains(segment)
         );
@@ -498,11 +505,47 @@ public class CarIntegrationTest {
         //then
         assertAll(
                 ()->assertEquals(expectingCarQuantity, page.getTotalElements()),
-                ()->assertTrue(seatsList.get(0)==seats),
+                ()->assertEquals(seatsList.get(0), seats),
                 ()->assertThat(page.getContent()).extracting("carDetails.fuel")
                         .contains(fuel)
         );
     }
+
+    @Test
+    void searchMethodWithGivenTransmissionShouldReturnMatchingCarsDto(){
+        //given
+        CarSearchDto carSearchDto=new CarSearchDto();
+        String transmission="automatic";
+        int expectingCarQuantity=3;
+        carSearchDto.setTransmission(transmission);
+        Pageable pageable=PageRequest.of(0,6);
+        //when
+        Page<CarDto> page=carService.search(pageable, carSearchDto);
+        //then
+        assertAll(
+                ()->assertEquals(expectingCarQuantity, page.getTotalElements()),
+                ()->assertThat(page.getContent()).extracting("carDetails.transmission")
+                        .contains(transmission)
+        );
+    }
+
+//    @Test
+//    void searchMethodWithGivenStartDateAndEndDateShouldReturnAvailableCarsInThisDateRange(){
+//        //given
+//        CarSearchDto carSearchDto=new CarSearchDto();
+//        LocalDateTime start=LocalDateTime.of()
+//        int expectingCarQuantity=3;
+//        carSearchDto.setTransmission(transmission);
+//        Pageable pageable=PageRequest.of(0,6);
+//        //when
+//        Page<CarDto> page=carService.search(pageable, carSearchDto);
+//        //then
+//        assertAll(
+//                ()->assertEquals(expectingCarQuantity, page.getTotalElements()),
+//                ()->assertThat(page.getContent()).extracting("carDetails.transmission")
+//                        .contains(transmission)
+//        );
+//    }
 
 
 }
