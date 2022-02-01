@@ -4,6 +4,7 @@ C:\Users\Patryk\Desktop\Car Rental v1.1\src\main\java\com\car\rental\utils\Confi
 C:\Users\Patryk\Desktop\Car Rental v1.1\src\main\java\com\car\rental\rental\mapper\RentalDtoMapper.java
 C:\Users\Patryk\Desktop\Car Rental v1.1\src\main\java\com\car\rental\report\ReturnReport.java
 C:\Users\Patryk\Desktop\Car Rental v1.1\src\main\java\com\car\rental\car\dto\CarSearchDto.java
+C:\Users\Patryk\Desktop\Car Rental v1.1\src\main\java\com\car\rental\rental\repository\RentalRepository.java
 C:\Users\Patryk\Desktop\Car Rental v1.1\src\main\java\com\car\rental\car\CarController.java
 C:\Users\Patryk\Desktop\Car Rental v1.1\src\main\java\com\car\rental\car\mapper\CarDtoMapper.java
 C:\Users\Patryk\Desktop\Car Rental v1.1\src\main\java\com\car\rental\car\dto\CarAddDto.java
@@ -20,7 +21,6 @@ C:\Users\Patryk\Desktop\Car Rental v1.1\src\main\java\com\car\rental\utils\CarCr
 C:\Users\Patryk\Desktop\Car Rental v1.1\src\main\java\com\car\rental\car\dto\CarDto.java
 C:\Users\Patryk\Desktop\Car Rental v1.1\src\main\java\com\car\rental\Application.java
 C:\Users\Patryk\Desktop\Car Rental v1.1\src\main\java\com\car\rental\details\CarDetailsService.java
-C:\Users\Patryk\Desktop\Car Rental v1.1\src\main\java\com\car\rental\car\dto\UpdateCarDto.java
 C:\Users\Patryk\Desktop\Car Rental v1.1\src\main\java\com\car\rental\car\repository\CarRepositoryImpl.java
 C:\Users\Patryk\Desktop\Car Rental v1.1\src\main\java\com\car\rental\employee\mapper\EmployeeDtoMapper.java
 C:\Users\Patryk\Desktop\Car Rental v1.1\src\main\java\com\car\rental\car\repository\CarSearchRepository.java
@@ -33,6 +33,4 @@ C:\Users\Patryk\Desktop\Car Rental v1.1\src\main\java\com\car\rental\rental\dto\
 C:\Users\Patryk\Desktop\Car Rental v1.1\src\main\java\com\car\rental\details\mapper\CarDetailsDtoMapper.java
 C:\Users\Patryk\Desktop\Car Rental v1.1\src\main\java\com\car\rental\rental\dto\RentalWithoutEmployeeDto.java
 C:\Users\Patryk\Desktop\Car Rental v1.1\src\main\java\com\car\rental\user\User.java
-C:\Users\Patryk\Desktop\Car Rental v1.1\src\main\java\com\car\rental\utils\EntityUpdater.java
 C:\Users\Patryk\Desktop\Car Rental v1.1\src\main\java\com\car\rental\details\dto\CarDetailsUpdateDto.java
-C:\Users\Patryk\Desktop\Car Rental v1.1\src\main\java\com\car\rental\details\dto\UpdateCarDetailsDto.java

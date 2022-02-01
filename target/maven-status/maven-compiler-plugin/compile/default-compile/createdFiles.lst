@@ -3,6 +3,7 @@ com\car\rental\car\mapper\CarToAddMapperImpl.class
 com\car\rental\details\CarDetailsController.class
 com\car\rental\user\User.class
 com\car\rental\details\CarDetailsService.class
+com\car\rental\rental\repository\RentalRepository.class
 com\car\rental\car\dto\CarAddDto.class
 com\car\rental\car\repository\CarRepository.class
 com\car\rental\details\mapper\CarDetailsAddDtoMapperImpl.class
@@ -13,14 +14,11 @@ com\car\rental\car\repository\CarRepositoryImpl.class
 com\car\rental\rental\dto\RentalWithoutEmployeeDto.class
 com\car\rental\details\mapper\CarDetailsAddDtoMapper.class
 com\car\rental\Application.class
-com\car\rental\car\dto\UpdateCarDto.class
 com\car\rental\car\mapper\CarDtoMapperImpl.class
-com\car\rental\details\dto\UpdateCarDetailsDto.class
 com\car\rental\employee\mapper\EmployeeDtoMapper.class
 com\car\rental\rental\dto\RentalDto.class
 com\car\rental\employee\mapper\EmployeeDtoMapperImpl.class
 com\car\rental\car\mapper\CarDtoMapper.class
-com\car\rental\utils\EntityUpdater.class
 com\car\rental\car\repository\CarSearchRepository.class
 com\car\rental\car\mapper\CarToAddMapper.class
 com\car\rental\utils\Config.class

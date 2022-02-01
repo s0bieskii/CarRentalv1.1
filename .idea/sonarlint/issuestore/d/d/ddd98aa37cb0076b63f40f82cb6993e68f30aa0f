@@ -1,0 +1,29 @@
+
+m
+java:S3776"RRefactor this method to reduce its Cognitive Complexity from 26 to the 15 allowed.(Õ Ñ´üÿÿÿÿ
+G
+java:S1905"*Remove this unnecessary cast to "Integer".(æ…†©8ÍÖÇˆê/
+?
+java:S1905&")Remove this unnecessary cast to "String".(êµ–ò
+F
+java:S1905,")Remove this unnecessary cast to "String".(êµ–ò8¤ú§èé/
+F
+java:S1905.")Remove this unnecessary cast to "String".(êµ–ò8ç¢©èé/
+G
+java:S19056"*Remove this unnecessary cast to "Integer".(Î§ı¤8 åÊˆê/
+F
+java:S1905>")Remove this unnecessary cast to "String".(²ÛÄ„8ÏÖÇˆê/
+F
+java:S1905D")Remove this unnecessary cast to "String".(²ÛÄ„8ÒÖÇˆê/
+F
+java:S1905F")Remove this unnecessary cast to "String".(²ÛÄ„8ÓÖÇˆê/
+b
+java:S1192 "LDefine a constant instead of duplicating this literal "carDetails" 17 times.(üŒ½ı
+b
+java:S1192"GDefine a constant instead of duplicating this literal "rental" 4 times.(şÏ¹£ûÿÿÿÿ
+g
+java:S1192!"QDefine a constant instead of duplicating this literal "registrationYear" 3 times.(êâ˜“
+M
+java:S2629"7Use the built-in formatting to construct this argument.(àú¡²
+¢
+java:S1862/"„This branch can not be reached because the condition duplicates a previous condition in the same sequence of "if/else if" statements(êâ˜“8ÙÖÇˆê/

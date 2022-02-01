@@ -1,33 +1,33 @@
 use car_rental_test;
-insert into car (id, brand, model, available, deleted, rental_id) values
-            (1, 'BMW', 'X3', 1, 0, 1),
-            (2, 'Ford', 'galaxy', 1, 0, 1),
-            (3, 'Opel', 'Insignia', 1, 0, 1),
-            (4, 'BMW', 'F11', 1, 0, 2),
-            (5, 'Mercedes', 'S500', 1, 0, 2),
-            (6, 'Ford', 'Fiesta', 0, 1, 2),
-            (7, 'Toyota', 'Avensis', 0, 0, null),
-            (8, 'BMW', 'E92', 1, 0, 2);
+insert into car (id, brand, model, available, deleted) values
+            (1, 'BMW', 'X3', 1, 0),
+            (2, 'Ford', 'galaxy', 1, 0),
+            (3, 'Opel', 'Insignia', 1, 0),
+            (4, 'BMW', 'F11', 1, 0),
+            (5, 'Mercedes', 'S500', 1, 0),
+            (6, 'Ford', 'Fiesta', 0, 1),
+            (7, 'Toyota', 'Avensis', 0, 0),
+            (8, 'BMW', 'E92', 1, 0);
 
-    insert into car_details (id, vin, color, registration_year, price, segment,
-        doors, seats, registration_number, mileage, inspection, insurance, fuel,
-        average_consumption, transmission) values
-        (1,'12345678912345678', 'blue', 2018, 110.0, 'SUV', 5, 5, 'PSL 1234', 120000,
-        '2022-09-19', '2022-09-19', 'diesel', 10.5, 'automatic'),
-        (2,'ABC123ABC123ABC12', 'green', 2015, 95.0, 'VAN', 5, 5, 'PO 1234', 135000,
-        '2022-09-19', '2022-09-19', 'diesel', 8.5, 'manual'),
-        (3,'5NMSH13E89H310439', 'brown', 2017, 95.0, 'sedan', 5, 5, 'SZ 1234', 166000,
-        '2022-09-19', '2022-09-19', 'diesel', 8.2, 'manual'),
-        (4,'1FTNF21L53EA67192', 'black', 2013, 115.0, 'combi', 5, 5, 'GB 12345', 155000,
-        '2022-09-19', '2022-09-19', 'diesel', 9.8, 'automatic'),
-        (5,'1G2ZH35N074288387', 'black', 2020, 150.0, 'limousine', 5, 5, 'GD 12345', 133000,
-        '2022-09-19', '2022-09-19', 'diesel', 12.5, 'automatic'),
-        (6,'5FNRL18943B012178', 'red', 2016, 80.0, 'hatchback', 5, 5, 'PSL 9692', 111000,
-        '2022-09-19', '2022-09-19', 'diesel', 7.2, 'manual'),
-        (7,'NM0GE9G71E1134666', 'grey', 2018, 100.0, 'sedan', 5, 5, 'PSL 9692', 100000,
-        '2022-09-19', '2022-09-19', 'diesel', 8.3, 'manual'),
-        (8,'2C4RDGCGXDR882416', 'blue', 2011, 100.0, 'coupe', 5, 5, 'PSL 9692', 950000,
-        '2022-09-19', '2022-09-19', 'diesel', 9.2, 'manual');
+insert into car_details (id, vin, color, registration_year, price, segment,
+    doors, seats, registration_number, mileage, inspection, insurance, fuel,
+    average_consumption, transmission) values
+    (1,'12345678912345678', 'blue', 2018, 110.0, 'SUV', 5, 5, 'PSL 1234', 120000,
+    '2022-09-19', '2022-09-19', 'diesel', 10.5, 'automatic'),
+    (2,'ABC123ABC123ABC12', 'green', 2015, 95.0, 'VAN', 5, 5, 'PO 1234', 135000,
+    '2022-09-19', '2022-09-19', 'diesel', 8.5, 'manual'),
+    (3,'5NMSH13E89H310439', 'brown', 2017, 95.0, 'sedan', 5, 5, 'SZ 1234', 166000,
+    '2022-09-19', '2022-09-19', 'diesel', 8.2, 'manual'),
+    (4,'1FTNF21L53EA67192', 'black', 2013, 115.0, 'combi', 5, 5, 'GB 12345', 155000,
+    '2022-09-19', '2022-09-19', 'diesel', 9.8, 'automatic'),
+    (5,'1G2ZH35N074288387', 'black', 2020, 150.0, 'limousine', 5, 5, 'GD 12345', 133000,
+    '2022-09-19', '2022-09-19', 'diesel', 12.5, 'automatic'),
+    (6,'5FNRL18943B012178', 'red', 2016, 80.0, 'hatchback', 5, 5, 'PSL 9692', 111000,
+    '2022-09-19', '2022-09-19', 'diesel', 7.2, 'manual'),
+    (7,'NM0GE9G71E1134666', 'grey', 2018, 100.0, 'sedan', 5, 5, 'PSL 9692', 100000,
+    '2022-09-19', '2022-09-19', 'diesel', 8.3, 'manual'),
+    (8,'2C4RDGCGXDR882416', 'blue', 2011, 100.0, 'coupe', 5, 5, 'PSL 9692', 950000,
+    '2022-09-19', '2022-09-19', 'diesel', 9.2, 'manual');
 
 update car set car_details_id = 1 where id=1;
 update car set car_details_id = 2 where id=2;

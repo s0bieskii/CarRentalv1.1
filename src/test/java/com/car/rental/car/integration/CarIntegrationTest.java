@@ -38,13 +38,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
 public class CarIntegrationTest {
-    @Autowired
-    private CarService carService;
-    @Autowired
-        private JdbcTemplate jdbcTemplate;
-    @Autowired
-        private DataSource dataSource;
 
+    private CarService carService;
+    private JdbcTemplate jdbcTemplate;
+    private DataSource dataSource;
+
+    @Autowired
     public CarIntegrationTest(CarService carService, JdbcTemplate jdbcTemplate, DataSource dataSource){
         this.carService=carService;
         this.jdbcTemplate=jdbcTemplate;
@@ -214,7 +213,7 @@ public class CarIntegrationTest {
     @Test
     void searchCarByIdWhereCarWithGivenIdNotExistShouldReturnNull(){
         //given
-        int id=Integer.MAX_VALUE;
+        Long id=Long.MAX_VALUE;
         //when
         CarDto car=carService.findById(id);
         //then
@@ -242,63 +241,63 @@ public class CarIntegrationTest {
         assertNotEquals(0, notEmptyCarsPage.getTotalElements());
     }
 
-//    @Test
-//    void updateCarMethodShouldReturnNullIfCarWithGivenIdNotExist(){
-//        //given
-//        int id=Integer.MAX_VALUE;
-//        CarUpdateDto carUpdateDto=new CarUpdateDto();
-//        //when
-//        CarDto returnedCar=carService.updateCar(id, carUpdateDto);
-//        //then
-//        assertNull(returnedCar);
-//    }
-//
-//    @Test
-//    void updateCarMethodShouldReturnUpdatedCarWithTheSameFieldsWhatsInCarUpdateDto(){
-//        //given
-//        CarAddDto seedCar=new CarAddDto(new CarDetailsAddDto());
-//        seedCar.setBrand("NoBrand");
-//        seedCar.getCarDetails().setColor("NoColor");
-//        seedCar.getCarDetails().setRegistrationYear(2000);
-//        Car rootCar=carService.addCar(seedCar);
-//        String carBrand=rootCar.getBrand();
-//        String carColor=rootCar.getCarDetails().getColor();
-//        int carRegistrationYear=rootCar.getCarDetails().getRegistrationYear();
-//        CarUpdateDto carUpdateDto=new CarUpdateDto(new CarDetailsUpdateDto());
-//        carUpdateDto.setBrand("TestBrand");
-//        carUpdateDto.getCarDetails().setColor("TestColor");
-//        carUpdateDto.getCarDetails().setRegistrationYear(2010);
-//        //when
-//        CarDto returnedCar=carService.updateCar(rootCar.getId(), carUpdateDto);
-//        //then
-//        assertAll(
-//                ()->assertNotEquals(carBrand, returnedCar.getBrand()),
-//                ()->assertNotEquals(carColor, returnedCar.getCarDetails().getColor()),
-//                ()->assertNotEquals(carRegistrationYear, returnedCar.getCarDetails().getRegistrationYear())
-//        );
-//    }
-//
-//    @Test
-//    void updateCarMethodShouldReturnCarWithNoChangeFieldsWhenFieldsInCarUpdateDtoIsNull(){
-//        //given
-//        CarAddDto seedCar=new CarAddDto(new CarDetailsAddDto());
-//        seedCar.setBrand("NoBrand");
-//        seedCar.getCarDetails().setColor("NoColor");
-//        seedCar.getCarDetails().setRegistrationYear(2000);
-//        Car rootCar=carService.addCar(seedCar);
-//        String carBrand=rootCar.getBrand();
-//        String carColor=rootCar.getCarDetails().getColor();
-//        int carRegistrationYear=rootCar.getCarDetails().getRegistrationYear();
-//        CarUpdateDto carUpdateDto=new CarUpdateDto(new CarDetailsUpdateDto());
-//        //when
-//        CarDto returnedCar=carService.updateCar(rootCar.getId(), carUpdateDto);
-//        //then
-//        assertAll(
-//                ()->assertEquals(carBrand, returnedCar.getBrand()),
-//                ()->assertEquals(carColor, returnedCar.getCarDetails().getColor()),
-//                ()->assertEquals(carRegistrationYear, returnedCar.getCarDetails().getRegistrationYear())
-//        );
-//    }
+    @Test
+    void updateCarMethodShouldReturnNullIfCarWithGivenIdNotExist(){
+        //given
+        Long id=Long.MAX_VALUE;
+        CarUpdateDto carUpdateDto=new CarUpdateDto();
+        //when
+        CarDto returnedCar=carService.updateCarByFields(carUpdateDto);
+        //then
+        assertNull(returnedCar);
+    }
+
+    @Test
+    void updateCarMethodShouldReturnUpdatedCarWithTheSameFieldsWhatsInCarUpdateDto(){
+        //given
+        CarAddDto seedCar=new CarAddDto(new CarDetailsAddDto());
+        seedCar.setBrand("NoBrand");
+        seedCar.getCarDetails().setColor("NoColor");
+        seedCar.getCarDetails().setRegistrationYear(2000);
+        Car rootCar=carService.addCar(seedCar);
+        String carBrand=rootCar.getBrand();
+        String carColor=rootCar.getCarDetails().getColor();
+        int carRegistrationYear=rootCar.getCarDetails().getRegistrationYear();
+        CarUpdateDto carUpdateDto=new CarUpdateDto(new CarDetailsUpdateDto());
+        carUpdateDto.setBrand("TestBrand");
+        carUpdateDto.getCarDetails().setColor("TestColor");
+        carUpdateDto.getCarDetails().setRegistrationYear(2010);
+        //when
+        CarDto returnedCar=carService.updateCarByFields(carUpdateDto);
+        //then
+        assertAll(
+                ()->assertNotEquals(carBrand, returnedCar.getBrand()),
+                ()->assertNotEquals(carColor, returnedCar.getCarDetails().getColor()),
+                ()->assertNotEquals(carRegistrationYear, returnedCar.getCarDetails().getRegistrationYear())
+        );
+    }
+
+    @Test
+    void updateCarMethodShouldReturnCarWithNoChangeFieldsWhenFieldsInCarUpdateDtoIsNull(){
+        //given
+        CarAddDto seedCar=new CarAddDto(new CarDetailsAddDto());
+        seedCar.setBrand("NoBrand");
+        seedCar.getCarDetails().setColor("NoColor");
+        seedCar.getCarDetails().setRegistrationYear(2000);
+        Car rootCar=carService.addCar(seedCar);
+        String carBrand=rootCar.getBrand();
+        String carColor=rootCar.getCarDetails().getColor();
+        int carRegistrationYear=rootCar.getCarDetails().getRegistrationYear();
+        CarUpdateDto carUpdateDto=new CarUpdateDto(new CarDetailsUpdateDto());
+        //when
+        CarDto returnedCar=carService.updateCarByFields(carUpdateDto);
+        //then
+        assertAll(
+                ()->assertEquals(carBrand, returnedCar.getBrand()),
+                ()->assertEquals(carColor, returnedCar.getCarDetails().getColor()),
+                ()->assertEquals(carRegistrationYear, returnedCar.getCarDetails().getRegistrationYear())
+        );
+    }
 
     @Test
     void deleteCarMethodShouldReturnTrueIfCarWithGivenIdExists(){
@@ -316,7 +315,7 @@ public class CarIntegrationTest {
     @Test
     void deleteCarMethodShouldReturnFalseIfCarWithGivenIdNotExists(){
         //given
-        int id=Integer.MAX_VALUE;
+        Long id=Long.MAX_VALUE;
         //when
         boolean carWithGivenIdExist =carService.deleteCar(id);
         //then

@@ -1,13 +1,13 @@
 use car_rental_test;
-insert into car (id, brand, model, available, deleted, rental_id) values
-            (1, 'BMW', 'X3', 1, 0, 1),
-            (2, 'Ford', 'galaxy', 1, 0, 1),
-            (3, 'Opel', 'Insignia', 1, 0, 1),
-            (4, 'BMW', 'F11', 1, 0, 2),
-            (5, 'Mercedes', 'S500', 1, 0, 2),
-            (6, 'Ford', 'Fiesta', 0, 1, 2),
-            (7, 'Toyota', 'Avensis', 0, 0, null),
-            (8, 'BMW', 'E92', 1, 0, 2);
+insert into car (id, brand, model, available, deleted) values
+            (1, 'BMW', 'X3', 1, 0),
+            (2, 'Ford', 'galaxy', 1, 0),
+            (3, 'Opel', 'Insignia', 1, 0),
+            (4, 'BMW', 'F11', 1, 0),
+            (5, 'Mercedes', 'S500', 1, 0),
+            (6, 'Ford', 'Fiesta', 0, 1),
+            (7, 'Toyota', 'Avensis', 0, 0),
+            (8, 'BMW', 'E92', 1, 0);
 
 insert into car_details (id, vin, color, registration_year, price, segment,
     doors, seats, registration_number, mileage, inspection, insurance, fuel,
