@@ -61,9 +61,9 @@ public class CarController {
     }
 
     @PatchMapping
-    public ResponseEntity updateCarFields(@RequestBody CarUpdateDto updateCar) {
+    public ResponseEntity updateCarByReflection(@RequestBody CarUpdateDto updateCar) throws IllegalAccessException {
         LOGGER.info("PatchMapping updateCarFields(" + updateCar + ")");
-        if (carService.updateCarByFields(updateCar) != null) {
+        if (carService.updateCarByReflection(updateCar) != null) {
             return ResponseEntity.noContent().build();
         }
         LOGGER.info("Update failed");
