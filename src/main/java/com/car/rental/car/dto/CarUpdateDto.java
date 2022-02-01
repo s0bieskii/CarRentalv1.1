@@ -12,10 +12,14 @@ import lombok.ToString;
 @ToString
 public class CarUpdateDto {
 
-    private int id;
+    private Long id;
     private String brand;
     private String model;
     private Boolean available;
     private Boolean deleted;
     private CarDetailsUpdateDto carDetails;
+
+    public CarUpdateDto(CarDetailsUpdateDto carDetails){
+        this.carDetails=carDetails;
+    }
 }

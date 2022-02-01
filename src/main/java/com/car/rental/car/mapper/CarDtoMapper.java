@@ -1,6 +1,7 @@
 package com.car.rental.car.mapper;
 
 import com.car.rental.car.Car;
+import com.car.rental.car.dto.CarAddDto;
 import com.car.rental.car.dto.CarDto;
 import com.car.rental.car.dto.CarUpdateDto;
 import com.car.rental.details.mapper.CarDetailsDtoMapper;
@@ -14,4 +15,5 @@ public interface CarDtoMapper {
 
     CarDto carToCarDto(Car car);
     Car carUpdateToCar(CarUpdateDto carUpdateDto);
+    Car carAddToCar(CarAddDto carAddDto);
 }

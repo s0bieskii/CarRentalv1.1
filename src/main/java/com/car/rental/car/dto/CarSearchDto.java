@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @ToString
 public class CarSearchDto {
 
-    private Integer id;
+    private Long id;
     private String brand;
     private String model;
     private Integer rental;

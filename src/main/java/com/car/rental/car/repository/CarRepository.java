@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CarRepository extends JpaRepository<Car, Integer>, CarSearchRepository{
+public interface CarRepository extends JpaRepository<Car, Long>, CarSearchRepository{
 
     Page<Car> findAll(Pageable pageable);
 }

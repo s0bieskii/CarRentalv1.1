@@ -12,7 +12,7 @@ import lombok.ToString;
 @ToString
 public class CarDto {
 
-    private int id;
+    private Long id;
     private String brand;
     private String model;
     private boolean available;
