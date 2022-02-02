@@ -10,8 +10,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
 @Mapper(uses = {CarDetailsDtoMapper.class, RentalDtoMapper.class})
-public interface CarDtoMapper {
-    CarDtoMapper CAR_DTO_MAPPER = Mappers.getMapper(CarDtoMapper.class);
+public interface CarMapper {
+    CarMapper CAR_DTO_MAPPER = Mappers.getMapper(CarMapper.class);
 
     CarDto carToCarDto(Car car);
     Car carUpdateToCar(CarUpdateDto carUpdateDto);

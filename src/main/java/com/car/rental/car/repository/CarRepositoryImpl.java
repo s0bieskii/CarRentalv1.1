@@ -35,12 +35,19 @@ public class CarRepositoryImpl implements CarSearchRepository {
         Root<Car> car = cq.from(Car.class);
         CarCriteriaBuilder carCriteriaBuilder = new CarCriteriaBuilder(car, cb);
 
-        carCriteriaBuilder.addCriteria("id", carDto.getId()).addCriteria("brand", carDto.getBrand())
-                .addCriteria("model", carDto.getModel()).addCriteria("available", true).addCriteria("deleted", false)
-                .addCriteria("rental", carDto.getRental()).addCriteria("color", carDto.getColor())
-                .addCriteria("registrationYear", carDto.getRegistrationYear()).addCriteria("price", carDto.getPrice())
-                .addCriteria("segment", carDto.getSegment()).addCriteria("doors", carDto.getDoors())
-                .addCriteria("seats", carDto.getSeats()).addCriteria("fuel", carDto.getFuel())
+        carCriteriaBuilder.addCriteria("id", carDto.getId())
+                .addCriteria("brand", carDto.getBrand())
+                .addCriteria("model", carDto.getModel())
+                .addCriteria("available", true)
+                .addCriteria("deleted", false)
+//                .addCriteria("rental", carDto.getRental())
+                .addCriteria("color", carDto.getColor())
+                .addCriteria("registrationYear", carDto.getRegistrationYear())
+                .addCriteria("price", carDto.getPrice())
+                .addCriteria("segment", carDto.getSegment())
+                .addCriteria("doors", carDto.getDoors())
+                .addCriteria("seats", carDto.getSeats())
+                .addCriteria("fuel", carDto.getFuel())
                 .addCriteria("transmission", carDto.getTransmission());
         Predicate predicate = carCriteriaBuilder.getPredicate();
         List<Car> carList;

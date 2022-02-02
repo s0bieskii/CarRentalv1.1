@@ -27,6 +27,7 @@ public class CarController {
     private final CarService carService;
 
     public CarController(CarService carService) {
+        LOGGER.info("CarController(" + carService + ")");
         this.carService = carService;
     }
 
@@ -60,20 +61,22 @@ public class CarController {
         return ResponseEntity.ok(carService.search(pageable, carSearchDto));
     }
 
-    @PatchMapping
+    @PatchMapping("/updateByField")
     public ResponseEntity updateCarByReflection(@RequestBody CarUpdateDto updateCar) throws IllegalAccessException {
         LOGGER.info("PatchMapping updateCarFields(" + updateCar + ")");
         if (carService.updateCarByReflection(updateCar) != null) {
+            LOGGER.info("Update success");
             return ResponseEntity.noContent().build();
         }
         LOGGER.info("Update failed");
         return ResponseEntity.badRequest().body("Something gone wrong with update!");
     }
 
-    @PatchMapping
+    @PatchMapping("/update")
     public ResponseEntity updateCar(@RequestBody CarUpdateDto updateCar) {
         LOGGER.info("PatchMapping updateCar(" + updateCar + ")");
         if (carService.updateCar(updateCar) != null) {
+            LOGGER.info("Update success");
             return ResponseEntity.noContent().build();
         }
         LOGGER.info("Update failed");

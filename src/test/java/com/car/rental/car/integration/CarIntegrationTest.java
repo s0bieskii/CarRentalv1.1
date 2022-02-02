@@ -419,23 +419,23 @@ public class CarIntegrationTest {
         );
     }
 
-    @Test
-    void searchMethodWithGivenRentalAndColorShouldReturnMatchingCarsDto() {
-        //given
-        CarSearchDto carSearchDto = new CarSearchDto();
-        carSearchDto.setColor("black");
-        carSearchDto.setRental(2);
-        int expectingCarQuantity = 2;
-        Pageable pageable = PageRequest.of(0, 6);
-        //when
-        Page<CarDto> page = carService.search(pageable, carSearchDto);
-        //then
-        assertAll(
-                () -> assertEquals(expectingCarQuantity, page.getTotalElements()),
-                () -> assertThat(page.getContent()).extracting("carDetails.color").contains("black"),
-                () -> assertThat(page.getContent()).extracting("rental.id").contains(2)
-        );
-    }
+//    @Test
+//    void searchMethodWithGivenRentalAndColorShouldReturnMatchingCarsDto() {
+//        //given
+//        CarSearchDto carSearchDto = new CarSearchDto();
+//        carSearchDto.setColor("black");
+//        carSearchDto.setRental(2);
+//        int expectingCarQuantity = 2;
+//        Pageable pageable = PageRequest.of(0, 6);
+//        //when
+//        Page<CarDto> page = carService.search(pageable, carSearchDto);
+//        //then
+//        assertAll(
+//                () -> assertEquals(expectingCarQuantity, page.getTotalElements()),
+//                () -> assertThat(page.getContent()).extracting("carDetails.color").contains("black"),
+//                () -> assertThat(page.getContent()).extracting("rental.id").contains(2)
+//        );
+//    }
 
     @Test
     void searchMethodWithGivenMinimalRegistrationYearAndMaximalPriceShouldReturnMatchingCarsDto() {
