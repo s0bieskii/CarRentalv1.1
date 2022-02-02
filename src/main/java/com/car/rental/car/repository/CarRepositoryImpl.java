@@ -11,14 +11,11 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class CarRepositoryImpl implements CarSearchRepository {
-    public static final Logger LOGGER = Logger.getLogger(CarRepositoryImpl.class.getName());
 
-    @Autowired
+    public static final Logger LOGGER = Logger.getLogger(CarRepositoryImpl.class.getName());
     private final EntityManager entityManager;
-    @Autowired
     private final RentalRepository rentalRepository;
 
     private CarRepositoryImpl(EntityManager entityManager, RentalRepository rentalRepository) {

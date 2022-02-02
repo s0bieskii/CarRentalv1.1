@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/employee")
 public class EmployeeController {
+
     public static final Logger LOGGER = Logger.getLogger(EmployeeController.class.getName());
     private final EmployeeService employeeService;
 
