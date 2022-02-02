@@ -46,15 +46,15 @@ insert into rental (id, city, country, phone, post_code, street, deleted) values
 insert into rental_cars (rental_id, cars_id) values
         (1, 1), (1, 2), (1, 3), (2, 4), (2, 5), (2, 6), (2, 8);
 
-insert into employee (id, employment_position, first_name, last_name, salary_per_hour) values
-        (1, 'bigboss', 'Patryk', 'Chojnacki', 120),
-        (2, 'manager', 'Julka', 'Pee', 45),
-        (3, 'dealer', 'Kaska', 'Chmiel', 13),
-        (4, 'dealer', 'Slawek', 'Petarda', 15),
-        (5, 'dealer', 'Igor', 'Cykor', 14),
-        (6, 'dealer', 'Emily', 'Gilmore', 15),
-        (7, 'dealer', 'Super', 'Man', 17),
-        (8, 'dealer', 'Spider', 'Man', 14);
+insert into employee (id, employment_position, first_name, last_name, salary_per_hour, deleted) values
+        (1, 'bigboss', 'Patryk', 'Chojnacki', 120, false),
+        (2, 'manager', 'Julka', 'Pee', 45, false),
+        (3, 'dealer', 'Kaska', 'Chmiel', 13, false),
+        (4, 'dealer', 'Slawek', 'Petarda', 15, false),
+        (5, 'dealer', 'Igor', 'Cykor', 14, false),
+        (6, 'dealer', 'Emily', 'Gilmore', 15, false),
+        (7, 'dealer', 'Super', 'Man', 17, false),
+        (8, 'dealer', 'Spider', 'Man', 14, false);
 
 insert into rental_employees(rental_id, employees_id) values
         (1,1), (1,2), (1,3), (1,4), (2,5), (2,6), (3,7), (3,8);

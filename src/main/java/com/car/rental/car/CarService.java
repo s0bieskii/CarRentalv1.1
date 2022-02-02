@@ -4,7 +4,7 @@ import com.car.rental.car.dto.CarAddDto;
 import com.car.rental.car.dto.CarDto;
 import com.car.rental.car.dto.CarSearchDto;
 import com.car.rental.car.dto.CarUpdateDto;
-import com.car.rental.car.mapper.CarDtoMapper;
+import com.car.rental.car.mapper.CarMapper;
 import com.car.rental.car.repository.CarRepository;
 import com.car.rental.details.dto.CarDetailsAddDto;
 import com.car.rental.rental.repository.RentalRepository;
@@ -22,13 +22,13 @@ import org.springframework.stereotype.Service;
 public class CarService {
     public static final Logger LOGGER = Logger.getLogger(CarService.class.getName());
     private final CarRepository carRepository;
-    private final CarDtoMapper carMapper;
+    private final CarMapper carMapper;
     private final RentalRepository rentalRepository;
     private final EntityUpdater entityUpdater;
 
-    public CarService(CarRepository carRepository, CarDtoMapper carMapper, RentalRepository rentalRepository,
+    public CarService(CarRepository carRepository, CarMapper carMapper, RentalRepository rentalRepository,
                       EntityUpdater entityUpdater) {
-        LOGGER.info("Creating CarService with(" + carRepository + " " + carMapper + " " + rentalRepository + " " +
+        LOGGER.info("Creating CarService with(" + carRepository + ", " + carMapper + ", " + rentalRepository + ", " +
                 entityUpdater);
         this.carRepository = carRepository;
         this.carMapper = carMapper;
