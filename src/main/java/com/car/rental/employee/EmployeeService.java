@@ -7,8 +7,10 @@ import com.car.rental.employee.dto.EmployeeUpdateDto;
 import com.car.rental.employee.mapper.EmployeeMapper;
 import com.car.rental.employee.repository.EmployeeRepository;
 import com.car.rental.utils.EntityUpdater;
+import com.car.rental.utils.PageWrapper;
+import java.util.List;
 import java.util.logging.Logger;
-import org.hibernate.Hibernate;
+import java.util.stream.Collectors;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -52,21 +54,32 @@ public class EmployeeService {
         return employee;
     }
 
-    //TODO implement this
-    public EmployeeDto search(Pageable pageable, EmployeeSearchDto employeeSearchDto) {
-        return null;
+    public Page<EmployeeDto> search(Pageable pageable, EmployeeSearchDto employeeSearchDto) {
+        LOGGER.info("search(" + pageable + ", " + employeeSearchDto + ")");
+        List<EmployeeDto> employeeDto = employeeRepository.find(employeeSearchDto).stream()
+                .map(employeeMapper::employeeToEmployeeDto).collect(Collectors.toList());
+        LOGGER.info("Found: " + employeeDto);
+        return PageWrapper.listToPage(pageable, employeeDto);
+    }
+
+    public Employee getById(Long id){
+        return employeeRepository.getById(id);
+    }
+
+    public Employee findByIdNotMapped(Long id){
+        return employeeRepository.findById(id).get();
     }
 
     //TODO refactor
     public EmployeeDto updateEmployeeByReflection(EmployeeUpdateDto employeeUpdate) {
         LOGGER.info("updateEmployeeByReflection(" + employeeUpdate + ")");
-        if (!employeeRepository.existsById(employeeUpdate.getId())) {
+        if (employeeUpdate.getId() == null || !employeeRepository.existsById(employeeUpdate.getId())) {
             LOGGER.info("Employee with given ID not exist" + employeeUpdate.getId());
             return null;
         }
         LOGGER.info("Employee with given ID exist" + employeeUpdate.getId());
-        Employee employeeToUpdate = (Employee) Hibernate.unproxy(employeeRepository.getById(employeeUpdate.getId()));
-        Employee employeeAfterUpdate=employeeToUpdate;
+        Employee employeeToUpdate = employeeRepository.findById(employeeUpdate.getId()).get();
+        Employee employeeAfterUpdate = employeeToUpdate;
         try {
             employeeAfterUpdate = (Employee) entityUpdater.updateEntity(employeeToUpdate, employeeUpdate);
         } catch (IllegalAccessException e) {
@@ -79,7 +92,7 @@ public class EmployeeService {
     public EmployeeDto updateEmployee(EmployeeUpdateDto employeeUpdateDto) {
         LOGGER.info("updateCar(" + employeeUpdateDto + ")");
         if (employeeUpdateDto.getId() != null && employeeRepository.existsById(employeeUpdateDto.getId())) {
-            Employee employee=employeeMapper.employeeUpdateDtoToEmployee(employeeUpdateDto);
+            Employee employee = employeeMapper.employeeUpdateDtoToEmployee(employeeUpdateDto);
             LOGGER.info("Employee successfully updated");
             return employeeMapper.employeeToEmployeeDto(employee);
         }
@@ -89,7 +102,7 @@ public class EmployeeService {
 
     public boolean deleteEmployee(Long id) {
         LOGGER.info("deleteCar(" + id + ")");
-        if(employeeRepository.existsById(id)){
+        if (employeeRepository.existsById(id)) {
             LOGGER.info("Employee with given ID exists");
             Employee employee = employeeRepository.getById(id);
             employee.setDeleted(true);

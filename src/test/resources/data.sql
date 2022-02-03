@@ -52,8 +52,8 @@ insert into employee (id, employment_position, first_name, last_name, salary_per
         (3, 'dealer', 'Kaska', 'Chmiel', 13, false),
         (4, 'dealer', 'Slawek', 'Petarda', 15, false),
         (5, 'dealer', 'Igor', 'Cykor', 14, false),
-        (6, 'dealer', 'Emily', 'Gilmore', 15, false),
-        (7, 'dealer', 'Super', 'Man', 17, false),
+        (6, 'dealer', 'Emily', 'Gilmore', 15, true),
+        (7, 'dealer', 'Patryk', 'Man', 17, false),
         (8, 'dealer', 'Spider', 'Man', 14, false);
 
 insert into rental_employees(rental_id, employees_id) values

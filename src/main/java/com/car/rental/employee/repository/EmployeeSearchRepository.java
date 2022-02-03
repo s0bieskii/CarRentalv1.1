@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface EmployeeSearchRepository {
 
-    public List<Employee> find(EmployeeSearchDto carDto);
+    public List<Employee> find(EmployeeSearchDto employeeSearchDto);
 }

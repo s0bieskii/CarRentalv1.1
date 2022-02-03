@@ -29,24 +29,25 @@ public class EmployeeController {
 
     public EmployeeController(EmployeeService employeeService) {
         LOGGER.info("CarController(" + employeeService + ")");
-        this.employeeService=employeeService;
+        this.employeeService = employeeService;
     }
 
     @PostMapping()
-    public ResponseEntity create(@RequestBody EmployeeAddDto dto){
+    public ResponseEntity create(@RequestBody EmployeeAddDto dto) {
         LOGGER.info("PostMapping create(" + dto + ")");
-        Employee employee=employeeService.addEmployee(dto);
-        return ResponseEntity.created(URI.create(Config.applicationPath+employee.getId())).build();
+        Employee employee = employeeService.addEmployee(dto);
+        return ResponseEntity.created(URI.create(Config.applicationPath + employee.getId())).build();
     }
 
     @GetMapping()
-    public ResponseEntity<Page<EmployeeDto>> getAll(@PageableDefault(page = 0, size = 6) @RequestBody Pageable pageable){
-        Page<EmployeeDto> employees=employeeService.getAll(pageable);
+    public ResponseEntity<Page<EmployeeDto>> getAll(
+            @PageableDefault(page = 0, size = 6) @RequestBody Pageable pageable) {
+        Page<EmployeeDto> employees = employeeService.getAll(pageable);
         return ResponseEntity.ok(employees);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<EmployeeDto> findById(@PathVariable Long id){
+    public ResponseEntity<EmployeeDto> findById(@PathVariable Long id) {
         LOGGER.info("GetMapping findById(" + id + ")");
         EmployeeDto employeeDto = employeeService.findById(id);
         return ResponseEntity.ok(employeeDto);
@@ -54,9 +55,10 @@ public class EmployeeController {
 
     //TODO implement this
     @GetMapping("/search")
-    public ResponseEntity search(@PageableDefault(size = 6, page = 0) @RequestBody Pageable pageable, EmployeeSearchDto employeeSearchDto){
-        LOGGER.info("GetMapping search(" + pageable +", "+employeeSearchDto+ ")");
-        EmployeeDto employeeDto=employeeService.search(pageable, employeeSearchDto);
+    public ResponseEntity search(@PageableDefault(size = 6, page = 0) Pageable pageable,
+                                 @RequestBody EmployeeSearchDto employeeSearchDto) {
+        LOGGER.info("GetMapping search(" + pageable + ", " + employeeSearchDto + ")");
+        Page<EmployeeDto> employeeDto = employeeService.search(pageable, employeeSearchDto);
         return ResponseEntity.ok(employeeService.search(pageable, employeeSearchDto));
     }
 
@@ -64,7 +66,7 @@ public class EmployeeController {
     public ResponseEntity updateEmployeeByReflection(@RequestBody EmployeeUpdateDto employeeUpdate)
             throws IllegalAccessException {
         LOGGER.info("PatchMapping updateEmployeeByReflection(" + employeeUpdate + ")");
-        if(employeeService.updateEmployeeByReflection(employeeUpdate)!=null){
+        if (employeeService.updateEmployeeByReflection(employeeUpdate) != null) {
             LOGGER.info("Update success");
             return ResponseEntity.noContent().build();
         }
@@ -73,9 +75,9 @@ public class EmployeeController {
     }
 
     @PatchMapping("/update")
-    public ResponseEntity updateCar(@RequestBody EmployeeUpdateDto employeeUpdateDto){
-        LOGGER.info("PatchMapping updateCar("+employeeUpdateDto+")");
-        if(employeeService.updateEmployee(employeeUpdateDto)!=null){
+    public ResponseEntity updateCar(@RequestBody EmployeeUpdateDto employeeUpdateDto) {
+        LOGGER.info("PatchMapping updateCar(" + employeeUpdateDto + ")");
+        if (employeeService.updateEmployee(employeeUpdateDto) != null) {
             LOGGER.info("Update success");
             return ResponseEntity.noContent().build();
         }
@@ -84,9 +86,9 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteCar(@PathVariable Long id){
-        LOGGER.info("DeleteMapping deleteCar("+id+")");
-        if(employeeService.deleteEmployee(id)){
+    public ResponseEntity deleteCar(@PathVariable Long id) {
+        LOGGER.info("DeleteMapping deleteCar(" + id + ")");
+        if (employeeService.deleteEmployee(id)) {
             return ResponseEntity.ok().body("Car with " + id + " successfully deleted");
         }
         return ResponseEntity.badRequest().body("Car with given ID not exist");

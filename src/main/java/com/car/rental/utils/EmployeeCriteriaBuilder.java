@@ -38,28 +38,28 @@ public class EmployeeCriteriaBuilder {
                 if (predicate == null) {
                     predicate = cb.equal(employee.get("firstName"), (String) value);
                 } else {
-                    predicate = cb.and(predicate, cb.equal(employee.get("id"), (String) value));
+                    predicate = cb.and(predicate, cb.equal(employee.get("firstName"), (String) value));
                 }
                 break;
             case "lastName":
                 if (predicate == null) {
                     predicate = cb.equal(employee.get("lastName"), (String) value);
                 } else {
-                    predicate = cb.and(predicate, cb.equal(employee.get("id"), (String) value));
+                    predicate = cb.and(predicate, cb.equal(employee.get("lastName"), (String) value));
                 }
                 break;
             case "employmentPosition":
                 if (predicate == null) {
                     predicate = cb.equal(employee.get("employmentPosition"), (String) value);
                 } else {
-                    predicate = cb.and(predicate, cb.equal(employee.get("id"), (String) value));
+                    predicate = cb.and(predicate, cb.equal(employee.get("employmentPosition"), (String) value));
                 }
                 break;
             case "deleted":
                 if (predicate == null) {
                     predicate = cb.equal(employee.get("deleted"), (Boolean) value);
                 } else {
-                    predicate = cb.and(predicate, cb.equal(employee.get("id"), (Boolean) value));
+                    predicate = cb.and(predicate, cb.equal(employee.get("deleted"), (Boolean) value));
                 }
                 break;
         }

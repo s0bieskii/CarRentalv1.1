@@ -1,5 +1,6 @@
 package com.car.rental.employee.dto;
 
+import java.math.BigDecimal;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,7 +16,7 @@ public class EmployeeUpdateDto {
     private String firstName;
     private String lastName;
     private String employmentPosition;
-    private Double salaryPerHour;
+    private BigDecimal salaryPerHour;
     private Boolean deleted;
 
 }
