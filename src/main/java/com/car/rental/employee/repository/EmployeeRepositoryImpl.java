@@ -1,6 +1,5 @@
 package com.car.rental.employee.repository;
 
-import com.car.rental.car.repository.CarRepositoryImpl;
 import com.car.rental.employee.Employee;
 import com.car.rental.employee.dto.EmployeeSearchDto;
 import com.car.rental.utils.EmployeeCriteriaBuilder;
@@ -12,12 +11,12 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
-public class EmployeeSearchImpl implements EmployeeSearchRepository {
+public class EmployeeRepositoryImpl implements EmployeeSearchRepository {
 
-    public static final Logger LOGGER = Logger.getLogger(CarRepositoryImpl.class.getName());
+    public static final Logger LOGGER = Logger.getLogger(EmployeeSearchRepository.class.getName());
     private final EntityManager entityManager;
 
-    public EmployeeSearchImpl(EntityManager entityManager) {
+    public EmployeeRepositoryImpl(EntityManager entityManager) {
         LOGGER.info("EmployeeSearchImpl("+entityManager+")");
         this.entityManager = entityManager;
     }
@@ -34,7 +33,7 @@ public class EmployeeSearchImpl implements EmployeeSearchRepository {
         employeeCriteriaBuilder.addCriteria("id", employeeSearchDto.getId())
                 .addCriteria("firstName", employeeSearchDto.getFirstName())
                 .addCriteria("lastName", employeeSearchDto.getLastName())
-                .addCriteria("employmentPosition", employeeSearchDto.getLastName())
+                .addCriteria("employmentPosition", employeeSearchDto.getEmploymentPosition())
                 .addCriteria("deleted", false);
 
         Predicate predicate=employeeCriteriaBuilder.getPredicate();

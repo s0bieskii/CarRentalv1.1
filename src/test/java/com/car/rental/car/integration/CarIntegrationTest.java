@@ -55,7 +55,7 @@ public class CarIntegrationTest {
     }
 
     @AfterEach
-    void tearDown() {
+    void cleanDb() {
         JdbcTestUtils.deleteFromTables(jdbcTemplate, "car", "car_details", "employee", "rental", "rental_cars",
                 "rental_employees", "rents", "return_report", "users", "users_rents");
     }
@@ -222,7 +222,7 @@ public class CarIntegrationTest {
         //given
         PageRequest request = PageRequest.of(0, 5);
         //when
-        tearDown(); //CLEAR DATABASE
+        cleanDb(); //CLEAR DATABASE
         Page<CarDto> emptyCarsPage = carService.getAll(request);
         //then
         assertEquals(0, emptyCarsPage.getTotalElements());

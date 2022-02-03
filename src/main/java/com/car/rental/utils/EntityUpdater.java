@@ -21,7 +21,6 @@ public class EntityUpdater {
     public Object updateEntity(Object objectToUpdate, Object update) throws IllegalAccessException {
         LOGGER.warning(
                 "You should use " + EntityUpdater.class + " carefully! WARNING for fields which you will not update!");
-        LOGGER.info("Update : " + objectToUpdate + " with new value from: " + update);
         objectToUpdate = customUpdate(objectToUpdate, update);
         for (Field entityField : objectToUpdate.getClass().getDeclaredFields()) {
             for (Field updateField : update.getClass().getDeclaredFields()) {
