@@ -2,7 +2,6 @@ package com.car.rental.employee.repository;
 
 import com.car.rental.employee.Employee;
 import com.car.rental.employee.dto.EmployeeSearchDto;
-import com.car.rental.utils.EmployeeCriteriaBuilder;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;
