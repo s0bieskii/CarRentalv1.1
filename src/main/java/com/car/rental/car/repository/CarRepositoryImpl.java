@@ -2,10 +2,11 @@ package com.car.rental.car.repository;
 
 import com.car.rental.car.Car;
 import com.car.rental.car.dto.CarSearchDto;
+import com.car.rental.rental.Rental;
 import com.car.rental.rental.repository.RentalRepository;
-import com.car.rental.utils.CarCriteriaBuilder;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
@@ -26,18 +27,18 @@ public class CarRepositoryImpl implements CarSearchRepository {
 
     @Override
     public List<Car> find(CarSearchDto carDto) {
-        LOGGER.info("Trying to find car with parameters : " + carDto);
+            LOGGER.info("Find matching cars find(" + carDto + ")");
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Car> cq = cb.createQuery(Car.class);
+        CriteriaQuery<Rental> cqRental = cb.createQuery(Rental.class);
         Root<Car> car = cq.from(Car.class);
+        Root<Rental> rental = cq.from(Rental.class);
         CarCriteriaBuilder carCriteriaBuilder = new CarCriteriaBuilder(car, cb);
 
-        carCriteriaBuilder.addCriteria("id", carDto.getId())
-                .addCriteria("brand", carDto.getBrand())
+        carCriteriaBuilder.addCriteria("id", carDto.getId()).addCriteria("brand", carDto.getBrand())
                 .addCriteria("model", carDto.getModel())
                 .addCriteria("available", true)
                 .addCriteria("deleted", false)
-//                .addCriteria("rental", carDto.getRental())
                 .addCriteria("color", carDto.getColor())
                 .addCriteria("registrationYear", carDto.getRegistrationYear())
                 .addCriteria("price", carDto.getPrice())
@@ -56,43 +57,18 @@ public class CarRepositoryImpl implements CarSearchRepository {
             LOGGER.info("Predicate created");
             carList = entityManager.createQuery(cq.select(car).where(predicate).distinct(true)).getResultList();
         }
-        LOGGER.info("Found " + carList.size() + " elements");
-        return carList;
-    }
+        List<Car> carsToReturn = carList;
+        if (carDto.getRental() != null) {
+            LOGGER.info("Filter cars by rental id");
+            cqRental.getRoots().add(rental);
+            cqRental.select(rental);
+            cqRental.where(cb.equal(rental.get("id"), carDto.getRental()));
+            List<Car> carsForRental = entityManager.createQuery(cqRental).getResultList().stream().map(Rental::getCars)
+                    .flatMap(List::stream).collect(Collectors.toList());
+            carsToReturn = carsForRental.stream().filter(e -> carList.contains(e)).collect(Collectors.toList());
 
-//    @Override
-//    public List<Car> find(CarSearchDto carDto) {
-//        LOGGER.info("Trying to find car with parameters : "+carDto);
-//        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-//        CriteriaQuery<Car> cq = cb.createQuery(Car.class);
-//        Root<Car> car = cq.from(Car.class);
-//        CarCriteriaBuilder carCriteriaBuilder = new CarCriteriaBuilder(car, cb);
-//
-//        carCriteriaBuilder.addCriteria("id", carDto.getId())
-//                .addCriteria("brand", carDto.getBrand())
-//                .addCriteria("model", carDto.getModel())
-//                .addCriteria("available", true)
-//                .addCriteria("deleted",false)
-//                .addCriteria("rental", carDto.getRental())
-//                .addCriteria("color", carDto.getColor())
-//                .addCriteria("registrationYear", carDto.getRegistrationYear())
-//                .addCriteria("price", carDto.getPrice())
-//                .addCriteria("segment", carDto.getSegment())
-//                .addCriteria("doors", carDto.getDoors())
-//                .addCriteria("seats", carDto.getSeats())
-//                .addCriteria("fuel", carDto.getFuel())
-//                .addCriteria("transmission", carDto.getTransmission());
-//        Predicate predicate=carCriteriaBuilder.getPredicate();
-//        List<Car> carList;
-//
-//        if(predicate==null){
-//            LOGGER.info("Predicate is null");
-//            carList=entityManager.createQuery(cq.select(car).distinct(true)).getResultList();
-//        } else {
-//            LOGGER.info("Predicate created");
-//            carList=entityManager.createQuery(cq.select(car).where(predicate).distinct(true)).getResultList();
-//        }
-//        LOGGER.info("Found "+carList.size()+" elements");
-//        return carList;
-//    }
+        }
+        LOGGER.info("Found " + carList.size() + " elements");
+        return carsToReturn;
+    }
 }

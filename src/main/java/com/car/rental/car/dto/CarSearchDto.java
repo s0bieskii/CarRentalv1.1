@@ -23,6 +23,7 @@ public class CarSearchDto {
     private String segment;
     private Integer doors;
     private Integer seats;
+
     private String fuel;
     private String transmission;
     private LocalDateTime start;

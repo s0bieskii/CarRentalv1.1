@@ -1,4 +1,4 @@
-package com.car.rental.utils;
+package com.car.rental.employee.repository;
 
 import com.car.rental.car.repository.CarRepositoryImpl;
 import com.car.rental.employee.Employee;

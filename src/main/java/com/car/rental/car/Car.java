@@ -3,6 +3,7 @@ package com.car.rental.car;
 import com.car.rental.details.CarDetails;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,7 +27,7 @@ public class Car {
     private String model;
     private boolean available;
     private boolean deleted;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private CarDetails carDetails;
 
 }
