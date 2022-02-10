@@ -1,11 +1,11 @@
 package com.car.rental.car.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -26,6 +26,8 @@ public class CarSearchDto {
 
     private String fuel;
     private String transmission;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime start;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime end;
 }

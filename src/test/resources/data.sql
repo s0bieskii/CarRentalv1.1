@@ -56,7 +56,7 @@ insert into employee (id, employment_position, first_name, last_name, salary_per
         (7, 'dealer', 'Patryk', 'Man', 17, false),
         (8, 'dealer', 'Spider', 'Man', 14, false);
 
-insert into rental_employees(rental_id, employees_id) values
+insert into rental_employees (rental_id, employees_id) values
         (1,1), (1,2), (1,3), (1,4), (2,5), (2,6), (3,7), (3,8);
 
 insert into users(id, birth, email, first_name, last_name, password, activated, deleted) values
@@ -76,8 +76,8 @@ insert into rents(id, comment, confirmed, start, end, final_price, returned, car
         (8, 'my comment 8', 0, '2022-05-10T12:30:00', '2022-05-18T12:30:00', 999, 0, 1, 8, 4),
         (9, 'my comment 9', 1, '2021-10-15T12:30:00', '2021-10-27T12:30:00', 888, 1, 2, 9, 4),
         (10, 'my comment 10', 1, '2021-11-09T12:30:00', '2021-11-23T12:30:00', 777, 1, 3, 10, 1),
-        (11, 'my comment 11', 0, '2022-06-06T12:30:00', '2022-06-19T12:30:00', 666, 0, 8, 12, 2),
-        (12, 'my comment 12', 1, '2021-06-06T12:30:00', '2021-02-19T12:30:00', 555, 1, 1, 13, 3);
+        (11, 'my comment 11', 0, '2022-06-06T12:30:00', '2022-06-19T12:30:00', 666, 0, 8, 11, 2),
+        (12, 'my comment 12', 1, '2021-06-06T12:30:00', '2021-02-19T12:30:00', 555, 1, 1, 12, 3);
 
 insert into return_report(id, damaged, note, car_id, employee_id) values
         (1, 0, 'note 1', 1, 5),
@@ -95,5 +95,3 @@ insert into return_report(id, damaged, note, car_id, employee_id) values
 
 insert into users_rents(user_id, rents_id) values
         (1,1), (1,2), (2,3), (3,4), (1,5), (2,6), (3,7), (4,8), (4,9), (1,10), (2,11), (3, 12);
-
-
