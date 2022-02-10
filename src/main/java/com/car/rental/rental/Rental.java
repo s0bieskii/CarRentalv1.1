@@ -31,7 +31,7 @@ public class Rental {
     private boolean deleted;
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Car> cars;
-    @OneToMany(fetch = FetchType.EAGER)
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Employee> employees;
 
 }
