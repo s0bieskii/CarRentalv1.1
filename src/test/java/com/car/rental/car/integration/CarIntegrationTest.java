@@ -223,6 +223,7 @@ public class CarIntegrationTest {
         //given
         PageRequest request = PageRequest.of(0, 5);
         //when
+        tearDown();
         Page<CarDto> emptyCarsPage = carService.getAll(request);
         //then
         assertEquals(0, emptyCarsPage.getTotalElements());
@@ -489,17 +490,17 @@ public class CarIntegrationTest {
         int seats = 5;
         String fuel = "diesel";
         int expectingCarQuantity = 3;
-        carSearchDto.setSeats(seats);
-        carSearchDto.setFuel(fuel);
         Pageable pageable = PageRequest.of(0, 6);
         //when
+        carSearchDto.setSeats(seats);
+        carSearchDto.setFuel(fuel);
         Page<CarDto> page = carService.search(pageable, carSearchDto);
         List<Integer> seatsList = page.getContent().stream()
                 .map(carDto -> carDto.getCarDetails().getDoors()).collect(Collectors.toList());
         //then
         assertAll(
                 () -> assertEquals(expectingCarQuantity, page.getTotalElements()),
-                () -> assertEquals(seatsList.get(0), seats),
+                () -> assertEquals(seats, seatsList.get(0)  ),
                 () -> assertThat(page.getContent()).extracting("carDetails.fuel")
                         .contains(fuel)
         );
