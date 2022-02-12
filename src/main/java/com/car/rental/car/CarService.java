@@ -8,12 +8,10 @@ import com.car.rental.car.mapper.CarMapper;
 import com.car.rental.car.repository.CarRepository;
 import com.car.rental.details.dto.CarDetailsAddDto;
 import com.car.rental.rental.repository.RentalRepository;
-import com.car.rental.utils.EntityUpdater;
 import com.car.rental.utils.PageWrapper;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
-import org.hibernate.Hibernate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -24,16 +22,12 @@ public class CarService {
     private final CarRepository carRepository;
     private final CarMapper carMapper;
     private final RentalRepository rentalRepository;
-    private final EntityUpdater entityUpdater;
 
-    public CarService(CarRepository carRepository, CarMapper carMapper, RentalRepository rentalRepository,
-                      EntityUpdater entityUpdater) {
-        LOGGER.info("Creating CarService with(" + carRepository + ", " + carMapper + ", " + rentalRepository + ", " +
-                entityUpdater);
+    public CarService(CarRepository carRepository, CarMapper carMapper, RentalRepository rentalRepository) {
+        LOGGER.info("Creating CarService with(" + carRepository + ", " + carMapper + ", " + rentalRepository);
         this.carRepository = carRepository;
         this.carMapper = carMapper;
         this.rentalRepository = rentalRepository;
-        this.entityUpdater = entityUpdater;
     }
 
     public Car addCar(CarAddDto dto) {
@@ -68,21 +62,6 @@ public class CarService {
                 .map(carMapper::carToCarDto).collect(Collectors.toList());
         LOGGER.info("Found: " + carResultList);
         return PageWrapper.listToPage(pageable, carResultList);
-    }
-
-    public CarDto updateCarByReflection(CarUpdateDto carUpdate) throws IllegalAccessException {
-        LOGGER.info("updateCarByReflection(" + carUpdate + ")");
-        if (!carRepository.existsById(carUpdate.getId())) {
-            LOGGER.info("Car with given ID not exist" + carUpdate.getId());
-            return null;
-        }
-        LOGGER.info("Car with given ID exist");
-        Car carToUpdate = (Car) Hibernate.unproxy(carRepository.getById(carUpdate.getId()));
-        Car carAfterUpdate = (Car) entityUpdater.updateEntity(carToUpdate, carUpdate);
-        carRepository.save(carAfterUpdate);
-        CarDto carDto = carMapper.carToCarDto(carAfterUpdate);
-        LOGGER.info("Update success! Car after update: " + carDto);
-        return carDto;
     }
 
     public CarDto updateCar(CarUpdateDto carUpdate) {

@@ -239,64 +239,6 @@ public class CarIntegrationTest {
         assertNotEquals(0, notEmptyCarsPage.getTotalElements());
     }
 
-//    @Test
-//    void updateCarMethodShouldReturnNullIfCarWithGivenIdNotExist(){
-//        //given
-//        Long id=Long.MAX_VALUE;
-//        CarUpdateDto carUpdateDto=new CarUpdateDto();
-//        //when
-//        CarDto returnedCar=carService.updateCarByReflection(carUpdateDto);
-//        //then
-//        assertNull(returnedCar);
-//    }
-//
-//    @Test
-//    void updateCarMethodShouldReturnUpdatedCarWithTheSameFieldsWhatsInCarUpdateDto(){
-//        //given
-//        CarAddDto seedCar=new CarAddDto(new CarDetailsAddDto());
-//        seedCar.setBrand("NoBrand");
-//        seedCar.getCarDetails().setColor("NoColor");
-//        seedCar.getCarDetails().setRegistrationYear(2000);
-//        Car rootCar=carService.addCar(seedCar);
-//        String carBrand=rootCar.getBrand();
-//        String carColor=rootCar.getCarDetails().getColor();
-//        int carRegistrationYear=rootCar.getCarDetails().getRegistrationYear();
-//        CarUpdateDto carUpdateDto=new CarUpdateDto(new CarDetailsUpdateDto());
-//        carUpdateDto.setBrand("TestBrand");
-//        carUpdateDto.getCarDetails().setColor("TestColor");
-//        carUpdateDto.getCarDetails().setRegistrationYear(2010);
-//        //when
-//        CarDto returnedCar=carService.updateCarByReflection(carUpdateDto);
-//        //then
-//        assertAll(
-//                ()->assertNotEquals(carBrand, returnedCar.getBrand()),
-//                ()->assertNotEquals(carColor, returnedCar.getCarDetails().getColor()),
-//                ()->assertNotEquals(carRegistrationYear, returnedCar.getCarDetails().getRegistrationYear())
-//        );
-//    }
-//
-//    @Test
-//    void updateCarMethodShouldReturnCarWithNoChangeFieldsWhenFieldsInCarUpdateDtoIsNull(){
-//        //given
-//        CarAddDto seedCar=new CarAddDto(new CarDetailsAddDto());
-//        seedCar.setBrand("NoBrand");
-//        seedCar.getCarDetails().setColor("NoColor");
-//        seedCar.getCarDetails().setRegistrationYear(2000);
-//        Car rootCar=carService.addCar(seedCar);
-//        String carBrand=rootCar.getBrand();
-//        String carColor=rootCar.getCarDetails().getColor();
-//        int carRegistrationYear=rootCar.getCarDetails().getRegistrationYear();
-//        CarUpdateDto carUpdateDto=new CarUpdateDto(new CarDetailsUpdateDto());
-//        //when
-//        CarDto returnedCar=carService.updateCarByReflection(carUpdateDto);
-//        //then
-//        assertAll(
-//                ()->assertEquals(carBrand, returnedCar.getBrand()),
-//                ()->assertEquals(carColor, returnedCar.getCarDetails().getColor()),
-//                ()->assertEquals(carRegistrationYear, returnedCar.getCarDetails().getRegistrationYear())
-//        );
-//    }
-
     @Test
     void deleteCarMethodShouldReturnTrueIfCarWithGivenIdExists() {
         //given
@@ -423,23 +365,22 @@ public class CarIntegrationTest {
     @Test
     void searchMethodWithGivenRentalAndColorShouldReturnMatchingCarsDto() {
         //given
+        int rentalId = 2;
+        String color = "black";
+        int expectingQuantity = 2;
         CarSearchDto carSearchDto = new CarSearchDto();
-        carSearchDto.setColor("black");
-        carSearchDto.setRental(2);
-        int expectingCarQuantity = 2;
+        carSearchDto.setRental(rentalId);
+        carSearchDto.setColor(color);
         Pageable pageable = PageRequest.of(0, 6);
         //when
-        Page<CarDto> page = carService.search(pageable, carSearchDto);
+        Page result = carService.search(pageable, carSearchDto);
         //then
-        assertAll(
-                () -> assertEquals(expectingCarQuantity, page.getContent().size()),
-                () -> assertThat(page.getContent()).extracting("carDetails.color").contains("black"),
-                () -> assertThat(page.getContent()).extracting("rental.id").contains(2)
-        );
+        assertEquals(2, result.getTotalElements());
+
     }
 
     @Test
-    void   searchMethodWithGivenMinimalRegistrationYearAndMaximalPriceShouldReturnMatchingCarsDto() {
+    void searchMethodWithGivenMinimalRegistrationYearAndMaximalPriceShouldReturnMatchingCarsDto() {
         //given
         CarSearchDto carSearchDto = new CarSearchDto();
         int year = 2018;
@@ -500,7 +441,7 @@ public class CarIntegrationTest {
         //then
         assertAll(
                 () -> assertEquals(expectingCarQuantity, page.getTotalElements()),
-                () -> assertEquals(seats, seatsList.get(0)  ),
+                () -> assertEquals(seats, seatsList.get(0)),
                 () -> assertThat(page.getContent()).extracting("carDetails.fuel")
                         .contains(fuel)
         );
@@ -525,23 +466,23 @@ public class CarIntegrationTest {
     }
 
     @Test
-    void searchMethodWithGivenStartDateAndEndDateShouldReturnAvailableCarsInThisDateRange(){
+    void searchMethodWithGivenStartDateAndEndDateShouldReturnAvailableCarsInThisDateRange() {
         //given
-        CarSearchDto carSearchDto=new CarSearchDto();
-        LocalDateTime start=LocalDateTime.of(2022, 02, 05, 12, 30   );
-        LocalDateTime end=LocalDateTime.of(2022, 02, 15, 12, 30   );
-        int expectingCarQuantity=3;
+        CarSearchDto carSearchDto = new CarSearchDto();
+        LocalDateTime start = LocalDateTime.of(2022, 02, 05, 12, 30);
+        LocalDateTime end = LocalDateTime.of(2022, 02, 15, 12, 30);
+        int expectingCarQuantity = 3;
         String transmission = "automatic";
         carSearchDto.setTransmission(transmission);
         carSearchDto.setStart(start);
         carSearchDto.setEnd(end);
-        Pageable pageable=PageRequest.of(0,6);
+        Pageable pageable = PageRequest.of(0, 6);
         //when
-        Page<CarDto> page=carService.search(pageable, carSearchDto);
+        Page<CarDto> page = carService.search(pageable, carSearchDto);
         //then
         assertAll(
-                ()->assertEquals(expectingCarQuantity, page.getTotalElements()),
-                ()->assertThat(page.getContent()).extracting("carDetails.transmission")
+                () -> assertEquals(expectingCarQuantity, page.getTotalElements()),
+                () -> assertThat(page.getContent()).extracting("carDetails.transmission")
                         .contains(transmission)
         );
     }

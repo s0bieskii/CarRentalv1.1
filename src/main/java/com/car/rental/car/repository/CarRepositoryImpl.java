@@ -65,8 +65,11 @@ public class CarRepositoryImpl implements CarSearchRepository {
             cqRental.where(cb.equal(rental.get("id"), carDto.getRental()));
             List<Car> carsForRental = entityManager.createQuery(cqRental).getResultList().stream().map(Rental::getCars)
                     .flatMap(List::stream).collect(Collectors.toList());
-            carsToReturn = carsForRental.stream().filter(e -> carList.contains(e)).collect(Collectors.toList());
-
+            if(carList.isEmpty()){
+                carsToReturn=carsForRental;
+            } else {
+                carsToReturn = carsForRental.stream().filter(e -> carList.contains(e)).collect(Collectors.toList());
+            }
         }
         LOGGER.info("Found " + carList.size() + " elements");
         return carsToReturn;
