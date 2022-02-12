@@ -2,7 +2,9 @@ package com.car.rental.car.repository;
 
 import com.car.rental.car.Car;
 import com.car.rental.details.CarDetails;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -13,6 +15,7 @@ import lombok.Getter;
 @Getter
 public class CarCriteriaBuilder {
     public static final Logger LOGGER = Logger.getLogger(CarCriteriaBuilder.class.getName());
+    public final List<String> customFields = new ArrayList<>();
     private CriteriaBuilder cb;
     private Root<Car> car;
     private Predicate predicate;
@@ -24,6 +27,10 @@ public class CarCriteriaBuilder {
 
     public CarCriteriaBuilder addCriteria(String fieldName, Object value) {
         if (value == null) {
+            return this;
+        }
+        if (customFields.contains(fieldName)) {
+            customFieldsSearch(fieldName, value);
             return this;
         }
         if (Arrays.stream(Car.class.getDeclaredFields()).map(field -> field.getName())
@@ -43,5 +50,21 @@ public class CarCriteriaBuilder {
         }
 
         return this;
+    }
+
+    public void customFieldsSearch(String fieldName, Object value) {
+        if (predicate == null) {
+            if (fieldName.equals("registrationYear")) {
+                predicate = cb.greaterThanOrEqualTo(car.get("carDetails").get(fieldName), (Integer) value);
+            } else if (fieldName.equals("price")) {
+                predicate = cb.lessThanOrEqualTo(car.get("carDetails").get(fieldName), (Double) value);
+            }
+        } else {
+            if (fieldName.equals("registrationYear")) {
+                predicate = cb.and(predicate, cb.equal(car.get("carDetails").get(fieldName), value));
+            } else if (fieldName.equals("price")) {
+                predicate = cb.and(predicate, cb.lessThanOrEqualTo(car.get("carDetails").get(fieldName), (Double) value));
+            }
+        }
     }
 }

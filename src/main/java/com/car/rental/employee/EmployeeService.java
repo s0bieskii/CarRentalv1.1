@@ -6,7 +6,6 @@ import com.car.rental.employee.dto.EmployeeSearchDto;
 import com.car.rental.employee.dto.EmployeeUpdateDto;
 import com.car.rental.employee.mapper.EmployeeMapper;
 import com.car.rental.employee.repository.EmployeeRepository;
-import com.car.rental.utils.EntityUpdater;
 import com.car.rental.utils.PageWrapper;
 import java.util.List;
 import java.util.logging.Logger;
@@ -20,15 +19,12 @@ public class EmployeeService {
     public static final Logger LOGGER = Logger.getLogger(EmployeeService.class.getName());
     private final EmployeeRepository employeeRepository;
     private final EmployeeMapper employeeMapper;
-    private final EntityUpdater entityUpdater;
 
-    public EmployeeService(EmployeeRepository employeeRepository, EmployeeMapper employeeMapper,
-                           EntityUpdater entityUpdater) {
+    public EmployeeService(EmployeeRepository employeeRepository, EmployeeMapper employeeMapper) {
         LOGGER.info(
-                "Creating EmployeeService with(" + employeeRepository + ", " + employeeMapper + ", " + entityUpdater);
+                "Creating EmployeeService with(" + employeeRepository + ", " + employeeMapper);
         this.employeeRepository = employeeRepository;
         this.employeeMapper = employeeMapper;
-        this.entityUpdater = entityUpdater;
     }
 
     public Employee addEmployee(EmployeeAddDto dto) {
@@ -68,25 +64,6 @@ public class EmployeeService {
 
     public Employee findByIdNotMapped(Long id){
         return employeeRepository.findById(id).get();
-    }
-
-    //TODO refactor
-    public EmployeeDto updateEmployeeByReflection(EmployeeUpdateDto employeeUpdate) {
-        LOGGER.info("updateEmployeeByReflection(" + employeeUpdate + ")");
-        if (employeeUpdate.getId() == null || !employeeRepository.existsById(employeeUpdate.getId())) {
-            LOGGER.info("Employee with given ID not exist" + employeeUpdate.getId());
-            return null;
-        }
-        LOGGER.info("Employee with given ID exist" + employeeUpdate.getId());
-        Employee employeeToUpdate = employeeRepository.findById(employeeUpdate.getId()).get();
-        Employee employeeAfterUpdate = employeeToUpdate;
-        try {
-            employeeAfterUpdate = (Employee) entityUpdater.updateEntity(employeeToUpdate, employeeUpdate);
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        }
-        employeeRepository.save(employeeAfterUpdate);
-        return employeeMapper.employeeToEmployeeDto(employeeAfterUpdate);
     }
 
     public EmployeeDto updateEmployee(EmployeeUpdateDto employeeUpdateDto) {

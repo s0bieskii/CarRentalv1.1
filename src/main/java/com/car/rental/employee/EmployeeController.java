@@ -62,18 +62,6 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeService.search(pageable, employeeSearchDto));
     }
 
-    @PatchMapping("/updateByField")
-    public ResponseEntity updateEmployeeByReflection(@RequestBody EmployeeUpdateDto employeeUpdate)
-            throws IllegalAccessException {
-        LOGGER.info("PatchMapping updateEmployeeByReflection(" + employeeUpdate + ")");
-        if (employeeService.updateEmployeeByReflection(employeeUpdate) != null) {
-            LOGGER.info("Update success");
-            return ResponseEntity.noContent().build();
-        }
-        LOGGER.info("Update failed");
-        return ResponseEntity.badRequest().body("Something gone wrong with update!");
-    }
-
     @PatchMapping("/update")
     public ResponseEntity updateCar(@RequestBody EmployeeUpdateDto employeeUpdateDto) {
         LOGGER.info("PatchMapping updateCar(" + employeeUpdateDto + ")");

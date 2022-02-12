@@ -15,11 +15,10 @@ import com.car.rental.employee.dto.EmployeeSearchDto;
 import com.car.rental.employee.dto.EmployeeUpdateDto;
 import javax.sql.DataSource;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.event.ContextRefreshedEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -42,15 +41,11 @@ public class EmployeeIntegrationTest {
         this.dataSource = dataSource;
     }
 
+    @BeforeEach
     void prepareDb() {
         ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator(false, false,
                 "UTF-8", new ClassPathResource("data.sql"));
         resourceDatabasePopulator.execute(dataSource);
-    }
-
-    @EventListener(ContextRefreshedEvent.class)
-    void startWithClear() {
-        cleanDb();
     }
 
     @AfterEach
@@ -100,7 +95,6 @@ public class EmployeeIntegrationTest {
     @Test
     void getAllMethodShouldReturnPageWithEmployeeDto() {
         //given
-        prepareDb();
         PageRequest request = PageRequest.of(0, 5);
         //when
         Page<EmployeeDto> employee = employeeService.getAll(request);
@@ -122,7 +116,6 @@ public class EmployeeIntegrationTest {
     @Test
     void getAllMethodWithGivenPageSizeAndPageShouldReturnPageWithTheSameSizeAndPageValue() {
         //given
-        prepareDb();
         PageRequest request = PageRequest.of(1, 1);
         //when
         Page<EmployeeDto> employee = employeeService.getAll(request);
@@ -136,7 +129,6 @@ public class EmployeeIntegrationTest {
     @Test
     void findByIdWithNotExistsEmployeeIdShouldReturnNull() {
         //given
-        prepareDb();
         Long notExistingId = Long.MAX_VALUE;
         //when
         EmployeeDto employee = employeeService.findById(notExistingId);
@@ -147,7 +139,6 @@ public class EmployeeIntegrationTest {
     @Test
     void findByIdWithExistsEmployeeIdShouldReturnEmployeeDtoWithTheSameId() {
         //given
-        prepareDb();
         Long existingId = 3L;
         //when
         EmployeeDto employee = employeeService.findById(existingId);
@@ -161,7 +152,6 @@ public class EmployeeIntegrationTest {
     @Test
     void searchMethodShouldReturnPageEmployeeDto() {
         //given
-        prepareDb();
         PageRequest page = PageRequest.of(0, 5);
         EmployeeSearchDto employeeSearchDto = new EmployeeSearchDto();
         //when
@@ -176,7 +166,6 @@ public class EmployeeIntegrationTest {
     @Test
     void searchMethodShouldReturnAllEmployeeWhenEmployeeSearchDtoFieldsIsNull() {
         //given
-        prepareDb();
         PageRequest page = PageRequest.of(0, 5);
         EmployeeSearchDto employeeSearchDto = new EmployeeSearchDto();
         Long totalEmployeeInDatabase = 7L;
@@ -189,7 +178,6 @@ public class EmployeeIntegrationTest {
     @Test
     void searchMethodShouldReturnEmptyPageWithEmployeeDtoWhenGivenFirstNameNotExistInDatabase() {
         //given
-        prepareDb();
         PageRequest page = PageRequest.of(0, 5);
         EmployeeSearchDto employeeSearchDto = new EmployeeSearchDto();
         employeeSearchDto.setFirstName("Loremipsumloremipsum");
@@ -203,7 +191,6 @@ public class EmployeeIntegrationTest {
     @Test
     void searchMethodShouldReturnOneEmployeeDtoWhenGivenFirstNameMatchWithOneEmployeeInDatabase() {
         //given
-        prepareDb();
         PageRequest page = PageRequest.of(0, 5);
         EmployeeSearchDto employeeSearchDto = new EmployeeSearchDto();
         employeeSearchDto.setFirstName("Kaska");
@@ -217,7 +204,6 @@ public class EmployeeIntegrationTest {
     @Test
     void searchMethodShouldReturnAllEmployeeDtoMatchingToGivenFirstName() {
         //given
-        prepareDb();
         PageRequest page = PageRequest.of(0, 5);
         EmployeeSearchDto employeeSearchDto = new EmployeeSearchDto();
         employeeSearchDto.setFirstName("Patryk");
@@ -231,7 +217,6 @@ public class EmployeeIntegrationTest {
     @Test
     void searchMethodWithGivenFirstNameShouldReturnMatchingEmployeeDto() {
         //given
-        prepareDb();
         PageRequest page = PageRequest.of(0, 5);
         EmployeeSearchDto employeeSearchDto = new EmployeeSearchDto();
         String firstName = "Patryk";
@@ -250,7 +235,6 @@ public class EmployeeIntegrationTest {
     @Test
     void searchMethodWithGivenFirstNameAndLastNameShouldReturnEmployeeDtoMatchingToVGivenValues() {
         //given
-        prepareDb();
         PageRequest page = PageRequest.of(0, 5);
         EmployeeSearchDto employeeSearchDto = new EmployeeSearchDto();
         String firstName = "Patryk";
@@ -271,7 +255,6 @@ public class EmployeeIntegrationTest {
     @Test
     void searchMethodWithGivenEmploymentPositionShouldReturnEmployeeDtoMatchingToVGivenValuesButWithOutEmployeesMarkedAsDeleted() {
         //given
-        prepareDb();
         PageRequest page = PageRequest.of(0, 5);
         EmployeeSearchDto employeeSearchDto = new EmployeeSearchDto();
         String employmentPosition = "dealer";
@@ -293,7 +276,6 @@ public class EmployeeIntegrationTest {
     @Test
     void searchMethodWithGivenIdShouldReturnEmployeeDtoMatchingToVGivenId() {
         //given
-        prepareDb();
         PageRequest page = PageRequest.of(0, 5);
         EmployeeSearchDto employeeSearchDto = new EmployeeSearchDto();
         Long id = 1L;
@@ -311,7 +293,6 @@ public class EmployeeIntegrationTest {
     @Test
     void searchMethodWithGivenManyFieldsWhichNotMatchingToAnyShouldReturnEmptyPage() {
         //given
-        prepareDb();
         PageRequest page = PageRequest.of(0, 5);
         EmployeeSearchDto employeeSearchDto = new EmployeeSearchDto();
         String firstName = "Patryk";
@@ -326,99 +307,8 @@ public class EmployeeIntegrationTest {
     }
 
     @Test
-    void updateEmployeeByReflectionReturnNullWhenEmployeeWithGivenIdInEmployeeSearchDtoNotExists() {
-        //given
-        prepareDb();
-        Long id = Long.MAX_VALUE;
-        EmployeeUpdateDto employeeUpdateDto = new EmployeeUpdateDto();
-        employeeUpdateDto.setId(id);
-        //when
-        EmployeeDto returnedEmployee = employeeService.updateEmployeeByReflection(employeeUpdateDto);
-        //then
-        assertNull(returnedEmployee);
-    }
-
-    @Test
-    void updateEmployeeByReflectionReturnNullWhenEmployeeUpdateDtoIdIsNull() {
-        //given
-        prepareDb();
-        Long id = null;
-        EmployeeUpdateDto employeeUpdateDto = new EmployeeUpdateDto();
-        employeeUpdateDto.setId(id);
-        //when
-        EmployeeDto returnedEmployee = employeeService.updateEmployeeByReflection(employeeUpdateDto);
-        //then
-        assertNull(returnedEmployee);
-    }
-
-    @Test
-    void updateEmployeeByReflectionReturnUpdatedEmployeeDtoWithNewGivenFirstName() {
-        //given
-        prepareDb();
-        Long id = 1L;
-        String name = "Bossman";
-        EmployeeUpdateDto employeeUpdateDto = new EmployeeUpdateDto();
-        employeeUpdateDto.setId(id);
-        employeeUpdateDto.setFirstName(name);
-        //when
-        EmployeeDto employeeBeforeUpdate = employeeService.findById(id);
-        String nameBeforeUpdate = employeeBeforeUpdate.getFirstName();
-        EmployeeDto returnedEmployee = employeeService.updateEmployeeByReflection(employeeUpdateDto);
-        //then
-        assertAll(
-                () -> assertEquals(name, returnedEmployee.getFirstName()),
-                () -> assertNotEquals(nameBeforeUpdate, returnedEmployee.getFirstName())
-        );
-    }
-
-    @Test
-    void updateEmployeeByReflectionReturnUpdatedEmployeeDtoWithNewFirstNameAndLastName() {
-        //given
-        prepareDb();
-        Long id = 1L;
-        String name = "Bossman";
-        String lastName = "Kaka";
-        EmployeeUpdateDto employeeUpdateDto = new EmployeeUpdateDto();
-        employeeUpdateDto.setId(id);
-        employeeUpdateDto.setFirstName(name);
-        employeeUpdateDto.setLastName(lastName);
-        //when
-        EmployeeDto employeeBeforeUpdate = employeeService.findById(id);
-        String nameBeforeUpdate = employeeBeforeUpdate.getFirstName();
-        String lastNameBeforeUpdate = employeeBeforeUpdate.getFirstName();
-        EmployeeDto returnedEmployee = employeeService.updateEmployeeByReflection(employeeUpdateDto);
-        //then
-        assertAll(
-                () -> assertEquals(name, returnedEmployee.getFirstName()),
-                () -> assertNotEquals(nameBeforeUpdate, returnedEmployee.getFirstName()),
-                () -> assertEquals(lastName, returnedEmployee.getLastName()),
-                () -> assertNotEquals(lastNameBeforeUpdate, returnedEmployee.getLastName())
-        );
-    }
-
-    @Test
-    void updateEmployeeByReflectionReturnUpdatedEmployeeDtoWithNewEmploymentPosition() {
-        //given
-        prepareDb();
-        Long id = 1L;
-        String newEmploymentPosition = "dealer";
-        EmployeeUpdateDto employeeUpdateDto = new EmployeeUpdateDto();
-        employeeUpdateDto.setId(id);
-        employeeUpdateDto.setEmploymentPosition(newEmploymentPosition);
-        //when
-        EmployeeDto employeeBeforeUpdate = employeeService.findById(id);
-        EmployeeDto returnedEmployee = employeeService.updateEmployeeByReflection(employeeUpdateDto);
-        //then
-        assertAll(
-                () -> assertEquals(newEmploymentPosition, returnedEmployee.getEmploymentPosition()),
-                () -> assertNotEquals(employeeBeforeUpdate, returnedEmployee.getEmploymentPosition())
-        );
-    }
-
-    @Test
     void updateEmployeeReturnNullIfEmployeeWithGivenIdNotExist() {
         //given
-        prepareDb();
         Long id = Long.MAX_VALUE;
         EmployeeUpdateDto employeeUpdateDto = new EmployeeUpdateDto();
         employeeUpdateDto.setId(id);
@@ -431,7 +321,6 @@ public class EmployeeIntegrationTest {
     @Test
     void updateEmployeeReturnNullIfEmployeeWithGivenNullId() {
         //given
-        prepareDb();
         Long id = null;
         EmployeeUpdateDto employeeUpdateDto = new EmployeeUpdateDto();
         employeeUpdateDto.setId(id);
@@ -444,7 +333,6 @@ public class EmployeeIntegrationTest {
     @Test
     void updateEmployeeReturnEmployeeDtoWithNewFirstName() {
         //given
-        prepareDb();
         Long id = 1L;
         String newFirstName="Popek";
         String oldFirstName;
@@ -465,7 +353,6 @@ public class EmployeeIntegrationTest {
     @Test
     void updateEmployeeReturnEmployeeDtoWithNewFirstNameAndLastName() {
         //given
-        prepareDb();
         Long id = 1L;
         String newFirstName="Popek";
         String newLastName="Karkaczow";
@@ -492,7 +379,6 @@ public class EmployeeIntegrationTest {
     @Test
     void updateEmployeeReturnEmployeeDtoWithNewEmploymentPositionAndSalaryPerHourField() {
         //given
-        prepareDb();
         Long id = 1L;
         String newEmploymentPosition="bigbosss";
         String oldEmploymentPosition;
