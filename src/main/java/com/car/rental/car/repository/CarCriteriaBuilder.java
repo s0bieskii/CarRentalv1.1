@@ -2,6 +2,7 @@ package com.car.rental.car.repository;
 
 import com.car.rental.car.Car;
 import com.car.rental.details.CarDetails;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -21,11 +22,14 @@ public class CarCriteriaBuilder {
     private Predicate predicate;
 
     public CarCriteriaBuilder(Root<Car> car, CriteriaBuilder cb) {
+        LOGGER.info("CarCriteriaBuilder("+car+", CriteriaBuilder "+cb+")");
         this.car = car;
         this.cb = cb;
+        initializeCustomFields();
     }
 
     public CarCriteriaBuilder addCriteria(String fieldName, Object value) {
+        LOGGER.info("AddCriteria to: "+fieldName);
         if (value == null) {
             return this;
         }
@@ -48,7 +52,6 @@ public class CarCriteriaBuilder {
                 predicate = cb.and(predicate, cb.equal(car.get("carDetails").get(fieldName), value));
             }
         }
-
         return this;
     }
 
@@ -57,14 +60,19 @@ public class CarCriteriaBuilder {
             if (fieldName.equals("registrationYear")) {
                 predicate = cb.greaterThanOrEqualTo(car.get("carDetails").get(fieldName), (Integer) value);
             } else if (fieldName.equals("price")) {
-                predicate = cb.lessThanOrEqualTo(car.get("carDetails").get(fieldName), (Double) value);
+                predicate = cb.lessThanOrEqualTo(car.get("carDetails").get(fieldName), (BigDecimal) value);
             }
         } else {
             if (fieldName.equals("registrationYear")) {
-                predicate = cb.and(predicate, cb.equal(car.get("carDetails").get(fieldName), value));
+                predicate = cb.and(predicate, cb.greaterThanOrEqualTo(car.get("carDetails").get(fieldName), (Integer)value));
             } else if (fieldName.equals("price")) {
-                predicate = cb.and(predicate, cb.lessThanOrEqualTo(car.get("carDetails").get(fieldName), (Double) value));
+                predicate = cb.and(predicate, cb.lessThanOrEqualTo(car.get("carDetails").get(fieldName), (BigDecimal) value));
             }
         }
+    }
+
+    private void initializeCustomFields(){
+        customFields.add("registrationYear");
+        customFields.add("price");
     }
 }

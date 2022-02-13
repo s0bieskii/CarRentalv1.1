@@ -1,6 +1,7 @@
 package com.car.rental.car.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +20,7 @@ public class CarSearchDto {
     private Integer rental;
     private String color;
     private Integer registrationYear;
-    private Double price;
+    private BigDecimal price;
     private String segment;
     private Integer doors;
     private Integer seats;
