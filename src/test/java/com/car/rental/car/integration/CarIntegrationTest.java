@@ -16,6 +16,8 @@ import com.car.rental.car.dto.CarAddDto;
 import com.car.rental.car.dto.CarDto;
 import com.car.rental.car.dto.CarSearchDto;
 import com.car.rental.details.dto.CarDetailsAddDto;
+import com.car.rental.utils.Config;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -227,6 +229,7 @@ public class CarIntegrationTest {
         Page<CarDto> emptyCarsPage = carService.getAll(request);
         //then
         assertEquals(0, emptyCarsPage.getTotalElements());
+        prepareDb();
     }
 
     @Test
@@ -326,8 +329,8 @@ public class CarIntegrationTest {
         Page<CarDto> page = carService.search(pageable, carSearchDto);
         //then
         assertAll(
-                () -> assertEquals(1, page.getContent().size(), "Check if only one item is found  "),
-                () -> assertEquals(expectingId, page.getContent().get(0).getId(), "Check if ID is the same")
+                () -> assertEquals(1, page.getContent().size()),
+                () -> assertEquals(expectingId, page.getContent().get(0).getId())
         );
     }
 
@@ -362,6 +365,7 @@ public class CarIntegrationTest {
         );
     }
 
+    //TODO rozwikłaj tę zagadkę xdddd
     @Test
     void searchMethodWithGivenRentalAndColorShouldReturnMatchingCarsDto() {
         //given
@@ -375,7 +379,7 @@ public class CarIntegrationTest {
         //when
         Page result = carService.search(pageable, carSearchDto);
         //then
-        assertEquals(2, result.getTotalElements());
+        assertEquals(expectingQuantity, result.getTotalElements());
 
     }
 
@@ -384,20 +388,18 @@ public class CarIntegrationTest {
         //given
         CarSearchDto carSearchDto = new CarSearchDto();
         int year = 2018;
-        double price = 111.0;
-        int expectingCarQuantity = 0;
+        BigDecimal price = BigDecimal.valueOf(111.0);
+        int expectingCarQuantity = 1;
         carSearchDto.setRegistrationYear(year);
         carSearchDto.setPrice(price);
         Pageable pageable = PageRequest.of(0, 6);
         //when
         Page<CarDto> page = carService.search(pageable, carSearchDto);
-        List<Integer> yearList = page.getContent().stream()
-                .map(carDto -> carDto.getCarDetails().getRegistrationYear()).collect(Collectors.toList());
-        List<Double> priceList = page.getContent().stream()
-                .map(carDto -> carDto.getCarDetails().getPrice()).collect(Collectors.toList());
         //then
         assertAll(
-                () -> assertEquals(expectingCarQuantity, page.getTotalElements())
+                () -> assertEquals(expectingCarQuantity, page.getTotalElements()),
+                () -> assertEquals(year, page.getContent().get(0).getCarDetails().getRegistrationYear()),
+                () -> assertTrue(price.compareTo(page.getContent().get(0).getCarDetails().getPrice()) >= 0)
         );
     }
 
@@ -471,9 +473,7 @@ public class CarIntegrationTest {
         CarSearchDto carSearchDto = new CarSearchDto();
         LocalDateTime start = LocalDateTime.of(2022, 02, 05, 12, 30);
         LocalDateTime end = LocalDateTime.of(2022, 02, 15, 12, 30);
-        int expectingCarQuantity = 3;
-        String transmission = "automatic";
-        carSearchDto.setTransmission(transmission);
+        int expectingCarQuantity = 5;
         carSearchDto.setStart(start);
         carSearchDto.setEnd(end);
         Pageable pageable = PageRequest.of(0, 6);
@@ -481,9 +481,85 @@ public class CarIntegrationTest {
         Page<CarDto> page = carService.search(pageable, carSearchDto);
         //then
         assertAll(
-                () -> assertEquals(expectingCarQuantity, page.getTotalElements()),
-                () -> assertThat(page.getContent()).extracting("carDetails.transmission")
-                        .contains(transmission)
+                () -> assertEquals(expectingCarQuantity, page.getTotalElements())
+        );
+    }
+
+    @Test
+    void searchMethodWithGivenRentalIdShouldReturnAllAvailableCarsFromRental(){
+        //given
+        CarSearchDto carSearchDto = new CarSearchDto();
+        int expectingCarQuantity = 3;
+        int rentalId = 2;
+        carSearchDto.setRental(rentalId);
+        Pageable pageable = PageRequest.of(0, 6);
+        //when
+        Page<CarDto> page = carService.search(pageable, carSearchDto);
+        //then
+        assertAll(
+                () -> assertEquals(expectingCarQuantity, page.getTotalElements())
+        );
+    }
+
+    @Test
+    void searchMethodWithGivenRentalIdAndStartDateAndEndDateShouldReturnAvailableCarsInThisDateRange() {
+        //given
+        CarSearchDto carSearchDto = new CarSearchDto();
+        LocalDateTime start = LocalDateTime.of(2022, 02, 05, 12, 30);
+        LocalDateTime end = LocalDateTime.of(2022, 02, 15, 12, 30);
+        int rentalId = 2;
+        int expectingCarQuantity = 2;
+        carSearchDto.setStart(start);
+        carSearchDto.setEnd(end);
+        carSearchDto.setRental(rentalId);
+        Pageable pageable = PageRequest.of(0, 6);
+        //when
+        Page<CarDto> page = carService.search(pageable, carSearchDto);
+        //then
+        assertAll(
+                () -> assertEquals(expectingCarQuantity, page.getTotalElements())
+        );
+    }
+
+    @Test
+    void searchMethodWithGivenCarIdAndStartDateAndEndDateShouldReturnAvailableCarsInThisDateRangeHavingAgainRentalDelayFalseAttempt() {
+        //given
+        int delayInHours = Config.timeDelayUntilNextRent;
+        CarSearchDto carSearchDto = new CarSearchDto();
+        LocalDateTime start = LocalDateTime.of(2022, 02, 15, 12, 29);
+        LocalDateTime end = LocalDateTime.of(2022, 02, 20, 12, 30);
+        Long carId = 5L;
+        int expectingCarQuantity = 0;
+        carSearchDto.setStart(start);
+        carSearchDto.setEnd(end);
+        carSearchDto.setId(carId);
+        Pageable pageable = PageRequest.of(0, 6);
+        //when
+        Page<CarDto> page = carService.search(pageable, carSearchDto);
+        //then
+        assertAll(
+                () -> assertEquals(expectingCarQuantity, page.getTotalElements())
+        );
+    }
+
+    @Test
+    void searchMethodWithGivenCarIdAndStartDateAndEndDateShouldReturnAvailableCarsInThisDateRangeHavingAgainRentalDelayTrueAttempt() {
+        //given
+        int delayInHours = Config.timeDelayUntilNextRent;
+        CarSearchDto carSearchDto = new CarSearchDto();
+        LocalDateTime start = LocalDateTime.of(2022, 02, 15, 12, 30).plusHours(delayInHours);
+        LocalDateTime end = LocalDateTime.of(2022, 02, 20, 12, 30);
+        Long carId = 5L;
+        int expectingCarQuantity = 1;
+        carSearchDto.setStart(start);
+        carSearchDto.setEnd(end);
+        carSearchDto.setId(carId);
+        Pageable pageable = PageRequest.of(0, 6);
+        //when
+        Page<CarDto> page = carService.search(pageable, carSearchDto);
+        //then
+        assertAll(
+                () -> assertEquals(expectingCarQuantity, page.getTotalElements())
         );
     }
 
