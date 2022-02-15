@@ -2,6 +2,7 @@ package com.car.rental.rental;
 
 import com.car.rental.car.Car;
 import com.car.rental.employee.Employee;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -17,12 +18,13 @@ import java.util.List;
 @NoArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 @Entity
 public class Rental {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String country;
     private String city;
     private String postCode;
@@ -31,7 +33,7 @@ public class Rental {
     private boolean deleted;
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Car> cars;
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
     private List<Employee> employees;
 
 }

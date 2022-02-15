@@ -15,7 +15,7 @@ import java.util.List;
 @ToString
 public class RentalDto {
 
-    private int id;
+    private Long id;
     private String country;
     private String city;
     private String postCode;

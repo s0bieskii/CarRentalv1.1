@@ -19,7 +19,7 @@ public class CarUpdateDto {
     private Boolean deleted;
     private CarDetailsUpdateDto carDetails;
 
-    public CarUpdateDto(CarDetailsUpdateDto carDetails){
-        this.carDetails=carDetails;
+    public CarUpdateDto(CarDetailsUpdateDto carDetails) {
+        this.carDetails = carDetails;
     }
 }

@@ -11,7 +11,7 @@ import lombok.ToString;
 @ToString
 public class RentalWithoutEmployeeDto {
 
-    private int id;
+    private Long id;
     private String country;
     private String city;
     private String postCode;

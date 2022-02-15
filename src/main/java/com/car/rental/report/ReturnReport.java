@@ -2,6 +2,7 @@ package com.car.rental.report;
 
 import com.car.rental.car.Car;
 import com.car.rental.employee.Employee;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,12 +15,13 @@ import javax.persistence.OneToOne;
 @NoArgsConstructor
 @Getter
 @Setter
+@EqualsAndHashCode
 @Entity
 public class ReturnReport {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String note;
     private Boolean damaged;
     @OneToOne(orphanRemoval = true)

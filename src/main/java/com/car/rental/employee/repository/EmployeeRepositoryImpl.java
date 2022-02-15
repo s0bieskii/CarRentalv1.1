@@ -16,14 +16,14 @@ public class EmployeeRepositoryImpl implements EmployeeSearchRepository {
     private final EntityManager entityManager;
 
     public EmployeeRepositoryImpl(EntityManager entityManager) {
-        LOGGER.info("EmployeeSearchImpl("+entityManager+")");
+        LOGGER.info("EmployeeSearchImpl(" + entityManager + ")");
         this.entityManager = entityManager;
     }
 
 
     @Override
     public List<Employee> find(EmployeeSearchDto employeeSearchDto) {
-        LOGGER.info("find("+employeeSearchDto+")");
+        LOGGER.info("find(" + employeeSearchDto + ")");
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Employee> cq = cb.createQuery(Employee.class);
         Root<Employee> employee = cq.from(Employee.class);
@@ -35,14 +35,15 @@ public class EmployeeRepositoryImpl implements EmployeeSearchRepository {
                 .addCriteria("employmentPosition", employeeSearchDto.getEmploymentPosition())
                 .addCriteria("deleted", false);
 
-        Predicate predicate=employeeCriteriaBuilder.getPredicate();
+        Predicate predicate = employeeCriteriaBuilder.getPredicate();
         List<Employee> employeeList;
         if (predicate == null) {
             LOGGER.info("Predicate is null");
             employeeList = entityManager.createQuery(cq.select(employee).distinct(true)).getResultList();
         } else {
             LOGGER.info("Predicate created");
-            employeeList = entityManager.createQuery(cq.select(employee).where(predicate).distinct(true)).getResultList();
+            employeeList =
+                    entityManager.createQuery(cq.select(employee).where(predicate).distinct(true)).getResultList();
         }
         LOGGER.info("Found " + employeeList.size() + " elements");
         return employeeList;

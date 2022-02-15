@@ -9,4 +9,6 @@ public class Config {
      * Time in hours after which next customer can rent Car
      */
     public static int timeDelayUntilNextRent = 12;
+
+    public static final String globalLocalDataTimeFormat = "yyyy-MM-dd HH:mm";
 }

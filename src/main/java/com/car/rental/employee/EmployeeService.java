@@ -58,11 +58,11 @@ public class EmployeeService {
         return PageWrapper.listToPage(pageable, employeeDto);
     }
 
-    public Employee getById(Long id){
+    public Employee getById(Long id) {
         return employeeRepository.getById(id);
     }
 
-    public Employee findByIdNotMapped(Long id){
+    public Employee findByIdNotMapped(Long id) {
         return employeeRepository.findById(id).get();
     }
 

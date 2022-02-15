@@ -12,6 +12,8 @@ public interface EmployeeMapper {
     EmployeeMapper CAR_DTO_MAPPER = Mappers.getMapper(EmployeeMapper.class);
 
     EmployeeDto employeeToEmployeeDto(Employee employee);
+
     Employee employeeAddDtoToEmployee(EmployeeAddDto employeeAddDto);
+
     Employee employeeUpdateDtoToEmployee(EmployeeUpdateDto employeeUpdateDto);
 }

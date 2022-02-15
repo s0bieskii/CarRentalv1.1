@@ -1,11 +1,12 @@
 package com.car.rental.details.dto;
 
+import com.car.rental.utils.Config;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.LocalDate;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -13,7 +14,7 @@ import java.time.LocalDate;
 @ToString
 public class CarDetailsUpdateDto {
 
-    private int id;
+    private Long id;
     private String vin;
     private String color;
     private Integer registrationYear;
@@ -23,7 +24,9 @@ public class CarDetailsUpdateDto {
     private Integer seats;
     private String registrationNumber;
     private Integer mileage;
+    @JsonFormat(pattern = Config.globalLocalDataTimeFormat)
     private LocalDate inspection;
+    @JsonFormat(pattern = Config.globalLocalDataTimeFormat)
     private LocalDate insurance;
     private String fuel;
     private Double averageConsumption;
