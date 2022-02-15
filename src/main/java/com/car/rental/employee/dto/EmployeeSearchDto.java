@@ -17,4 +17,5 @@ public class EmployeeSearchDto {
     private String firstName;
     private String lastName;
     private String employmentPosition;
+    private Long rentalId;
 }

@@ -22,6 +22,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
 import org.springframework.test.jdbc.JdbcTestUtils;
@@ -334,19 +335,19 @@ public class EmployeeIntegrationTest {
     void updateEmployeeReturnEmployeeDtoWithNewFirstName() {
         //given
         Long id = 1L;
-        String newFirstName="Popek";
+        String newFirstName = "Popek";
         String oldFirstName;
         EmployeeUpdateDto employeeUpdateDto = new EmployeeUpdateDto();
         employeeUpdateDto.setId(id);
         employeeUpdateDto.setFirstName(newFirstName);
-        EmployeeDto rootEmployee=employeeService.findById(id);
-        oldFirstName=rootEmployee.getFirstName();
+        EmployeeDto rootEmployee = employeeService.findById(id);
+        oldFirstName = rootEmployee.getFirstName();
         //when
         EmployeeDto employee = employeeService.updateEmployee(employeeUpdateDto);
         //then
         assertAll(
-                ()->assertNotEquals(oldFirstName, employee.getFirstName()),
-                ()->assertEquals(newFirstName, employee.getFirstName())
+                () -> assertNotEquals(oldFirstName, employee.getFirstName()),
+                () -> assertEquals(newFirstName, employee.getFirstName())
         );
     }
 
@@ -354,25 +355,25 @@ public class EmployeeIntegrationTest {
     void updateEmployeeReturnEmployeeDtoWithNewFirstNameAndLastName() {
         //given
         Long id = 1L;
-        String newFirstName="Popek";
-        String newLastName="Karkaczow";
+        String newFirstName = "Popek";
+        String newLastName = "Karkaczow";
         String oldFirstName;
         String oldLastName;
         EmployeeUpdateDto employeeUpdateDto = new EmployeeUpdateDto();
         employeeUpdateDto.setId(id);
         employeeUpdateDto.setFirstName(newFirstName);
         employeeUpdateDto.setLastName(newLastName);
-        EmployeeDto rootEmployee=employeeService.findById(id);
-        oldFirstName=rootEmployee.getFirstName();
-        oldLastName=rootEmployee.getLastName();
+        EmployeeDto rootEmployee = employeeService.findById(id);
+        oldFirstName = rootEmployee.getFirstName();
+        oldLastName = rootEmployee.getLastName();
         //when
         EmployeeDto employee = employeeService.updateEmployee(employeeUpdateDto);
         //then
         assertAll(
-                ()->assertNotEquals(oldFirstName, employee.getFirstName()),
-                ()->assertEquals(newFirstName, employee.getFirstName()),
-                ()->assertNotEquals(oldLastName, employee.getLastName()),
-                ()->assertEquals(newLastName, employee.getLastName())
+                () -> assertNotEquals(oldFirstName, employee.getFirstName()),
+                () -> assertEquals(newFirstName, employee.getFirstName()),
+                () -> assertNotEquals(oldLastName, employee.getLastName()),
+                () -> assertEquals(newLastName, employee.getLastName())
         );
     }
 
@@ -380,19 +381,35 @@ public class EmployeeIntegrationTest {
     void updateEmployeeReturnEmployeeDtoWithNewEmploymentPositionAndSalaryPerHourField() {
         //given
         Long id = 1L;
-        String newEmploymentPosition="bigbosss";
+        String newEmploymentPosition = "bigbosss";
         String oldEmploymentPosition;
         EmployeeUpdateDto employeeUpdateDto = new EmployeeUpdateDto();
         employeeUpdateDto.setId(id);
         employeeUpdateDto.setEmploymentPosition(newEmploymentPosition);
-        EmployeeDto rootEmployee=employeeService.findById(id);
-        oldEmploymentPosition=rootEmployee.getFirstName();
+        EmployeeDto rootEmployee = employeeService.findById(id);
+        oldEmploymentPosition = rootEmployee.getFirstName();
         //when
         EmployeeDto employee = employeeService.updateEmployee(employeeUpdateDto);
         //then
         assertAll(
-                ()->assertNotEquals(oldEmploymentPosition, employee.getEmploymentPosition()),
-                ()->assertEquals(newEmploymentPosition, employee.getEmploymentPosition())
+                () -> assertNotEquals(oldEmploymentPosition, employee.getEmploymentPosition()),
+                () -> assertEquals(newEmploymentPosition, employee.getEmploymentPosition())
+        );
+    }
+
+    @Test
+    void searchEmployeeWithGivenERentalIdShouldReturnAllEmployeeFromRental() {
+        //given
+        int expectQuantity = 4;
+        Long rentalId = 1L;
+        EmployeeSearchDto employeeSearchDto = new EmployeeSearchDto();
+        employeeSearchDto.setRentalId(rentalId);
+        Pageable page = PageRequest.of(0, 6);
+        //when
+        Page employee = employeeService.search(page, employeeSearchDto);
+        //then
+        assertAll(
+                () -> assertEquals(expectQuantity, employee.getContent().size())
         );
     }
 }

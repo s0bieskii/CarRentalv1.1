@@ -58,14 +58,6 @@ public class EmployeeService {
         return PageWrapper.listToPage(pageable, employeeDto);
     }
 
-    public Employee getById(Long id) {
-        return employeeRepository.getById(id);
-    }
-
-    public Employee findByIdNotMapped(Long id) {
-        return employeeRepository.findById(id).get();
-    }
-
     public EmployeeDto updateEmployee(EmployeeUpdateDto employeeUpdateDto) {
         LOGGER.info("updateCar(" + employeeUpdateDto + ")");
         if (employeeUpdateDto.getId() != null && employeeRepository.existsById(employeeUpdateDto.getId())) {
