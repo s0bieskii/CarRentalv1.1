@@ -10,7 +10,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class CarDetailsDto {
 
-    int id;
+    private Long id;
     private String color;
     private Integer registrationYear;
     private BigDecimal price;

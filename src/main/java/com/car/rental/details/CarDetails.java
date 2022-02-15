@@ -1,15 +1,16 @@
 package com.car.rental.details;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
+import com.car.rental.utils.Config;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.LocalDate;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
 @Getter
@@ -19,8 +20,8 @@ import java.time.LocalDate;
 public class CarDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY )
-    private int id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String vin;
     private String color;
     private Integer registrationYear;
@@ -30,7 +31,9 @@ public class CarDetails {
     private Integer seats;
     private String registrationNumber;
     private int mileage;
+    @JsonFormat(pattern = Config.globalLocalDataTimeFormat)
     private LocalDate inspection;
+    @JsonFormat(pattern = Config.globalLocalDataTimeFormat)
     private LocalDate insurance;
     private String fuel;
     private double averageConsumption;

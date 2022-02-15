@@ -1,5 +1,6 @@
 package com.car.rental.car.dto;
 
+import com.car.rental.utils.Config;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -24,11 +25,10 @@ public class CarSearchDto {
     private String segment;
     private Integer doors;
     private Integer seats;
-
     private String fuel;
     private String transmission;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern = Config.globalLocalDataTimeFormat)
     private LocalDateTime start;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm")
+    @JsonFormat(pattern = Config.globalLocalDataTimeFormat)
     private LocalDateTime end;
 }

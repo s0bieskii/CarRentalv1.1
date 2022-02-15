@@ -22,14 +22,14 @@ public class CarCriteriaBuilder {
     private Predicate predicate;
 
     public CarCriteriaBuilder(Root<Car> car, CriteriaBuilder cb) {
-        LOGGER.info("CarCriteriaBuilder("+car+", CriteriaBuilder "+cb+")");
+        LOGGER.info("CarCriteriaBuilder(" + car + ", CriteriaBuilder " + cb + ")");
         this.car = car;
         this.cb = cb;
         initializeCustomFields();
     }
 
     public CarCriteriaBuilder addCriteria(String fieldName, Object value) {
-        LOGGER.info("AddCriteria to: "+fieldName);
+        LOGGER.info("AddCriteria to: " + fieldName);
         if (value == null) {
             return this;
         }
@@ -64,14 +64,16 @@ public class CarCriteriaBuilder {
             }
         } else {
             if (fieldName.equals("registrationYear")) {
-                predicate = cb.and(predicate, cb.greaterThanOrEqualTo(car.get("carDetails").get(fieldName), (Integer)value));
+                predicate = cb.and(predicate,
+                        cb.greaterThanOrEqualTo(car.get("carDetails").get(fieldName), (Integer) value));
             } else if (fieldName.equals("price")) {
-                predicate = cb.and(predicate, cb.lessThanOrEqualTo(car.get("carDetails").get(fieldName), (BigDecimal) value));
+                predicate = cb.and(predicate,
+                        cb.lessThanOrEqualTo(car.get("carDetails").get(fieldName), (BigDecimal) value));
             }
         }
     }
 
-    private void initializeCustomFields(){
+    private void initializeCustomFields() {
         customFields.add("registrationYear");
         customFields.add("price");
     }
