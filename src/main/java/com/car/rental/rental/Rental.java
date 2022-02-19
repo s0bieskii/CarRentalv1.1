@@ -31,9 +31,9 @@ public class Rental {
     private String street;
     private String phone;
     private boolean deleted;
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Car> cars;
-    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Employee> employees;
 
 }
