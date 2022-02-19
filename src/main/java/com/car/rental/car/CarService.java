@@ -37,7 +37,6 @@ public class CarService {
             dto.setCarDetails(new CarDetailsAddDto());
         }
         Car carToSave = carMapper.carAddToCar(dto);
-        LOGGER.info("Car to save after mapping " + carToSave);
         Car savedCar = carRepository.save(carToSave);
         return savedCar;
     }

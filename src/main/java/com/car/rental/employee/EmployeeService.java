@@ -30,7 +30,6 @@ public class EmployeeService {
     public Employee addEmployee(EmployeeAddDto dto) {
         LOGGER.info("addEmployee(" + dto + ")");
         Employee employeeToAdd = employeeMapper.employeeAddDtoToEmployee(dto);
-        LOGGER.info("Employee to save after mapping " + employeeToAdd);
         Employee savedEmployee = employeeRepository.save(employeeToAdd);
         return savedEmployee;
     }
@@ -62,6 +61,7 @@ public class EmployeeService {
         LOGGER.info("updateCar(" + employeeUpdateDto + ")");
         if (employeeUpdateDto.getId() != null && employeeRepository.existsById(employeeUpdateDto.getId())) {
             Employee employee = employeeMapper.employeeUpdateDtoToEmployee(employeeUpdateDto);
+            employeeRepository.save(employee);
             LOGGER.info("Employee successfully updated");
             return employeeMapper.employeeToEmployeeDto(employee);
         }
