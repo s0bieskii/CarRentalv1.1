@@ -42,6 +42,7 @@ public class EmployeeController {
     @GetMapping()
     public ResponseEntity<Page<EmployeeDto>> getAll(
             @PageableDefault(page = 0, size = 6) @RequestBody Pageable pageable) {
+        LOGGER.info("GetMapping getAll(" + pageable + ")");
         Page<EmployeeDto> employees = employeeService.getAll(pageable);
         return ResponseEntity.ok(employees);
     }
@@ -53,7 +54,6 @@ public class EmployeeController {
         return ResponseEntity.ok(employeeDto);
     }
 
-    //TODO implement this
     @GetMapping("/search")
     public ResponseEntity search(@PageableDefault(size = 6, page = 0) Pageable pageable,
                                  @RequestBody EmployeeSearchDto employeeSearchDto) {
@@ -77,7 +77,7 @@ public class EmployeeController {
     public ResponseEntity deleteCar(@PathVariable Long id) {
         LOGGER.info("DeleteMapping deleteCar(" + id + ")");
         if (employeeService.deleteEmployee(id)) {
-            return ResponseEntity.ok().body("Car with " + id + " successfully deleted");
+            return ResponseEntity.ok().body("Car with id: " + id + " successfully deleted");
         }
         return ResponseEntity.badRequest().body("Car with given ID not exist");
     }
