@@ -70,6 +70,13 @@ public class RentalCriteriaBuilder {
                     predicate = cb.and(predicate, cb.equal(rental.get("phone"), (String) value));
                 }
                 break;
+            case "deleted":
+                if (predicate == null) {
+                    predicate = cb.equal(rental.get("deleted"), value);
+                } else {
+                    predicate = cb.and(predicate, cb.equal(rental.get("deleted"), value));
+                }
+                break;
         }
         return this;
     }

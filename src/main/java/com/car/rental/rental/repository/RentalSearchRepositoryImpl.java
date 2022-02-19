@@ -33,7 +33,7 @@ public class RentalSearchRepositoryImpl implements RentalSearchRepository {
                 .addCriteria("city", rentalSearchDto.getCity())
                 .addCriteria("postCode", rentalSearchDto.getPostCode())
                 .addCriteria("street", rentalSearchDto.getStreet())
-                .addCriteria("street", rentalSearchDto.getPhone())
+                .addCriteria("phone", rentalSearchDto.getPhone())
                 .addCriteria("deleted", false);
 
         Predicate predicate = rentalCriteriaBuilder.getPredicate();
