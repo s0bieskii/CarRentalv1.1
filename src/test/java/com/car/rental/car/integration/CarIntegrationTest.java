@@ -309,7 +309,7 @@ public class CarIntegrationTest {
         carSearchDto.setColor(color);
         Pageable pageable = PageRequest.of(0, 6);
         //when
-        Page result = carService.search(pageable, carSearchDto);
+        Page<CarDto> result = carService.search(pageable, carSearchDto);
         //then
         assertEquals(expectingQuantity, result.getTotalElements());
 
@@ -403,8 +403,8 @@ public class CarIntegrationTest {
     void searchMethodWithGivenStartDateAndEndDateShouldReturnAvailableCarsInThisDateRange() {
         //given
         CarSearchDto carSearchDto = new CarSearchDto();
-        LocalDateTime start = LocalDateTime.of(2022, 02, 05, 12, 30);
-        LocalDateTime end = LocalDateTime.of(2022, 02, 15, 12, 30);
+        LocalDateTime start = LocalDateTime.of(2022, 2, 5, 12, 30);
+        LocalDateTime end = LocalDateTime.of(2022, 2, 15, 12, 30);
         int expectingCarQuantity = 5;
         carSearchDto.setStart(start);
         carSearchDto.setEnd(end);
@@ -437,8 +437,8 @@ public class CarIntegrationTest {
     void searchMethodWithGivenRentalIdAndStartDateAndEndDateShouldReturnAvailableCarsInThisDateRange() {
         //given
         CarSearchDto carSearchDto = new CarSearchDto();
-        LocalDateTime start = LocalDateTime.of(2022, 02, 05, 12, 30);
-        LocalDateTime end = LocalDateTime.of(2022, 02, 15, 12, 30);
+        LocalDateTime start = LocalDateTime.of(2022, 2, 5, 12, 30);
+        LocalDateTime end = LocalDateTime.of(2022, 2, 15, 12, 30);
         int rentalId = 2;
         int expectingCarQuantity = 2;
         carSearchDto.setStart(start);
@@ -456,10 +456,9 @@ public class CarIntegrationTest {
     @Test
     void searchMethodWithGivenCarIdAndStartDateAndEndDateShouldReturnAvailableCarsInThisDateRangeHavingAgainRentalDelayFalseAttempt() {
         //given
-        int delayInHours = Config.timeDelayUntilNextRent;
         CarSearchDto carSearchDto = new CarSearchDto();
-        LocalDateTime start = LocalDateTime.of(2022, 02, 15, 12, 29);
-        LocalDateTime end = LocalDateTime.of(2022, 02, 20, 12, 30);
+        LocalDateTime start = LocalDateTime.of(2022, 2, 15, 12, 29);
+        LocalDateTime end = LocalDateTime.of(2022, 2, 20, 12, 30);
         Long carId = 5L;
         int expectingCarQuantity = 0;
         carSearchDto.setStart(start);
@@ -479,8 +478,8 @@ public class CarIntegrationTest {
         //given
         int delayInHours = Config.timeDelayUntilNextRent;
         CarSearchDto carSearchDto = new CarSearchDto();
-        LocalDateTime start = LocalDateTime.of(2022, 02, 15, 12, 30).plusHours(delayInHours).plusMinutes(1);
-        LocalDateTime end = LocalDateTime.of(2022, 02, 20, 12, 30);
+        LocalDateTime start = LocalDateTime.of(2022, 2, 15, 12, 30).plusHours(delayInHours).plusMinutes(1);
+        LocalDateTime end = LocalDateTime.of(2022, 2, 20, 12, 30);
         Long carId = 5L;
         int expectingCarQuantity = 1;
         carSearchDto.setStart(start);
