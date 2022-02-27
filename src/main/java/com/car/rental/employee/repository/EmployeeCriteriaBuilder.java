@@ -29,37 +29,37 @@ public class EmployeeCriteriaBuilder {
         switch (fieldName) {
             case "id":
                 if (predicate == null) {
-                    predicate = cb.equal(employee.get("id"), (Long) value);
+                    predicate = cb.equal(employee.get("id"), value);
                 } else {
-                    predicate = cb.and(predicate, cb.equal(employee.get("id"), (Long) value));
+                    predicate = cb.and(predicate, cb.equal(employee.get("id"), value));
                 }
                 break;
             case "firstName":
                 if (predicate == null) {
-                    predicate = cb.equal(employee.get("firstName"), (String) value);
+                    predicate = cb.equal(employee.get("firstName"), value);
                 } else {
-                    predicate = cb.and(predicate, cb.equal(employee.get("firstName"), (String) value));
+                    predicate = cb.and(predicate, cb.equal(employee.get("firstName"), value));
                 }
                 break;
             case "lastName":
                 if (predicate == null) {
-                    predicate = cb.equal(employee.get("lastName"), (String) value);
+                    predicate = cb.equal(employee.get("lastName"), value);
                 } else {
-                    predicate = cb.and(predicate, cb.equal(employee.get("lastName"), (String) value));
+                    predicate = cb.and(predicate, cb.equal(employee.get("lastName"), value));
                 }
                 break;
             case "employmentPosition":
                 if (predicate == null) {
-                    predicate = cb.equal(employee.get("employmentPosition"), (String) value);
+                    predicate = cb.equal(employee.get("employmentPosition"), value);
                 } else {
-                    predicate = cb.and(predicate, cb.equal(employee.get("employmentPosition"), (String) value));
+                    predicate = cb.and(predicate, cb.equal(employee.get("employmentPosition"), value));
                 }
                 break;
             case "deleted":
                 if (predicate == null) {
-                    predicate = cb.equal(employee.get("deleted"), (Boolean) value);
+                    predicate = cb.equal(employee.get("deleted"), value);
                 } else {
-                    predicate = cb.and(predicate, cb.equal(employee.get("deleted"), (Boolean) value));
+                    predicate = cb.and(predicate, cb.equal(employee.get("deleted"), value));
                 }
                 break;
         }

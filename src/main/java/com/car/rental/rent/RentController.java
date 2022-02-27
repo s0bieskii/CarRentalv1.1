@@ -36,7 +36,7 @@ public class RentController {
     public ResponseEntity create(@RequestBody RentAddDto dto) {
         LOGGER.info("PostMapping create(" + dto + ")");
         Rent rent = rentService.addRent(dto);
-        if(rent == null){
+        if (rent == null) {
             return ResponseEntity.badRequest().body("Something gone wrong!");
         }
         return ResponseEntity.created(URI.create(Config.applicationPath + rent.getId())).build();

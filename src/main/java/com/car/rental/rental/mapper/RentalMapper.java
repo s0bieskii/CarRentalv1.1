@@ -15,7 +15,10 @@ public interface RentalMapper {
     RentalMapper CAR_DTO_MAPPER = Mappers.getMapper(RentalMapper.class);
 
     RentalDto rentalToRentalDto(Rental rental);
+
     Rental rentalAddDtoToRental(RentalAddDto rentalAddDto);
+
     RentalWithoutEmployeeDto rentalToRentalWithoutEmployeeDto(Rental rental);
+
     Rental rentalUpdateDtoToRental(RentalUpdateDto rentalUpdateDto);
 }

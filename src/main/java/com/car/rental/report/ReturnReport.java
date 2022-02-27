@@ -28,5 +28,6 @@ public class ReturnReport {
     private Car car;
     @OneToOne(orphanRemoval = true)
     private Employee employee;
+    private boolean deleted;
 
 }

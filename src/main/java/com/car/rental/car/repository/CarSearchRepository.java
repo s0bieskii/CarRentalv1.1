@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface CarSearchRepository {
 
-    public List<Car> find(CarSearchDto carDto);
+    List<Car> find(CarSearchDto carDto);
 }

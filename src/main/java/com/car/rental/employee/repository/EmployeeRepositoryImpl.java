@@ -48,7 +48,7 @@ public class EmployeeRepositoryImpl implements EmployeeSearchRepository {
                     entityManager.createQuery(cq.select(employee).where(predicate).distinct(true)).getResultList();
         }
 
-        if(employeeSearchDto.getRentalId()!=null){
+        if (employeeSearchDto.getRentalId() != null) {
             employeeList = filterByRentalId(employeeSearchDto, employeeList);
         }
         LOGGER.info("Found " + employeeList.size() + " elements");
@@ -72,9 +72,10 @@ public class EmployeeRepositoryImpl implements EmployeeSearchRepository {
                             .stream().map(Rental::getEmployees)
                             .flatMap(List::stream).collect(Collectors.toList());
             carListToFilter =
-                    carListToFilter.stream().filter(e -> employeeFromRental.contains(e)).collect(Collectors.toList());
+                    carListToFilter.stream().filter(employeeFromRental::contains).collect(Collectors.toList());
             LOGGER.info(
-                    "Rental has all employees: " + employeeFromRental.size() + " and matching for searching parameter employee: " +
+                    "Rental has all employees: " + employeeFromRental.size() +
+                            " and matching for searching parameter employee: " +
                             carListToFilter.size());
             return carListToFilter;
         }

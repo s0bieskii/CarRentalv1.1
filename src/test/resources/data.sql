@@ -80,20 +80,20 @@ insert into rents(id, comment, confirmed, start, end, final_price, returned, car
         (12, 'my comment 12', 1, '2021-06-06T12:30:00', '2021-02-19T12:30:00', 555, 1, 1, 3, 0),
         (13, 'my comment 13', 1, '2021-09-01T12:30:00', '2021-09-22T12:30:00', 970, 1, 4, 3, 1);
 
-insert into return_report(id, damaged, note, car_id, employee_id) values
-        (1, 0, 'note 1', 1, 5),
-        (2, 1, 'bumper cracked 2', 5, 3),
-        (3, 0, 'note 3', 5, 3),
-        (4, 0, 'note 4', 8, 3),
-        (5, 0, 'note 5', 2, 7),
-        (6, 0, 'note 6', 3, 8),
-        (7, 0, 'note 7', 4, 8),
-        (8, 0, 'note 8', 1, 4),
-        (9, 1, 'paint scratch on left doors 9', 2, 6),
-        (10, 0, 'note 10', 3, 7),
-        (11, 0, 'note 11', 8, 2),
-        (12, 0, 'note 12', 1, 1),
-        (13, 0, 'note 12', 1, 1);
+insert into return_report(id, damaged, note, car_id, employee_id, deleted) values
+        (1, 0, 'note 1', 1, 5, 0),
+        (2, 1, 'bumper cracked 2', 5, 3, 0),
+        (3, 0, 'note 3', 5, 3, 0),
+        (4, 0, 'note 4', 8, 3, 0),
+        (5, 0, 'note 5', 2, 7, 0),
+        (6, 0, 'note 6', 3, 8, 0),
+        (7, 0, 'note 7', 4, 8, 0),
+        (8, 0, 'note 8', 1, 4, 0),
+        (9, 1, 'paint scratch on left doors 9', 2, 6, 0),
+        (10, 0, 'note 10', 3, 7, 0),
+        (11, 0, 'note 11', 8, 2, 0),
+        (12, 0, 'note 12', 1, 1, 0),
+        (13, 0, 'note 12', 1, 1, 0);
 
 update rents set report_id = 1 where id=1;
 update rents set report_id = 2 where id=2;

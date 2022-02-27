@@ -14,6 +14,8 @@ public interface CarMapper {
     CarMapper CAR_DTO_MAPPER = Mappers.getMapper(CarMapper.class);
 
     CarDto carToCarDto(Car car);
+
     Car carUpdateToCar(CarUpdateDto carUpdateDto);
+
     Car carAddToCar(CarAddDto carAddDto);
 }
