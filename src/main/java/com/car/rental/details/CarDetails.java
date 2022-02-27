@@ -2,6 +2,7 @@ package com.car.rental.details;
 
 import com.car.rental.utils.Config;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -25,15 +26,15 @@ public class CarDetails {
     private String vin;
     private String color;
     private Integer registrationYear;
-    private Double price;
+    private BigDecimal price;
     private String segment;
     private Integer doors;
     private Integer seats;
     private String registrationNumber;
     private int mileage;
-    @JsonFormat(pattern = Config.globalLocalDataTimeFormat)
+    @JsonFormat(pattern = Config.globalLocalDataFormat)
     private LocalDate inspection;
-    @JsonFormat(pattern = Config.globalLocalDataTimeFormat)
+    @JsonFormat(pattern = Config.globalLocalDataFormat)
     private LocalDate insurance;
     private String fuel;
     private double averageConsumption;

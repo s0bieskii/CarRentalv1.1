@@ -103,7 +103,7 @@ public class CarIntegrationTest {
         CarDetailsAddDto carDetailsToAdd = new CarDetailsAddDto();
         carDetailsToAdd.setColor("red");
         carDetailsToAdd.setFuel("diesel");
-        carDetailsToAdd.setPrice(100.0);
+        carDetailsToAdd.setPrice(BigDecimal.valueOf(100.0));
         carToAdd.setCarDetails(carDetailsToAdd);
         //when
         Car car = carService.addCar(carToAdd);

@@ -59,12 +59,12 @@ public class EmployeeController {
                                  @RequestBody EmployeeSearchDto employeeSearchDto) {
         LOGGER.info("GetMapping search(" + pageable + ", " + employeeSearchDto + ")");
         Page<EmployeeDto> employeeDto = employeeService.search(pageable, employeeSearchDto);
-        return ResponseEntity.ok(employeeService.search(pageable, employeeSearchDto));
+        return ResponseEntity.ok(employeeDto);
     }
 
     @PatchMapping("/update")
     public ResponseEntity updateCar(@RequestBody EmployeeUpdateDto employeeUpdateDto) {
-        LOGGER.info("PatchMapping updateCar(" + employeeUpdateDto + ")");
+        LOGGER.info("PatchMapping updateEmployee(" + employeeUpdateDto + ")");
         if (employeeService.updateEmployee(employeeUpdateDto) != null) {
             LOGGER.info("Update success");
             return ResponseEntity.noContent().build();
@@ -74,11 +74,11 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteCar(@PathVariable Long id) {
-        LOGGER.info("DeleteMapping deleteCar(" + id + ")");
+    public ResponseEntity deleteEmployee(@PathVariable Long id) {
+        LOGGER.info("DeleteMapping deleteEmployee(" + id + ")");
         if (employeeService.deleteEmployee(id)) {
-            return ResponseEntity.ok().body("Car with id: " + id + " successfully deleted");
+            return ResponseEntity.ok().body("Employee with id: " + id + " successfully deleted");
         }
-        return ResponseEntity.badRequest().body("Car with given ID not exist");
+        return ResponseEntity.badRequest().body("Employee with given ID not exist");
     }
 }

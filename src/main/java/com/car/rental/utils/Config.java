@@ -11,4 +11,6 @@ public class Config {
     public static int timeDelayUntilNextRent = 12;
 
     public static final String globalLocalDataTimeFormat = "yyyy-MM-dd HH:mm";
+
+    public static final String globalLocalDataFormat = "yyyy-MM-dd";
 }

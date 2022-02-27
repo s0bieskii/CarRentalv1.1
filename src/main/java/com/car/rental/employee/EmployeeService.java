@@ -38,7 +38,7 @@ public class EmployeeService {
         LOGGER.info("getAll(" + pageable);
         Page<EmployeeDto> employeesDto = employeeRepository.findAll(pageable)
                 .map(employeeMapper::employeeToEmployeeDto);
-        LOGGER.info("All founded employees: " + employeesDto);
+        LOGGER.info("All founded employees: " + employeesDto.getTotalElements());
         return employeesDto;
     }
 

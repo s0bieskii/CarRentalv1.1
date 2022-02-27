@@ -5,6 +5,7 @@ import com.car.rental.report.ReturnReport;
 import com.car.rental.user.User;
 import com.car.rental.utils.Config;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -35,14 +36,15 @@ public class Rent {
     private Car car;
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private ReturnReport report;
     @JsonFormat(pattern = Config.globalLocalDataTimeFormat)
     private LocalDateTime start;
     @JsonFormat(pattern = Config.globalLocalDataTimeFormat)
     private LocalDateTime end;
     private String comment;
-    private Double finalPrice;
+    private BigDecimal finalPrice;
     private boolean confirmed;
     private boolean returned;
+    private boolean deleted;
 }

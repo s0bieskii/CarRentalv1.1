@@ -23,7 +23,7 @@ public class ReturnReport {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String note;
-    private Boolean damaged;
+    private boolean damaged;
     @OneToOne(orphanRemoval = true)
     private Car car;
     @OneToOne(orphanRemoval = true)
