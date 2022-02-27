@@ -30,30 +30,30 @@ public class RentalCriteriaBuilder {
         switch (fieldName) {
             case "id":
                 if (predicate == null) {
-                    predicate = cb.equal(rental.get("id"), (Long) value);
+                    predicate = cb.equal(rental.get("id"), value);
                 } else {
-                    predicate = cb.and(predicate, cb.equal(rental.get("id"), (Long) value));
+                    predicate = cb.and(predicate, cb.equal(rental.get("id"), value));
                 }
                 break;
             case "country":
                 if (predicate == null) {
-                    predicate = cb.equal(rental.get("country"), (String) value);
+                    predicate = cb.equal(rental.get("country"), value);
                 } else {
-                    predicate = cb.and(predicate, cb.equal(rental.get("country"), (String) value));
+                    predicate = cb.and(predicate, cb.equal(rental.get("country"), value));
                 }
                 break;
             case "city":
                 if (predicate == null) {
-                    predicate = cb.equal(rental.get("city"), (String) value);
+                    predicate = cb.equal(rental.get("city"), value);
                 } else {
-                    predicate = cb.and(predicate, cb.equal(rental.get("city"), (String) value));
+                    predicate = cb.and(predicate, cb.equal(rental.get("city"), value));
                 }
                 break;
             case "postCode":
                 if (predicate == null) {
-                    predicate = cb.equal(rental.get("postCode"), (String) value);
+                    predicate = cb.equal(rental.get("postCode"), value);
                 } else {
-                    predicate = cb.and(predicate, cb.equal(rental.get("postCode"), (String) value));
+                    predicate = cb.and(predicate, cb.equal(rental.get("postCode"), value));
                 }
                 break;
             case "street":
@@ -65,9 +65,9 @@ public class RentalCriteriaBuilder {
                 break;
             case "phone":
                 if (predicate == null) {
-                    predicate = cb.equal(rental.get("phone"), (String) value);
+                    predicate = cb.equal(rental.get("phone"), value);
                 } else {
-                    predicate = cb.and(predicate, cb.equal(rental.get("phone"), (String) value));
+                    predicate = cb.and(predicate, cb.equal(rental.get("phone"), value));
                 }
                 break;
             case "deleted":

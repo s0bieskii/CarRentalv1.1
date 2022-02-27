@@ -1,13 +1,12 @@
 package com.car.rental.rental.dto;
 
 import com.car.rental.employee.dto.EmployeeDto;
+import java.util.List;
+import javax.persistence.OneToMany;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
-import javax.persistence.OneToMany;
-import java.util.List;
 
 @Getter
 @Setter

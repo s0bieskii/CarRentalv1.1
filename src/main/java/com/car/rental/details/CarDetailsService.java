@@ -10,8 +10,8 @@ import org.springframework.stereotype.Service;
 @Service
 public class CarDetailsService {
     public static final Logger LOGGER = Logger.getLogger(CarController.class.getName());
-    private CarDetailsMapper carDetailsAddDtoMapper;
-    private CarDetailsRepository carDetailsRepository;
+    private final CarDetailsMapper carDetailsAddDtoMapper;
+    private final CarDetailsRepository carDetailsRepository;
 
     private CarDetailsService(CarDetailsRepository carDetailsRepository, CarDetailsMapper carDetailsMapper) {
         LOGGER.info("Creating CarService with " + CarDetailsRepository.class.getName() + ", " +

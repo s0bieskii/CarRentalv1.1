@@ -28,51 +28,51 @@ public class RentCriteriaBuilder {
         switch (fieldName) {
             case "id":
                 if (predicate == null) {
-                    predicate = cb.equal(rent.get("id"), (Long) value);
+                    predicate = cb.equal(rent.get("id"), value);
                 } else {
-                    predicate = cb.and(predicate, cb.equal(rent.get("id"), (Long) value));
+                    predicate = cb.and(predicate, cb.equal(rent.get("id"), value));
                 }
                 break;
             case "carId":
                 if (predicate == null) {
-                    predicate = cb.equal(rent.get("car").get("id"), (Long) value);
+                    predicate = cb.equal(rent.get("car").get("id"), value);
                 } else {
-                    predicate = cb.and(predicate, cb.equal(rent.get("car").get("id"), (Long) value));
+                    predicate = cb.and(predicate, cb.equal(rent.get("car").get("id"), value));
                 }
                 break;
             case "userId":
                 if (predicate == null) {
-                    predicate = cb.equal(rent.get("user").get("id"), (Long) value);
+                    predicate = cb.equal(rent.get("user").get("id"), value);
                 } else {
-                    predicate = cb.and(predicate, cb.equal(rent.get("user").get("id"), (Long) value));
+                    predicate = cb.and(predicate, cb.equal(rent.get("user").get("id"), value));
                 }
                 break;
             case "confirmed":
                 if (predicate == null) {
-                    predicate = cb.equal(rent.get("confirmed"), (Boolean) value);
+                    predicate = cb.equal(rent.get("confirmed"), value);
                 } else {
-                    predicate = cb.and(predicate, cb.equal(rent.get("confirmed"), (Boolean) value));
+                    predicate = cb.and(predicate, cb.equal(rent.get("confirmed"), value));
                 }
                 break;
             case "returned":
                 if (predicate == null) {
-                    predicate = cb.equal(rent.get("returned"), (Boolean) value);
+                    predicate = cb.equal(rent.get("returned"), value);
                 } else {
-                    predicate = cb.and(predicate, cb.equal(rent.get("returned"), (Boolean) value));
+                    predicate = cb.and(predicate, cb.equal(rent.get("returned"), value));
                 }
                 break;
             case "damaged":
                 if (predicate == null) {
-                    predicate = cb.equal(rent.get("report").get("damaged"), (Boolean) value);
+                    predicate = cb.equal(rent.get("report").get("damaged"), value);
                 } else {
-                    predicate = cb.and(predicate, cb.equal(rent.get("report").get("damaged"), (Boolean) value));
+                    predicate = cb.and(predicate, cb.equal(rent.get("report").get("damaged"), value));
                 }
                 break;
             case "deleted":
                 if (predicate == null) {
-                    predicate = cb.equal(rent.get("deleted"), (Boolean) value);
+                    predicate = cb.equal(rent.get("deleted"), value);
                 } else {
-                    predicate = cb.and(predicate, cb.equal(rent.get("deleted"), (Boolean) value));
+                    predicate = cb.and(predicate, cb.equal(rent.get("deleted"), value));
                 }
                 break;
         }

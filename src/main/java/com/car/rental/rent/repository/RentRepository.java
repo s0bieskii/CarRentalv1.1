@@ -9,5 +9,5 @@ import org.springframework.data.repository.query.Param;
 public interface RentRepository extends JpaRepository<Rent, Long>, RentSearchRepository {
 
     @Query(value = "SELECT * FROM rents WHERE car_id = :id", nativeQuery = true)
-    List<Rent> findRentByCarId(@Param("id")Long id);
+    List<Rent> findRentByCarId(@Param("id") Long id);
 }

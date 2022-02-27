@@ -50,8 +50,8 @@ public class RentRepositoryImpl implements RentSearchRepository {
             rentList =
                     entityManager.createQuery(cq.select(employee).where(predicate).distinct(true)).getResultList();
         }
-        if(rentSearchDto.getStart()!= null && rentSearchDto.getEnd()!=null){
-            rentList=filterByDateAvailable(rentSearchDto, rentList);
+        if (rentSearchDto.getStart() != null && rentSearchDto.getEnd() != null) {
+            rentList = filterByDateAvailable(rentSearchDto, rentList);
         }
         LOGGER.info("Found " + rentList.size() + " elements");
         return rentList;
