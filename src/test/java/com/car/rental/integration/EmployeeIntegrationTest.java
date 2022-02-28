@@ -1,4 +1,4 @@
-package com.car.rental.car.integration;
+package com.car.rental.integration;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;

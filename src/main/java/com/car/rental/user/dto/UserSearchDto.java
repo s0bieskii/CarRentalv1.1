@@ -10,12 +10,13 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class UserDto {
+public class UserSearchDto {
 
     private Long id;
     private String firstName;
     private String lastName;
     private LocalDate birth;
     private String email;
-    private String password;
+    private Boolean activated;
+    private Boolean deleted;
 }
