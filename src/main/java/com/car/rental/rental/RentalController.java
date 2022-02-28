@@ -5,7 +5,6 @@ import com.car.rental.rental.dto.RentalDto;
 import com.car.rental.rental.dto.RentalSearchDto;
 import com.car.rental.rental.dto.RentalUpdateDto;
 import com.car.rental.rental.dto.RentalWithoutEmployeeDto;
-import com.car.rental.rental.mapper.RentalMapper;
 import com.car.rental.utils.Config;
 import java.net.URI;
 import java.util.logging.Logger;
@@ -28,12 +27,10 @@ public class RentalController {
 
     public static final Logger LOGGER = Logger.getLogger(RentalController.class.getName());
     private final RentalService rentalService;
-    private final RentalMapper rentalMapper;
 
-    public RentalController(RentalService rentalService, RentalMapper rentalMapper) {
+    public RentalController(RentalService rentalService) {
         LOGGER.info("RentalController(" + rentalService + ")");
         this.rentalService = rentalService;
-        this.rentalMapper = rentalMapper;
     }
 
     @PostMapping

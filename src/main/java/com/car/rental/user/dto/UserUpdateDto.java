@@ -10,7 +10,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class UserDto {
+public class UserUpdateDto {
 
     private Long id;
     private String firstName;
@@ -18,4 +18,5 @@ public class UserDto {
     private LocalDate birth;
     private String email;
     private String password;
+    private Boolean deleted;
 }

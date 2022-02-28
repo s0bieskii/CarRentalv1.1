@@ -1,4 +1,4 @@
-package com.car.rental.car.unit;
+package com.car.rental.unit;
 
 
 public class CarServiceUnitTest {

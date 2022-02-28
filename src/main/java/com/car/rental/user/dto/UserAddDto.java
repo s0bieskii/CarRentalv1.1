@@ -10,9 +10,8 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
-public class UserDto {
+public class UserAddDto {
 
-    private Long id;
     private String firstName;
     private String lastName;
     private LocalDate birth;
