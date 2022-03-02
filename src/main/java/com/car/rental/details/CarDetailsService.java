@@ -1,6 +1,5 @@
 package com.car.rental.details;
 
-import com.car.rental.car.CarController;
 import com.car.rental.details.dto.CarDetailsAddDto;
 import com.car.rental.details.mapper.CarDetailsMapper;
 import com.car.rental.details.repository.CarDetailsRepository;
@@ -9,12 +8,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class CarDetailsService {
-    public static final Logger LOGGER = Logger.getLogger(CarController.class.getName());
+    public static final Logger LOGGER = Logger.getLogger(CarDetailsService.class.getName());
     private final CarDetailsMapper carDetailsAddDtoMapper;
     private final CarDetailsRepository carDetailsRepository;
 
     private CarDetailsService(CarDetailsRepository carDetailsRepository, CarDetailsMapper carDetailsMapper) {
-        LOGGER.info("Creating CarService with " + CarDetailsRepository.class.getName() + ", " +
+        LOGGER.info("Creating CarDetailsService with " + CarDetailsRepository.class.getName() + ", " +
                 CarDetailsMapper.class.getName());
         this.carDetailsAddDtoMapper = carDetailsMapper;
         this.carDetailsRepository = carDetailsRepository;

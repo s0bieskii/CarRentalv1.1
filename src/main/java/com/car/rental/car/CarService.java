@@ -74,7 +74,6 @@ public class CarService {
         return null;
     }
 
-
     public boolean deleteCar(Long carIdToDelete) {
         LOGGER.info("deleteCar(" + carIdToDelete + ")");
         if (carRepository.existsById(carIdToDelete)) {

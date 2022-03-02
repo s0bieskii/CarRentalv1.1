@@ -8,8 +8,8 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @ToString
+@NoArgsConstructor
 public class UserAddDto {
 
     private String firstName;

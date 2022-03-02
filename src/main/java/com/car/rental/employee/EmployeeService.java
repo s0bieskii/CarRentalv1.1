@@ -58,7 +58,7 @@ public class EmployeeService {
     }
 
     public EmployeeDto updateEmployee(EmployeeUpdateDto employeeUpdateDto) {
-        LOGGER.info("updateCar(" + employeeUpdateDto + ")");
+        LOGGER.info("updateEmployee(" + employeeUpdateDto + ")");
         if (employeeUpdateDto.getId() != null && employeeRepository.existsById(employeeUpdateDto.getId())) {
             Employee employee = employeeMapper.employeeUpdateDtoToEmployee(employeeUpdateDto);
             employeeRepository.save(employee);
@@ -70,13 +70,13 @@ public class EmployeeService {
     }
 
     public boolean deleteEmployee(Long id) {
-        LOGGER.info("deleteCar(" + id + ")");
+        LOGGER.info("deleteEmployee(" + id + ")");
         if (employeeRepository.existsById(id)) {
             LOGGER.info("Employee with given ID exists");
             Employee employee = employeeRepository.getById(id);
             employee.setDeleted(true);
             employeeRepository.save(employee);
-            LOGGER.info("Successful deleted car with id=" + id);
+            LOGGER.info("Successful deleted Employee with id=" + id);
             return true;
         }
         LOGGER.info("Employee with given id not exist");

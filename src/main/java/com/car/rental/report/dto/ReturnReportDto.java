@@ -9,8 +9,8 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @ToString
+@NoArgsConstructor
 public class ReturnReportDto {
 
     private Long id;

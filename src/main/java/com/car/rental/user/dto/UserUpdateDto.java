@@ -8,8 +8,8 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @ToString
+@NoArgsConstructor
 public class UserUpdateDto {
 
     private Long id;

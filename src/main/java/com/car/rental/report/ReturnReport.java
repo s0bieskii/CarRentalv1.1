@@ -11,10 +11,12 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
-@NoArgsConstructor
 @Getter
 @Setter
+@ToString
+@NoArgsConstructor
 @EqualsAndHashCode
 @Entity
 public class ReturnReport {

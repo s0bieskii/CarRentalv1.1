@@ -7,8 +7,8 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@NoArgsConstructor
 @ToString
+@NoArgsConstructor
 public class RentalWithoutEmployeeDto {
 
     private Long id;

@@ -105,7 +105,7 @@ public class RentService {
             Rent rent = rentRepository.getById(id);
             rent.setDeleted(true);
             rentRepository.save(rent);
-            LOGGER.info("Successful deleted car with id=" + id);
+            LOGGER.info("Successful deleted Rent with id=" + id);
             return true;
         }
         LOGGER.info("Rent with given id not exist");

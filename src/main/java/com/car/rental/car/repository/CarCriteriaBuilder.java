@@ -56,7 +56,7 @@ public class CarCriteriaBuilder {
         return this;
     }
 
-    public void customFieldsSearch(String fieldName, Object value) {
+    private void customFieldsSearch(String fieldName, Object value) {
         if (predicate == null) {
             if (fieldName.equals("registrationYear")) {
                 predicate = cb.greaterThanOrEqualTo(car.get("carDetails").get(fieldName), (Integer) value);
