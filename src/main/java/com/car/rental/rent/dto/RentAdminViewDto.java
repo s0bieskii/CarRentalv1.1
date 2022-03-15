@@ -2,7 +2,7 @@ package com.car.rental.rent.dto;
 
 import com.car.rental.car.dto.CarDto;
 import com.car.rental.report.dto.ReturnReportDto;
-import com.car.rental.user.dto.UserDto;
+import com.car.rental.rent.user.dto.UserDto;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import lombok.Getter;

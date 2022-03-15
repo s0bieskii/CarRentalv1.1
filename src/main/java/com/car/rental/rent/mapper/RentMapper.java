@@ -7,7 +7,7 @@ import com.car.rental.rent.dto.RentAdminViewDto;
 import com.car.rental.rent.dto.RentDto;
 import com.car.rental.rent.dto.RentUpdateDto;
 import com.car.rental.report.mapper.ReturnReportMapper;
-import com.car.rental.user.mapper.UserMapper;
+import com.car.rental.rent.user.mapper.UserMapper;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

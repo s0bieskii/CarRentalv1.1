@@ -9,12 +9,12 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import com.car.rental.user.User;
-import com.car.rental.user.UserService;
-import com.car.rental.user.dto.UserAddDto;
-import com.car.rental.user.dto.UserDto;
-import com.car.rental.user.dto.UserSearchDto;
-import com.car.rental.user.dto.UserUpdateDto;
+import com.car.rental.rent.user.User;
+import com.car.rental.rent.user.UserService;
+import com.car.rental.rent.user.dto.UserAddDto;
+import com.car.rental.rent.user.dto.UserDto;
+import com.car.rental.rent.user.dto.UserSearchDto;
+import com.car.rental.rent.user.dto.UserUpdateDto;
 import java.time.LocalDate;
 import javax.sql.DataSource;
 import org.junit.jupiter.api.AfterEach;

@@ -12,6 +12,7 @@ import lombok.ToString;
 @ToString
 public class CarDetailsDto {
 
+    //TODO add air conditioner
     private Long id;
     private String color;
     private Integer registrationYear;
@@ -23,3 +24,5 @@ public class CarDetailsDto {
     private double averageConsumption;
     private String transmission;
 }
+
+
