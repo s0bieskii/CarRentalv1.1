@@ -1,0 +1,83 @@
+/* common */
+
+body {
+    background-color: #252b30;
+    color: white;
+}
+
+
+
+.btn-primary {
+    color: rgb(0, 0, 0);
+    background-color: #3366ff;
+    border: transparent;
+}
+
+.form-group {
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #212529;
+    color: white;
+    text-align: center;
+}
+
+.content .badge {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.car-offer .badge {
+    margin-top: 10px;
+}
+
+.btn-link {
+    color: #3c5c77;
+    background-color: transparent;
+}
+
+/* rent-a-car.html */
+.card {
+    background-color: white;
+    color: black;
+}
+
+.search-bar .form-control{
+    height: 40px;
+    width: auto;
+    margin-left: 5px;
+    margin-bottom: 5px;
+}
+
+.search-bar .form-select {
+    margin-bottom: 5px;
+}
+
+.col {
+    margin-bottom: 20px;
+}
+
+/* xxxxxx */
+
+.content .badge {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+#search-badge {
+    margin-bottom: 0px;
+}
+
+.float-left h5 {
+    font-weight: bold;
+}
+
+.car-small h3 {
+    align: left;
+}

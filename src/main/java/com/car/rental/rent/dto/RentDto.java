@@ -15,7 +15,7 @@ import lombok.ToString;
 public class RentDto {
 
     private Long id;
-    private CarDto car;
+    private CarDto   car;
     private UserDto user;
     private LocalDateTime start;
     private LocalDateTime end;
