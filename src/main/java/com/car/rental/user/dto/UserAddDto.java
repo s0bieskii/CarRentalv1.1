@@ -1,4 +1,4 @@
-package com.car.rental.rent.user.dto;
+package com.car.rental.user.dto;
 
 import com.car.rental.utils.BirthDate;
 import java.time.LocalDate;

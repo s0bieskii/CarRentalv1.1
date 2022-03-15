@@ -1,7 +1,7 @@
-package com.car.rental.rent.user.repository;
+package com.car.rental.user.repository;
 
-import com.car.rental.rent.user.User;
-import com.car.rental.rent.user.dto.UserSearchDto;
+import com.car.rental.user.User;
+import com.car.rental.user.dto.UserSearchDto;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.persistence.EntityManager;

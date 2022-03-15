@@ -1,7 +1,7 @@
-package com.car.rental.rent.user.repository;
+package com.car.rental.user.repository;
 
 import com.car.rental.car.repository.CarRepositoryImpl;
-import com.car.rental.rent.user.User;
+import com.car.rental.user.User;
 import java.util.logging.Logger;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Predicate;

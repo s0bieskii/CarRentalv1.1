@@ -1,10 +1,10 @@
-package com.car.rental.rent.user.mapper;
+package com.car.rental.user.mapper;
 
 import com.car.rental.rent.mapper.RentMapper;
-import com.car.rental.rent.user.dto.UserDto;
-import com.car.rental.rent.user.dto.UserUpdateDto;
-import com.car.rental.rent.user.User;
-import com.car.rental.rent.user.dto.UserAddDto;
+import com.car.rental.user.dto.UserDto;
+import com.car.rental.user.dto.UserUpdateDto;
+import com.car.rental.user.User;
+import com.car.rental.user.dto.UserAddDto;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

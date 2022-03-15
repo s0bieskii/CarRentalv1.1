@@ -2,7 +2,7 @@ package com.car.rental.rent;
 
 import com.car.rental.car.Car;
 import com.car.rental.report.ReturnReport;
-import com.car.rental.rent.user.User;
+import com.car.rental.user.User;
 import com.car.rental.utils.Config;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.math.BigDecimal;

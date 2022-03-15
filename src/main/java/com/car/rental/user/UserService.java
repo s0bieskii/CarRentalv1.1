@@ -1,11 +1,11 @@
-package com.car.rental.rent.user;
+package com.car.rental.user;
 
-import com.car.rental.rent.user.dto.UserDto;
-import com.car.rental.rent.user.dto.UserUpdateDto;
-import com.car.rental.rent.user.mapper.UserMapper;
-import com.car.rental.rent.user.repository.UserRepository;
-import com.car.rental.rent.user.dto.UserAddDto;
-import com.car.rental.rent.user.dto.UserSearchDto;
+import com.car.rental.user.dto.UserDto;
+import com.car.rental.user.dto.UserUpdateDto;
+import com.car.rental.user.mapper.UserMapper;
+import com.car.rental.user.repository.UserRepository;
+import com.car.rental.user.dto.UserAddDto;
+import com.car.rental.user.dto.UserSearchDto;
 import com.car.rental.utils.PageWrapper;
 import java.util.List;
 import java.util.logging.Logger;

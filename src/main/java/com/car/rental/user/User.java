@@ -1,4 +1,4 @@
-package com.car.rental.rent.user;
+package com.car.rental.user;
 
 import com.car.rental.rent.Rent;
 import java.time.LocalDate;
