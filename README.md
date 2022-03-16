@@ -22,6 +22,13 @@ I created basic REST API and now i'm working on Model View Controller with Thyme
 - Implement verification email validation by token
 
 
+### How to run:
+- Open project with InteliJ, go to: **src/main/java/com/car/rental/Application.java -> right click to Application.java -> Run 'Application.main()'**
+- Open CarRentalv1.1-main folder -> Open command line and type: **mvn spring-boot:run**
+
+**Application will start on: http://localhost:8080**
+
+
 ## What you can find in my project: 🎉
 - REST API
 - ModelViewController
@@ -34,8 +41,8 @@ I created basic REST API and now i'm working on Model View Controller with Thyme
 - Clean code
 - Integration tests
 
-## Tech/framework used 🔧
 
+## Tech/framework used 🔧
 - Java 11
 - Spring Boot 2
 - Spring Validator
@@ -51,7 +58,6 @@ I created basic REST API and now i'm working on Model View Controller with Thyme
 
 
 ## Screenshots 📺
-
 <p align="center">
     <img src="https://user-images.githubusercontent.com/42815359/158565591-23301d8f-6ca5-4afe-84c3-bd8869e738d1.png" alt="Screenshot">
 </p>
