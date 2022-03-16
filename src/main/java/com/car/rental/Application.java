@@ -9,6 +9,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 public class Application {
 
     public static void main(String[] args) {
+        System.setProperty("java.runtime.version", "11");
         SpringApplication.run(Application.class, args);
     }
 
