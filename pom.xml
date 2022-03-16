@@ -14,7 +14,7 @@
     <name>car.rental</name>
     <description>Car rental web application</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>11.0.4</java.version>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
         <vaadin.version>14.8.4</vaadin.version>
     </properties>
@@ -94,6 +94,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.0</version>
                 <configuration>
+                    <source>11.0.4</source>
+                    <target>11.0.4</target>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.mapstruct</groupId>
