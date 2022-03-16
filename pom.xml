@@ -14,7 +14,7 @@
     <name>car.rental</name>
     <description>Car rental web application</description>
     <properties>
-        <java.version>11.0.4</java.version>
+        <java.version>11</java.version>
         <org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
         <vaadin.version>14.8.4</vaadin.version>
     </properties>
@@ -84,7 +84,6 @@
             <artifactId>springfox-swagger-ui</artifactId>
             <version>3.0.0</version>
         </dependency>
-
     </dependencies>
 
     <build>
