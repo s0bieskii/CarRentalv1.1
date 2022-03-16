@@ -63,7 +63,7 @@ public class EmployeeController {
     }
 
     @PatchMapping("/update")
-    public ResponseEntity updateCar(@RequestBody EmployeeUpdateDto employeeUpdateDto) {
+    public ResponseEntity updateEmployee(@RequestBody EmployeeUpdateDto employeeUpdateDto) {
         LOGGER.info("PatchMapping updateEmployee(" + employeeUpdateDto + ")");
         if (employeeService.updateEmployee(employeeUpdateDto) != null) {
             LOGGER.info("Update success");

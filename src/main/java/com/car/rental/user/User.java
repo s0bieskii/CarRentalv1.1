@@ -2,14 +2,19 @@ package com.car.rental.user;
 
 import com.car.rental.rent.Rent;
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -20,7 +25,8 @@ import lombok.ToString;
 @Setter
 @ToString
 @Entity
-@Table(name = "users")
+@Table(name = "users", uniqueConstraints=
+    @UniqueConstraint(columnNames = {"email"}))
 public class User {
 
     @Id
@@ -29,10 +35,13 @@ public class User {
     private String firstName;
     private String lastName;
     private LocalDate birth;
+    @Column(unique = true)
     private String email;
     private String password;
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Rent> rents;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Role> roles;
     private boolean activated;
     private boolean deleted;
 
