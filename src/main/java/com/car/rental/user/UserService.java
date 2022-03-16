@@ -7,6 +7,7 @@ import com.car.rental.user.repository.UserRepository;
 import com.car.rental.user.dto.UserAddDto;
 import com.car.rental.user.dto.UserSearchDto;
 import com.car.rental.utils.PageWrapper;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -30,6 +31,8 @@ public class UserService {
     public User addUser(UserAddDto userAddDto) {
         LOGGER.info("addUser(" + userAddDto + ")");
         User user = userMapper.userAddDtoToUser(userAddDto);
+        user.setRoles(new ArrayList<>());
+        user.getRoles().add(new Role("ROLE_USER"));
         User savedUser = userRepository.save(user);
         return savedUser;
     }
