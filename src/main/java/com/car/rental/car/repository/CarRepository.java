@@ -10,4 +10,5 @@ import org.springframework.stereotype.Repository;
 public interface CarRepository extends JpaRepository<Car, Long>, CarSearchRepository {
 
     Page<Car> findAll(Pageable pageable);
+
 }

@@ -5,7 +5,9 @@ body {
     color: white;
 }
 
-
+#fuel {
+    border-left: 10px;
+}
 
 .btn-primary {
     color: rgb(0, 0, 0);

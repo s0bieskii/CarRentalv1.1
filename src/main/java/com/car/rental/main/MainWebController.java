@@ -1,42 +1,27 @@
-package com.car.rental.car;
+package com.car.rental.main;
 
-import com.car.rental.car.dto.CarAddDto;
+import com.car.rental.car.CarService;
 import com.car.rental.car.dto.CarSearchDto;
 import com.car.rental.details.CarDetailsService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/web/cars")
-public class CarWebController {
+@RequestMapping()
+public class MainWebController {
 
     final private CarService carService;
     final private CarDetailsService carDetailsService;
 
-    public CarWebController(CarService carService, CarDetailsService carDetailsService) {
+    public MainWebController(CarService carService, CarDetailsService carDetailsService) {
         this.carDetailsService = carDetailsService;
         this.carService=carService;
     }
 
-    @GetMapping("/create")
-    public String createView(ModelMap modelMap){
-        CarAddDto dto = new CarAddDto();
-        dto.setBrand("Ford");
-        dto.setModel("Galaxy");
-        modelMap.addAttribute("car", dto);
-        return "cars/create-car.html";
-    }
-
-    @PostMapping()
-    public String create(){
-        return "cars/cars.html";
-    }
-
-    @GetMapping("/search")
+    @GetMapping()
     public String searchCarCreateView(ModelMap modelMap){
         modelMap.addAttribute("searchCar", new CarSearchDto());
         modelMap.addAttribute("colors", carDetailsService.getCarsColors());

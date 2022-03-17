@@ -4,10 +4,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1448cd2-8819-4532-8efc-e0244a619617" name="Changes" comment="Add .idea starte config to repository">
+    <list default="true" id="a1448cd2-8819-4532-8efc-e0244a619617" name="Changes" comment="Fix application:&#10;-remove swagger">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/utils/SwaggerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/utils/SwaggerConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/car/CarWebController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/car/CarWebController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/car/repository/CarRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/car/repository/CarRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/details/CarDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/details/CarDetailsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/details/repository/CarDetailsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/details/repository/CarDetailsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/main.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/cars/kaudi.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/cars/1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/car-offer/rent-a-car.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/car-offer/rent-a-car.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -445,7 +451,14 @@
       <option name="project" value="LOCAL" />
       <updated>1647437164551</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Fix application:&#10;-remove swagger">
+      <created>1647460241838</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1647460241838</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -463,7 +476,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/battle-ships/battle-ships" />
     </ignored-roots>
-    <MESSAGE value="Employee search method implemented with necessary classes" />
     <MESSAGE value="Add integration test for employeeService, fix bugs in employeeService and code refactor" />
     <MESSAGE value="Fix car search and rebuild carCriteriaBuilder and change package" />
     <MESSAGE value="Code refactor and fix carIntegrationTest" />
@@ -488,7 +500,8 @@
     <MESSAGE value="Restore user folder to correct directory" />
     <MESSAGE value="Add user Controller.&#10;Add registration form with validation&#10;Add login form" />
     <MESSAGE value="Add .idea starte config to repository" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add .idea starte config to repository" />
+    <MESSAGE value="Fix application:&#10;-remove swagger" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix application:&#10;-remove swagger" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

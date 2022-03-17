@@ -1,20 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Car Rental</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link href="../../static/css/main.css" rel="stylesheet">
-    <link rel="icon" href="../../static/images/icon.png">
+    <link th:href="@{/css/bootstrap.min.css}" th:rel="stylesheet">
+    <link th:href="@{/css/main.css}" th:rel="stylesheet">
+    <link rel="icon" th:href="@{/images/icon.png}">
 </head>
 
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-                <img src="../../static/images/logo.png" width="100" height="30" class="d-inline-block align-top" alt="">
+                <img th:src="@{/images/logo.png}" width="100" height="30" class="d-inline-block align-top" alt="">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -107,10 +107,10 @@
                 </div>
                 <div class="col-sm">
                     <select class="d-inline form-select" aria-label="Default select example">
-                  <option selected>Segment</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
+                  <option selected value="">segment</option>
+                  <option th:each="segment : ${segments}"
+                                th:value="${segment}"
+                                th:utext="${segment}"/>
                 </select>
                 </div>
             </div>
@@ -118,42 +118,41 @@
             <div class="row">
                 <div class="col-sm">
                     <select class="d-inline form-select" aria-label="Default select example">
-                    <option selected>Doors</option>
-                    <option value="1">Bmw</option>
-                    <option value="2">Ford</option>
-                    <option value="3">Rhree</option>
+                    <option selected value="">doors</option>
+                        <option th:each="door : ${doors}"
+                                th:value="${door}"
+                                th:utext="${door}"/>
                   </select>
                 </div>
                 <div class="col-sm">
                     <select class="d-inline form-select" aria-label="Default select example">
-                    <option selected>Seats</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option selected value="">seats</option>
+                        <option th:each="seat : ${seats}"
+                                th:value="${seat}"
+                                th:utext="${seat}"/>
                   </select>
                 </div>
                 <div class="col-sm">
                     <select class="d-inline form-select" aria-label="Default select example">
-                    <option selected>Fuel</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option selected value="">fuel</option>
+                        <option th:each="fuel : ${fuels}"
+                                th:value="${fuel}"
+                                th:utext="${fuel}"/>
                   </select>
                 </div>
                 <div class="col-sm">
                     <select class="d-inline form-select" aria-label="Default select example">
-                    <option selected>Transmission</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <option selected value="">transmission</option>
+                    <option value="manual">manual</option>
+                    <option value="automatic">automatic</option>
                   </select>
                 </div>
                 <div class="col-sm">
-                    <select class="d-inline form-select" aria-label="Default select example">
-                    <option selected>Color</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                    <select  class="d-inline form-select" aria-label="Default select example">
+                    <option selected value="">colors</option>
+                    <option th:each="color : ${colors}"
+                            th:value="${color}"
+                            th:utext="${color}"/>
                   </select>
                 </div>
             </div>
@@ -163,180 +162,48 @@
     <div class="container-fluid" id="car-container">
         <div class="container">
             <div class='row'>
-                <div class='col-12 col-sm-6 col-md-4'>
+                <div th:each="car : ${cars}" class='col-12 col-sm-6 col-md-4'>
                     <div class="col">
-                        <div class="card h-100 shadow-sm"><img src="../../static/images/cars/kaudi.png" class="card-img-top" alt="...">
+                        <!--<div class="card h-100 shadow-sm"><img th:src="@{/images/cars/{id}.png(id=${car.id})}" class="card-img-top" alt="..." -->
+                        <div class="card h-100 shadow-sm"><img th:src="@{/images/cars/1.png}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <div class="clearfix mb-3">
-                                    <h3><span class="float-start badge rounded-pill bg-primary">Audi Q1</span></h3>
-                                    <h3><span class="float-end badge rounded-pill bg-warning text-dark">12354.00€</span>
-                                    </h3>
+                                    <h3><span class="float-start badge rounded-pill bg-primary" th:text="${car.brand}+' '+${car.model}">Brand Model</span></h3>
+                                    <h3 ><span class="float-end badge rounded-pill bg-warning text-dark" th:text="${car.carDetails.price}+' €'">12354.00€</span></h3>
                                 </div>
                                 <div class="flex-column d-flex p-2 bd-highlight">
-                                    <h3><span class="float-start badge bg-secondary">Fuel:</span>diesel</h3>
-                                    <h3><span class="float-start badge bg-secondary">Doors:</span> 5</h3>
-                                    <h3><span class="float-start badge bg-secondary">A/C:</span> YES</h3>
-                                    <h3><span class="float-start badge bg-secondary">Transmission:</span> automatic</h3>
-                                </div>
-                                <div class="text-center my-1"><a href="#" class="btn btn-primary">Check offer</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class='col-12 col-sm-6 col-md-4'>
-                    <div class="col">
-                        <div class="card h-100 shadow-sm"><img src="../../static/images/cars/kaudi.png" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <div class="clearfix mb-3">
-                                    <h3><span class="float-start badge rounded-pill bg-primary">Audi Q1</span></h3>
-                                    <h3><span class="float-end badge rounded-pill bg-warning text-dark">12354.00€</span>
-                                    </h3>
-                                </div>
-                                <div class="flex-column d-flex p-2 bd-highlight">
-                                    <h3><span class="float-start badge bg-secondary">Fuel:</span>diesel</h3>
-                                    <h3><span class="float-start badge bg-secondary">Doors:</span> 5</h3>
-                                    <h3><span class="float-start badge bg-secondary">A/C:</span> YES</h3>
-                                    <h3><span class="float-start badge bg-secondary">Transmission:</span> automatic</h3>
-                                </div>
-                                <div class="text-center my-1"><a href="#" class="btn btn-primary">Check offer</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class='col-12 col-sm-6 col-md-4'>
-                    <div class="col">
-                        <div class="card h-100 shadow-sm"><img src="../../static/images/cars/kaudi.png" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <div class="clearfix mb-3">
-                                    <h3><span class="float-start badge rounded-pill bg-primary">Audi Q1</span></h3>
-                                    <h3><span class="float-end badge rounded-pill bg-warning text-dark">12354.00€</span>
-                                    </h3>
-                                </div>
-                                <div class="flex-column d-flex p-2 bd-highlight">
-                                    <h3><span class="float-start badge bg-secondary">Fuel:</span>diesel</h3>
-                                    <h3><span class="float-start badge bg-secondary">Doors:</span> 5</h3>
-                                    <h3><span class="float-start badge bg-secondary">A/C:</span> YES</h3>
-                                    <h3><span class="float-start badge bg-secondary">Transmission:</span> automatic</h3>
-                                </div>
-                                <div class="text-center my-1"><a href="#" class="btn btn-primary">Check offer</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class='col-12 col-sm-6 col-md-4'>
-                    <div class="col">
-                        <div class="card h-100 shadow-sm"><img src="../../static/images/cars/kaudi.png" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <div class="clearfix mb-3">
-                                    <h3><span class="float-start badge rounded-pill bg-primary">Audi Q1</span></h3>
-                                    <h3><span class="float-end badge rounded-pill bg-warning text-dark">12354.00€</span>
-                                    </h3>
-                                </div>
-                                <div class="flex-column d-flex p-2 bd-highlight">
-                                    <h3><span class="float-start badge bg-secondary">Fuel:</span>diesel</h3>
-                                    <h3><span class="float-start badge bg-secondary">Doors:</span> 5</h3>
-                                    <h3><span class="float-start badge bg-secondary">A/C:</span> YES</h3>
-                                    <h3><span class="float-start badge bg-secondary">Transmission:</span> automatic</h3>
-                                </div>
-                                <div class="text-center my-1"><a href="#" class="btn btn-primary">Check offer</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class='col-12 col-sm-6 col-md-4'>
-                    <div class="col">
-                        <div class="card h-100 shadow-sm"><img src="../../static/images/cars/kaudi.png" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <div class="clearfix mb-3">
-                                    <h3><span class="float-start badge rounded-pill bg-primary">Audi Q1</span></h3>
-                                    <h3><span class="float-end badge rounded-pill bg-warning text-dark">12354.00€</span>
-                                    </h3>
-                                </div>
-                                <div class="flex-column d-flex p-2 bd-highlight">
-                                    <h3><span class="float-start badge bg-secondary">Fuel:</span>diesel</h3>
-                                    <h3><span class="float-start badge bg-secondary">Doors:</span> 5</h3>
-                                    <h3><span class="float-start badge bg-secondary">A/C:</span> YES</h3>
-                                    <h3><span class="float-start badge bg-secondary">Transmission:</span> automatic</h3>
-                                </div>
-                                <div class="text-center my-1"><a href="#" class="btn btn-primary">Check offer</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class='col-12 col-sm-6 col-md-4'>
-                    <div class="col">
-                        <div class="card h-100 shadow-sm"><img src="../../static/images/cars/kaudi.png" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <div class="clearfix mb-3">
-                                    <h3><span class="float-start badge rounded-pill bg-primary">Audi Q1</span></h3>
-                                    <h3><span class="float-end badge rounded-pill bg-warning text-dark">12354.00€</span>
-                                    </h3>
-                                </div>
-                                <div class="flex-column d-flex p-2 bd-highlight">
-                                    <h3><span class="float-start badge bg-secondary">Fuel:</span>diesel</h3>
-                                    <h3><span class="float-start badge bg-secondary">Doors:</span> 5</h3>
-                                    <h3><span class="float-start badge bg-secondary">A/C:</span> YES</h3>
-                                    <h3><span class="float-start badge bg-secondary">Transmission:</span> automatic</h3>
-                                </div>
-                                <div class="text-center my-1"><a href="#" class="btn btn-primary">Check offer</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class='col-12 col-sm-6 col-md-4'>
-                    <div class="col">
-                        <div class="card h-100 shadow-sm"><img src="../../static/images/cars/kaudi.png" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <div class="clearfix mb-3">
-                                    <h3><span class="float-start badge rounded-pill bg-primary">Audi Q1</span></h3>
-                                    <h3><span class="float-end badge rounded-pill bg-warning text-dark">12354.00€</span>
-                                    </h3>
-                                </div>
-                                <div class="flex-column d-flex p-2 bd-highlight">
-                                    <h3><span class="float-start badge bg-secondary">Fuel:</span>diesel</h3>
-                                    <h3><span class="float-start badge bg-secondary">Doors:</span> 5</h3>
-                                    <h3><span class="float-start badge bg-secondary">A/C:</span> YES</h3>
-                                    <h3><span class="float-start badge bg-secondary">Transmission:</span> automatic</h3>
-                                </div>
-                                <div class="text-center my-1"><a href="#" class="btn btn-primary">Check offer</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class='col-12 col-sm-6 col-md-4'>
-                    <div class="col">
-                        <div class="card h-100 shadow-sm"><img src="../../static/images/cars/kaudi.png" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <div class="clearfix mb-3">
-                                    <h3><span class="float-start badge rounded-pill bg-primary">Audi Q1</span></h3>
-                                    <h3><span class="float-end badge rounded-pill bg-warning text-dark">12354.00€</span>
-                                    </h3>
-                                </div>
-                                <div class="flex-column d-flex p-2 bd-highlight">
-                                    <h3><span class="float-start badge bg-secondary">Fuel:</span>diesel</h3>
-                                    <h3><span class="float-start badge bg-secondary">Doors:</span> 5</h3>
-                                    <h3><span class="float-start badge bg-secondary">A/C:</span> YES</h3>
-                                    <h3><span class="float-start badge bg-secondary">Transmission:</span> automatic</h3>
-                                </div>
-                                <div class="text-center my-1"><a href="#" class="btn btn-primary">Check offer</a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class='col-12 col-sm-6 col-md-4' col-md-3>
-                    <div class="col">
-                        <div class="card h-100 shadow-sm"><img src="../../static/images/cars/kaudi.png" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <div class="clearfix mb-3">
-                                    <h3><span class="float-start badge rounded-pill bg-primary">Audi Q1</span></h3>
-                                    <h3><span class="float-end badge rounded-pill bg-warning text-dark">12354.00€</span>
-                                    </h3>
-                                </div>
-                                <div class="flex-column d-flex p-2 bd-highlight">
-                                    <h3><span class="float-start badge bg-secondary">Fuel:</span>diesel</h3>
-                                    <h3><span class="float-start badge bg-secondary">Doors:</span> 5</h3>
-                                    <h3><span class="float-start badge bg-secondary">A/C:</span> YES</h3>
-                                    <h3><span class="float-start badge bg-secondary">Transmission:</span> automatic</h3>
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-6">
+                                            <h3><span class="float-start badge bg-secondary">Fuel:</span></h3>
+                                        </div>
+                                        <div class="col-md-12 col-lg-6">
+                                            <h3 th:text="${' '+car.carDetails.fuel}"> fuel</h3>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-6">
+                                            <h3><span class="float-start badge bg-secondary">Doors:</span></h3>
+                                        </div>
+                                        <div class="col-md-12 col-lg-6">
+                                            <h3 th:text="${car.carDetails.doors}"> doors</h3>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-6">
+                                            <h3><span class="float-start badge bg-secondary">A/C</span></h3>
+                                        </div>
+                                        <div class="col-md-12 col-lg-6">
+                                            <h3 th:text="${' '+car.carDetails.fuel}"> A/C</h3>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 col-lg-6">
+                                            <h3><span class="float-start badge bg-secondary">Transmission:</span></h3>
+                                        </div>
+                                        <div class="col-md-12 col-lg-6">
+                                            <h3 th:text="${' '+car.carDetails.transmission}"> transmission</h3>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="text-center my-1"><a href="#" class="btn btn-primary">Check offer</a></div>
                             </div>
