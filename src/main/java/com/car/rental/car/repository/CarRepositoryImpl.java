@@ -49,6 +49,8 @@ public class CarRepositoryImpl implements CarSearchRepository {
                 .addCriteria("seats", carDto.getSeats())
                 .addCriteria("fuel", carDto.getFuel())
                 .addCriteria("transmission", carDto.getTransmission());
+        LOGGER.info("AddCriteria to start date:" + carDto.getStart());
+        LOGGER.info("AddCriteria to end date:" + carDto.getEnd());
         Predicate predicate = carCriteriaBuilder.getPredicate();
         List<Car> carList;
 
@@ -64,6 +66,7 @@ public class CarRepositoryImpl implements CarSearchRepository {
             carsToReturn = filterByRentalId(carDto, carsToReturn);
         }
         if (carDto.getStart() != null && carDto.getEnd() != null) {
+            LOGGER.info("filterByRentalDate( start:" + carDto.getStart() + ", end: " + carDto.getEnd() + ")");
             carsToReturn = filterByDateAvailable(carDto, carsToReturn);
         }
 
@@ -72,7 +75,7 @@ public class CarRepositoryImpl implements CarSearchRepository {
     }
 
     private List<Car> filterByDateAvailable(CarSearchDto carDto, List<Car> carListToFilter) {
-        LOGGER.info("filterByRentalId(" + carDto + ", " + carListToFilter + ")");
+        LOGGER.info("filterByRentalDate( start:" + carDto.getStart() + ", end: " + carDto.getEnd() + ")");
         if (carDto.getStart() != null && carDto.getEnd() != null && !carListToFilter.isEmpty()) {
             List<Car> carsToReturn = new ArrayList<>();
             CriteriaBuilder cb = entityManager.getCriteriaBuilder();

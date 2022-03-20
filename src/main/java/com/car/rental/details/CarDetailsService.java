@@ -3,6 +3,7 @@ package com.car.rental.details;
 import com.car.rental.details.dto.CarDetailsAddDto;
 import com.car.rental.details.mapper.CarDetailsMapper;
 import com.car.rental.details.repository.CarDetailsRepository;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
@@ -51,5 +52,10 @@ public class CarDetailsService {
     public List<String> getDoorsQuantity(){
         LOGGER.info("getDoorsQuantity()");
         return carDetailsRepository.getDoorsQuantity();
+    }
+
+    public BigDecimal getMaxPrice(){
+        LOGGER.info("getDoorsQuantity()");
+        return carDetailsRepository.getMaxPrice();
     }
 }

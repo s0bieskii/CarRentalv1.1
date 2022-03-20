@@ -8,6 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Getter
 @Setter
@@ -18,7 +19,7 @@ public class CarSearchDto {
     private Long id;
     private String brand;
     private String model;
-    private Integer rental;
+    private Long rental;
     private String color;
     private Integer registrationYear;
     private BigDecimal price;
@@ -28,7 +29,9 @@ public class CarSearchDto {
     private String fuel;
     private String transmission;
     @JsonFormat(pattern = Config.globalLocalDataTimeFormat)
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime start;
     @JsonFormat(pattern = Config.globalLocalDataTimeFormat)
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
     private LocalDateTime end;
 }

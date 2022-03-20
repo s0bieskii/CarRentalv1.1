@@ -5,15 +5,38 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a1448cd2-8819-4532-8efc-e0244a619617" name="Changes" comment="Fix application:&#10;-remove swagger">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/utils/FlywayConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V2__insert_values.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/main/aboutView.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/main/contact.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/car/CarService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/car/CarService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/car/CarWebController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/car/CarWebController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/car/dto/CarSearchDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/car/dto/CarSearchDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/car/repository/CarCriteriaBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/car/repository/CarCriteriaBuilder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/car/repository/CarRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/car/repository/CarRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/car/repository/CarRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/car/repository/CarRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/details/CarDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/details/CarDetails.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/details/CarDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/details/CarDetailsService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/details/repository/CarDetailsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/details/repository/CarDetailsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/main/MainWebController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/main/MainWebController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/cars/kaudi.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/cars/1.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/js/bootstrap.bundle.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/js/bootstrap.bundle.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/car-offer/car-offer-confirm.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/car-offer/car-offer-confirm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/car-offer/car-offer.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/car-offer/car-offer.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/car-offer/rent-a-car.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/car-offer/rent-a-car.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/car-offer/rent-success.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/car-offer/rent-success.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/cars/cars.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/cars/cars.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/cars/create-car.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/cars/create-car.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/error.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/error.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login/forgot-password.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/login/forgot-password.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/login/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/register/register-success.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/register/register-success.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/register/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/register/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/rent/single-rent.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/rent/single-rent.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/template.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/template.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/car/rental/integration/CarIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/car/rental/integration/CarIntegrationTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,8 +49,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Interface" />
+        <option value="HTML File" />
         <option value="Class" />
       </list>
     </option>
@@ -48,7 +71,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="848940a2123daed9c9ecbeab6d7ba3df17ed6189" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -102,11 +125,11 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/com/car/rental/car/dto" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/CarRentalv1.1-main/CarRentalv1.1-main" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates/main" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="reference.settings.project.maven.importing" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
@@ -117,13 +140,14 @@
       <recent name="com.car.rental.rental" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Patryk Java\SpringLearning\Car Rental v1.1\src\main\resources\templates\main" />
       <recent name="D:\Patryk Java\SpringLearning\Car Rental v1.1\src\main\resources\templates" />
       <recent name="D:\Patryk Java\SpringLearning\Car Rental v1.1\src" />
       <recent name="D:\Patryk Java\SpringLearning\Car Rental v1.1" />
       <recent name="D:\Patryk Java\SpringLearning\Car Rental v1.1\node_modules" />
-      <recent name="D:\Patryk Java\SpringLearning\Car Rental v1.1\frontend\themes" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Patryk Java\SpringLearning\Car Rental v1.1\src\main\resources\db\migration" />
       <recent name="D:\Patryk Java\SpringLearning\Car Rental v1.1\src\main\resources\static" />
       <recent name="D:\Patryk Java\SpringLearning\Car Rental v1.1" />
       <recent name="C:\Users\Patryk\Desktop\Car Rental v1.1" />
@@ -225,10 +249,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Application" />
-        <item itemvalue="JUnit.CarIntegrationTest" />
         <item itemvalue="JUnit.EmployeeIntegrationTest" />
         <item itemvalue="JUnit.CarIntegrationTest.searchMethodWithGivenStartDateAndEndDateShouldReturnAvailableCarsInThisDateRange" />
         <item itemvalue="JUnit.CarIntegrationTest.searchMethodWithEmptyCarSearchDtoShouldReturnAllAvailableCarsFromDatabase" />
+        <item itemvalue="JUnit.CarIntegrationTest" />
       </list>
     </recent_temporary>
   </component>
@@ -466,7 +490,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>

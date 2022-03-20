@@ -1,40 +1,42 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
+
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Car Rental</title>
     <link th:href="@{/css/bootstrap.min.css}" th:rel="stylesheet">
     <link th:href="@{/css/main.css}" th:rel="stylesheet">
     <link rel="icon" th:href="@{/images/icon.png}">
 </head>
-
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
                 <img th:src="@{/images/logo.png}" width="100" height="30" class="d-inline-block align-top" alt="">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">About</a>
+                                <a class="nav-link" th:href="@{/}">About</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Rent a car</a>
+                                <a class="nav-link" th:href="@{/web/cars/search}">Rent a car</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Login</a>
+                                <a class="nav-link"  th:href="@{/web/users/login}">Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Register</a>
+                                <a class="nav-link" th:href="@{/web/users/register}">Register</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Contact</a>
+                                <a class="nav-link" th:href="@{/contact}">Contact</a>
                             </li>
                         </ul>
                     </ul>
@@ -48,128 +50,151 @@
             <div class="row">
                 <div class="col-sm-12">
                     <h3>Rent a car</h3>
-                        <hr/>
+                    <hr />
                 </div>
             </div>
-            <div class="row" id="search-badge">
-                <div class="col-sm-3">
-                    <h3><span class="badge rounded-pill bg-warning text-dark align-middle">Search option</span>
-                </div>
-                <div class="col-sm">
-                    <div class="d-flex flex-row bd-highlight">
-                        <h3><span class="badge rounded-pill bg-warning text-dark align-middle">End</span></h3>
-                        <input type="date" class="form-control" id="start" placeholder="Birth">
+            <form th:action="@{/web/cars/search}" th:object="${searchCar}" method="post">
+                <div class="row" id="search-badge">
+                    <div class="col-sm">
+                        <h3><span class="badge rounded-pill bg-warning text-dark align-middle">Search option</span></h3>
+                    </div>
+                    <div class="col-sm">
+                        <div class="d-flex flex-row bd-highlight">
+                            <h3><span class="badge rounded-pill bg-warning text-dark align-middle">Start</span></h3>
+                            <input th:value="${minDate}" type="datetime-local" th:attr="min=${minDate}" class="form-control" id="start" placeholder="Birth">
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="d-flex flex-row bd-highlight">
+                            <h3><span class="badge rounded-pill bg-warning text-dark align-middle">End</span></h3>
+                            <input type="datetime-local" class="form-control" id="end" placeholder="Birth">
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div data-role="main" class="row">
+                            <div class="col-4 d-flex align-items-start justify-content-center">
+                                <p>Price: </p>
+                            </div>
+                            <div class="col-8 d-flex justify-content-center">
+                                <input th:field="*{price}" type="range" class="form-range" id="customRange1"
+                                    th:value="*{price}" min="0" th:max="${maxPrice}"
+                                    oninput="this.nextElementSibling.value = this.value">
+                                <output th:text="*{price}">1</output>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm">
+                        <div class="d-flex flex-row">
+                            <h3><span class="badge rounded-pill bg-warning text-dark align-middle">Cars on site</span>
+                            </h3>
+                            <select> class="d-inline form-select" aria-label="Default select example">
+                                <option th:value="6" th:utext="6" th:href="@{/(size=${cars.size}, page=6)}"></option>
+                                <option th:value="9" th:utext="9" th:href="@{/(size=${cars.size}, page=9)}"></option>
+                                <option th:value="12" th:utext="12" th:href="@{/(size=${cars.size}, page=12)}"></option>
+                                <option th:value="15" th:utext="15" th:href="@{/(size=${cars.size}, page=15)}"></option>
+                                <option th:value="18" th:utext="18" th:href="@{/(size=${cars.size}, page=18)}"></option>
+                                <option th:value="21" th:utext="21" th:href="@{/(size=${cars.size}, page=21)}"></option>
+                                <option th:value="24" th:utext="24" th:href="@{/(size=${cars.size}, page=24)}"></option>
+                                <option th:value="27" th:utext="27" th:href="@{/(size=${cars.size}, page=27)}"></option>
+                                <option th:value="30" th:utext="30" th:href="@{/(size=${cars.size}, page=30)}"></option>
+                            </select>
+                        </div>
                     </div>
                 </div>
-                <div class="col-sm">
-                    <div class="d-flex flex-row bd-highlight">
-                        <h3><span class="badge rounded-pill bg-warning text-dark align-middle">Start</span></h3>
-                        <input type="date" class="form-control" id="end" placeholder="Birth">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm">
+                            <select th:field="*{brand}" class="d-inline form-select"
+                                aria-label="Default select example">
+                                <option th:value selected>Brand</option>
+                                <option th:each="brand : ${brands}" th:value="${brand}" th:utext="${brand}" />
+                            </select>
+                        </div>
+                        <div class="col-sm">
+                            <select th:field="*{model}" class="d-inline form-select"
+                                aria-label="Default select example">
+                                <option th:value selected>Model</option>
+                                <option th:each="model : ${models}" th:value="${model}" th:utext="${model}" />
+                            </select>
+                        </div>
+                        <div class="col-sm">
+                            <select class="d-inline form-select" aria-label="Default select example">
+                                <option th:value="null" selected>Rental</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
+                        </div>
+                        <div class="col-sm">
+                            <select th:field="*{segment}" class="d-inline form-select"
+                                aria-label="Default select example">
+                                <option th:value="null" selected value="">Segment</option>
+                                <option th:each="segment : ${segments}" th:value="${segment}" th:utext="${segment}" />
+                            </select>
+                        </div>
+                        <div class="col-sm">
+                            <select th:field="*{doors}" class="d-inline form-select"
+                                aria-label="Default select example">
+                                <option th:value="null" selected value="">Doors</option>
+                                <option th:each="door : ${doors}" th:value="${door}" th:utext="${door}" />
+                            </select>
+                        </div>
                     </div>
-                </div>
+                    <div class="row">
 
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm">
-
-                    <select class="d-inline form-select" aria-label="Default select example">
-                  <option selected>Brand</option>
-                  <option value="1">Bmw</option>
-                  <option value="2">Ford</option>
-                  <option value="3">Rhree</option>
-                </select>
-                </div>
-                <div class="col-sm">
-                    <select class="d-inline form-select" aria-label="Default select example">
-                  <option selected>Model</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
-                </div>
-                <div class="col-sm">
-                    <select class="d-inline form-select" aria-label="Default select example">
-                  <option selected>Price</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
-                </div>
-                <div class="col-sm">
-                    <select class="d-inline form-select" aria-label="Default select example">
-                  <option selected>Rental</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
-                </div>
-                <div class="col-sm">
-                    <select class="d-inline form-select" aria-label="Default select example">
-                  <option selected value="">segment</option>
-                  <option th:each="segment : ${segments}"
-                                th:value="${segment}"
-                                th:utext="${segment}"/>
-                </select>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm">
-                    <select class="d-inline form-select" aria-label="Default select example">
-                    <option selected value="">doors</option>
-                        <option th:each="door : ${doors}"
-                                th:value="${door}"
-                                th:utext="${door}"/>
-                  </select>
-                </div>
-                <div class="col-sm">
-                    <select class="d-inline form-select" aria-label="Default select example">
-                    <option selected value="">seats</option>
-                        <option th:each="seat : ${seats}"
-                                th:value="${seat}"
-                                th:utext="${seat}"/>
-                  </select>
-                </div>
-                <div class="col-sm">
-                    <select class="d-inline form-select" aria-label="Default select example">
-                    <option selected value="">fuel</option>
-                        <option th:each="fuel : ${fuels}"
-                                th:value="${fuel}"
-                                th:utext="${fuel}"/>
-                  </select>
-                </div>
-                <div class="col-sm">
-                    <select class="d-inline form-select" aria-label="Default select example">
-                    <option selected value="">transmission</option>
-                    <option value="manual">manual</option>
-                    <option value="automatic">automatic</option>
-                  </select>
-                </div>
-                <div class="col-sm">
-                    <select  class="d-inline form-select" aria-label="Default select example">
-                    <option selected value="">colors</option>
-                    <option th:each="color : ${colors}"
-                            th:value="${color}"
-                            th:utext="${color}"/>
-                  </select>
-                </div>
-            </div>
+                        <div class="col-sm">
+                            <select th:field="*{seats}" class="d-inline form-select"
+                                aria-label="Default select example">
+                                <option th:value="null" selected value="">Seats</option>
+                                <option th:each="seat : ${seats}" th:value="${seat}" th:utext="${seat}" />
+                            </select>
+                        </div>
+                        <div class="col-sm">
+                            <select th:field="*{fuel}" class="d-inline form-select" aria-label="Default select example">
+                                <option th:value="null" selected value="">Fuel</option>
+                                <option th:each="fuel : ${fuels}" th:value="${fuel}" th:utext="${fuel}" />
+                            </select>
+                        </div>
+                        <div class="col-sm">
+                            <select th:field="*{transmission}" class="d-inline form-select"
+                                aria-label="Default select example">
+                                <option selected value="">Transmission</option>
+                                <option value="manual">manual</option>
+                                <option value="automatic">automatic</option>
+                            </select>
+                        </div>
+                        <div class="col-sm">
+                            <select th:field="*{color}" class="d-inline form-select"
+                                aria-label="Default select example">
+                                <option selected value="">Colors</option>
+                                <option th:each="color : ${colors}" th:value="${color}" th:utext="${color}" />
+                            </select>
+                        </div>
+                        <div class="col-sm d-flex justify-content-center">
+                            <div class="row">
+                                <button type="submit" class="btn btn-primary btn-lg">Search</button>
+                            </div>
+                        </div>
+                    </div>
+            </form>
         </div>
     </section>
+    <br>
 
     <div class="container-fluid" id="car-container">
         <div class="container">
             <div class='row'>
-                <div th:each="car : ${cars}" class='col-12 col-sm-6 col-md-4'>
+                <div th:each="car : ${cars.content}" class='col-12 col-sm-6 col-md-4'>
                     <div class="col">
                         <!--<div class="card h-100 shadow-sm"><img th:src="@{/images/cars/{id}.png(id=${car.id})}" class="card-img-top" alt="..." -->
-                        <div class="card h-100 shadow-sm"><img th:src="@{/images/cars/1.png}" class="card-img-top" alt="...">
+                        <div class="card h-100 shadow-sm"><img th:src="@{/images/cars/1.png}" class="card-img-top"
+                                alt="...">
                             <div class="card-body">
                                 <div class="clearfix mb-3">
-                                    <h3><span class="float-start badge rounded-pill bg-primary" th:text="${car.brand}+' '+${car.model}">Brand Model</span></h3>
-                                    <h3 ><span class="float-end badge rounded-pill bg-warning text-dark" th:text="${car.carDetails.price}+' €'">12354.00€</span></h3>
+                                    <h3><span class="float-start badge rounded-pill bg-primary"
+                                            th:text="${car.brand}+' '+${car.model}">Brand Model</span></h3>
+                                    <h3><span class="float-end badge rounded-pill bg-warning text-dark"
+                                            th:text="${car.carDetails.price}+' €/day'">12354.00€</span></h3>
                                 </div>
                                 <div class="flex-column d-flex p-2 bd-highlight">
                                     <div class="row">
@@ -205,40 +230,54 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="text-center my-1"><a href="#" class="btn btn-primary">Check offer</a></div>
+                                <div class="text-center my-1"><a th:href="@{'/web/cars/offer/' + ${car.id}}"
+                                        class="btn btn-primary">Check offer</a></div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
 
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                </ul>
-            </nav>
+    <div class="d-flex justify-content-center">
+        <nav aria-label="...">
+            <ul class="pagination pagination-lg">
+                <th:block th:each="page: ${pageNumbers}">
+                    <li class="page-item active" aria-current="page" th:if="${currentPage == page}">
+                        <span class="page-link" th:text="${page}">1
+                        </span>
+                    </li>
+                    <li class="page-item" th:if="${currentPage != page}">
+                        <a class="page-link" th:href="@{/(size=${cars.size}, page=${page})}" th:text="${page}">2</a>
+                    </li>
+                </th:block>
+            </ul>
+        </nav>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
 
-
-            <br>
-            <br>
-
-            <footer class="footer">
-                <div class="container" id="git-footer">
-                    <span class="text-muted">
-            <a href="https://github.com/s0bieskii">
-                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-github"
-                     viewBox="0 0 16 16">
-                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
-                </svg>
-            </a>
-        </span>
-                </div>
-            </footer>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <footer class="footer">
+        <div class="container" id="git-footer">
+            <span class="text-muted">
+                <a href="https://github.com/s0bieskii/CarRentalv1.1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
+                        class="bi bi-github" viewBox="0 0 16 16">
+                        <path
+                            d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+                    </svg>
+                </a>
+            </span>
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+        </script>
 
 </body>
 
