@@ -30,9 +30,15 @@ public class CarCriteriaBuilder {
     }
 
     public CarCriteriaBuilder addCriteria(String fieldName, Object value) {
-        LOGGER.info("AddCriteria to: " + fieldName);
+        LOGGER.info("AddCriteria to: " + fieldName + " " + value);
         if (value == null) {
             return this;
+        }
+        if(fieldName == "price"){
+            BigDecimal check = (BigDecimal)value;
+            if( check.equals(BigDecimal.valueOf(0))){
+                value = BigDecimal.valueOf(Double.MAX_VALUE);
+            }
         }
         if (customFields.contains(fieldName)) {
             customFieldsSearch(fieldName, value);

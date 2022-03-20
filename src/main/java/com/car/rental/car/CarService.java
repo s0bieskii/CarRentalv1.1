@@ -88,4 +88,14 @@ public class CarService {
         LOGGER.info("Car with given id not exist");
         return false;
     }
+
+    public List<String> getCarsBrands(){
+        LOGGER.info("getCarsBrands()");
+        return carRepository.getAllCarsBrands();
+    }
+
+    public List<String> getCarsModels(){
+        LOGGER.info("getCarsModels()");
+        return carRepository.getAllCarsModels();
+    }
 }

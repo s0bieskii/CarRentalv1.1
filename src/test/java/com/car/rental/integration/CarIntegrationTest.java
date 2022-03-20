@@ -301,7 +301,7 @@ public class CarIntegrationTest {
     @Test
     void searchMethodWithGivenRentalAndColorShouldReturnMatchingCarsDto() {
         //given
-        int rentalId = 2;
+        Long rentalId = 2L;
         String color = "black";
         int expectingQuantity = 2;
         CarSearchDto carSearchDto = new CarSearchDto();
@@ -422,7 +422,7 @@ public class CarIntegrationTest {
         //given
         CarSearchDto carSearchDto = new CarSearchDto();
         int expectingCarQuantity = 3;
-        int rentalId = 2;
+        Long rentalId = 2L;
         carSearchDto.setRental(rentalId);
         Pageable pageable = PageRequest.of(0, 6);
         //when
@@ -439,7 +439,7 @@ public class CarIntegrationTest {
         CarSearchDto carSearchDto = new CarSearchDto();
         LocalDateTime start = LocalDateTime.of(2022, 2, 5, 12, 30);
         LocalDateTime end = LocalDateTime.of(2022, 2, 15, 12, 30);
-        int rentalId = 2;
+        Long rentalId = 2L;
         int expectingCarQuantity = 2;
         carSearchDto.setStart(start);
         carSearchDto.setEnd(end);
