@@ -249,7 +249,7 @@
                         </span>
                     </li>
                     <li class="page-item" th:if="${currentPage != page}">
-                        <a class="page-link" th:href="@{/(size=${cars.size}, page=${page})}" th:text="${page}">2</a>
+                        <a class="page-link" th:href="@{/web/cars/search/(size=${cars.size}, page=${page})}" th:text="${page}">2</a>
                     </li>
                 </th:block>
             </ul>
