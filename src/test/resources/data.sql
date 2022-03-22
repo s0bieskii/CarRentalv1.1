@@ -1,4 +1,3 @@
-use car_rental_test;
 insert into car (id, brand, model, available, deleted) values
             (1, 'BMW', 'X3', 1, 0),
             (2, 'Ford', 'galaxy', 1, 0),
