@@ -25,6 +25,7 @@ I created basic REST API and now i'm working on Model View Controller with Thyme
 ### How to run:
 - Open project with InteliJ, go to: **src/main/java/com/car/rental/Application.java -> right click to Application.java -> Run 'Application.main()'**
 - Open CarRentalv1.1-main folder -> Open command line and type: **mvn spring-boot:run**
+- Open app in: https://carrental-portfolio.herokuapp.com/
 
 **Application will start on: http://localhost:8080**
 
