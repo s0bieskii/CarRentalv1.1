@@ -1,11 +1,12 @@
 package com.car.rental.car;
 
-import com.car.rental.car.dto.CarAddDto;
 import com.car.rental.car.dto.CarDto;
 import com.car.rental.car.dto.CarSearchDto;
 import com.car.rental.details.CarDetailsService;
+import com.car.rental.rent.RentService;
 import com.car.rental.rental.RentalService;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -29,30 +30,19 @@ public class CarWebController {
     final private CarService carService;
     final private CarDetailsService carDetailsService;
     final private RentalService rentalService;
+    final private RentService rentService;
 
-    public CarWebController(CarService carService, CarDetailsService carDetailsService, RentalService rentalService) {
+    public CarWebController(CarService carService, CarDetailsService carDetailsService, RentalService rentalService,
+                            RentService rentService) {
         this.carDetailsService = carDetailsService;
         this.carService=carService;
         this.rentalService = rentalService;
+        this.rentService = rentService;
     }
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {
         binder.registerCustomEditor(String.class, new StringTrimmerEditor(true));
-    }
-
-    @GetMapping("/create")
-    public String createView(ModelMap modelMap){
-        CarAddDto dto = new CarAddDto();
-        dto.setBrand("Ford");
-        dto.setModel("Galaxy");
-        modelMap.addAttribute("car", dto);
-        return "cars/create-car.html";
-    }
-
-    @PostMapping()
-    public String create(){
-        return "cars/cars.html";
     }
 
     @GetMapping("/search")
@@ -73,11 +63,13 @@ public class CarWebController {
         }
         CarSearchDto carSearchDto = new CarSearchDto();
         carSearchDto.setPrice(BigDecimal.ZERO);
+        carSearchDto.setStart(LocalDateTime.now());
+        carSearchDto.setEnd(LocalDateTime.now().plusDays(1));
 
         modelMap.addAttribute("cars", carsPage);
         modelMap.addAttribute("currentPage", page);
         modelMap.addAttribute("searchCar", carSearchDto);
-        modelMap.addAttribute("rentals", rentalService.getAll(PageRequest.of(1, 10)).getContent());
+        modelMap.addAttribute("rentals", rentalService.findAll());
         modelMap.addAttribute("colors", carDetailsService.getCarsColors());
         modelMap.addAttribute("fuels", carDetailsService.getCarsFuels());
         modelMap.addAttribute("seats", carDetailsService.getCarsSeats());
@@ -109,6 +101,7 @@ public class CarWebController {
         modelMap.addAttribute("cars", carsPage);
         modelMap.addAttribute("currentPage", page);
         modelMap.addAttribute("searchCar", carSearch);
+        modelMap.addAttribute("rentals", rentalService.findAll());;
         modelMap.addAttribute("colors", carDetailsService.getCarsColors());
         modelMap.addAttribute("fuels", carDetailsService.getCarsFuels());
         modelMap.addAttribute("seats", carDetailsService.getCarsSeats());
@@ -121,7 +114,25 @@ public class CarWebController {
     }
 
     @GetMapping("/offer/{id}")
-    public String getSingleCarOfferView(@PathVariable Long id){
+    public String getSingleCarOfferView(@PathVariable Long id, ModelMap modelMap){
+
+        modelMap.addAttribute("id", id);
+        modelMap.addAttribute("car", carService.findById(id));
+        modelMap.addAttribute("searchCar", new CarSearchDto());
+        modelMap.addAttribute("rental", rentalService.getRentalByCarId(id));
+        modelMap.addAttribute("price", null);
+        return "car-offer/car-offer.html";
+    }
+
+    @PostMapping("/offer/{id}")
+    public String getSingleCarOfferView(@PathVariable Long id, ModelMap modelMap, CarSearchDto carSearch){
+
+        modelMap.addAttribute("id", id);
+        modelMap.addAttribute("car", carService.findById(id));
+        modelMap.addAttribute("searchCar", carSearch);
+        modelMap.addAttribute("rental", rentalService.getRentalByCarId(id));
+        modelMap.addAttribute("price",
+                rentService.calculateRentFinalPrice(carSearch.getId(), carSearch.getStart(), carSearch.getEnd()));
         return "car-offer/car-offer.html";
     }
 }

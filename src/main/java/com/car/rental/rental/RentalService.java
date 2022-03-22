@@ -9,6 +9,7 @@ import com.car.rental.rental.mapper.RentalMapper;
 import com.car.rental.rental.repository.RentalRepository;
 import com.car.rental.utils.PageWrapper;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import org.springframework.data.domain.Page;
@@ -39,8 +40,25 @@ public class RentalService {
         LOGGER.info("getAll(" + pageable);
         Page<RentalDto> rentalDto = rentalRepository.findAll(pageable)
                 .map(rentalMapper::rentalToRentalDto);
-        LOGGER.info("All founded rentals: " + rentalDto);
+        LOGGER.info("All founded rentals: " + rentalDto.getContent().size());
         return rentalDto;
+    }
+
+    public List<RentalDto> findAll() {
+        LOGGER.info("getAll()");
+        List<RentalDto> rentalDto = rentalRepository.findAll().stream().map(rentalMapper::rentalToRentalDto).collect(
+                Collectors.toList());
+        LOGGER.info("All founded rentals: " + rentalDto.size());
+        return rentalDto;
+    }
+
+    public RentalDto getRentalByCarId(Long carId){
+        LOGGER.info("getRentalByCarId(" + carId + ")");
+        Optional<Rental> rental = rentalRepository.findRentalByCarId(carId);
+        if(rental.isPresent()){
+            return rentalMapper.rentalToRentalDto(rental.get());
+        }
+        return null;
     }
 
     public RentalDto findById(Long id) {
