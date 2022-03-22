@@ -51,6 +51,7 @@ public class CarRepositoryImpl implements CarSearchRepository {
                 .addCriteria("transmission", carDto.getTransmission());
         LOGGER.info("AddCriteria to start date:" + carDto.getStart());
         LOGGER.info("AddCriteria to end date:" + carDto.getEnd());
+        LOGGER.info("AddCriteria to rentalId :" + carDto.getRental());
         Predicate predicate = carCriteriaBuilder.getPredicate();
         List<Car> carList;
 

@@ -10,6 +10,7 @@
     <link th:href="@{/css/main.css}" th:rel="stylesheet">
     <link rel="icon" th:href="@{/images/icon.png}">
 </head>
+
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -30,7 +31,7 @@
                                 <a class="nav-link" th:href="@{/web/cars/search}">Rent a car</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link"  th:href="@{/web/users/login}">Login</a>
+                                <a class="nav-link" th:href="@{/web/users/login}">Login</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" th:href="@{/web/users/register}">Register</a>
@@ -44,7 +45,7 @@
             </div>
         </nav>
     </header>
-
+    <form th:action="@{/web/cars/search}" th:object="${searchCar}" method="post">
     <section class="search-bar">
         <div class="container">
             <div class="row">
@@ -53,7 +54,7 @@
                     <hr />
                 </div>
             </div>
-            <form th:action="@{/web/cars/search}" th:object="${searchCar}" method="post">
+
                 <div class="row" id="search-badge">
                     <div class="col-sm">
                         <h3><span class="badge rounded-pill bg-warning text-dark align-middle">Search option</span></h3>
@@ -61,13 +62,15 @@
                     <div class="col-sm">
                         <div class="d-flex flex-row bd-highlight">
                             <h3><span class="badge rounded-pill bg-warning text-dark align-middle">Start</span></h3>
-                            <input th:value="${minDate}" type="datetime-local" th:attr="min=${minDate}" class="form-control" id="start" placeholder="Birth">
+                            <input th:attr="min=${searchCar.startDate}" th:field="*{start}" type="datetime-local"
+                                class="form-control">
                         </div>
                     </div>
                     <div class="col-sm">
                         <div class="d-flex flex-row bd-highlight">
                             <h3><span class="badge rounded-pill bg-warning text-dark align-middle">End</span></h3>
-                            <input type="datetime-local" class="form-control" id="end" placeholder="Birth">
+                            <input th:attr="min=${searchCar.endDate}" th:field="*{end}"
+                                type="datetime-local" class="form-control">
                         </div>
                     </div>
                     <div class="col-sm">
@@ -85,19 +88,6 @@
                     </div>
                     <div class="col-sm">
                         <div class="d-flex flex-row">
-                            <h3><span class="badge rounded-pill bg-warning text-dark align-middle">Cars on site</span>
-                            </h3>
-                            <select> class="d-inline form-select" aria-label="Default select example">
-                                <option th:value="6" th:utext="6" th:href="@{/(size=${cars.size}, page=6)}"></option>
-                                <option th:value="9" th:utext="9" th:href="@{/(size=${cars.size}, page=9)}"></option>
-                                <option th:value="12" th:utext="12" th:href="@{/(size=${cars.size}, page=12)}"></option>
-                                <option th:value="15" th:utext="15" th:href="@{/(size=${cars.size}, page=15)}"></option>
-                                <option th:value="18" th:utext="18" th:href="@{/(size=${cars.size}, page=18)}"></option>
-                                <option th:value="21" th:utext="21" th:href="@{/(size=${cars.size}, page=21)}"></option>
-                                <option th:value="24" th:utext="24" th:href="@{/(size=${cars.size}, page=24)}"></option>
-                                <option th:value="27" th:utext="27" th:href="@{/(size=${cars.size}, page=27)}"></option>
-                                <option th:value="30" th:utext="30" th:href="@{/(size=${cars.size}, page=30)}"></option>
-                            </select>
                         </div>
                     </div>
                 </div>
@@ -118,11 +108,10 @@
                             </select>
                         </div>
                         <div class="col-sm">
-                            <select class="d-inline form-select" aria-label="Default select example">
+                            <select th:field="*{rental}" class="d-inline form-select"
+                                    aria-label="Default select example">
                                 <option th:value="null" selected>Rental</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                <option th:each="rentalItr : ${rentals}" th:value="${rentalItr.getId()}" th:utext="${rentalItr.getCity()}" />
                             </select>
                         </div>
                         <div class="col-sm">
@@ -141,7 +130,6 @@
                         </div>
                     </div>
                     <div class="row">
-
                         <div class="col-sm">
                             <select th:field="*{seats}" class="d-inline form-select"
                                 aria-label="Default select example">
@@ -176,10 +164,10 @@
                             </div>
                         </div>
                     </div>
-            </form>
-        </div>
-    </section>
-    <br>
+                </div>
+            </div>
+        </section>
+        <br>
 
     <div class="container-fluid" id="car-container">
         <div class="container">
@@ -230,8 +218,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="text-center my-1"><a th:href="@{'/web/cars/offer/' + ${car.id}}"
-                                        class="btn btn-primary">Check offer</a></div>
+                                    <button type="submit" class="btn btn-primary btn-lg"
+                                            th:formaction="@{'/web/cars/offer/' + ${car.id}}">Check offer</button>
+
                             </div>
                         </div>
                     </div>
@@ -239,6 +228,7 @@
             </div>
         </div>
     </div>
+    </form>
 
     <div class="d-flex justify-content-center">
         <nav aria-label="...">
@@ -249,7 +239,7 @@
                         </span>
                     </li>
                     <li class="page-item" th:if="${currentPage != page}">
-                        <a class="page-link" th:href="@{/(size=${cars.size}, page=${page})}" th:text="${page}">2</a>
+                        <a class="page-link" th:href="@{/web/cars/search/(size=${cars.size}, page=${page})}" th:text="${page}">2</a>
                     </li>
                 </th:block>
             </ul>

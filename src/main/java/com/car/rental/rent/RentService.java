@@ -14,7 +14,6 @@ import com.car.rental.user.repository.UserRepository;
 import com.car.rental.utils.Config;
 import com.car.rental.utils.PageWrapper;
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
@@ -131,25 +130,18 @@ public class RentService {
 
     private BigDecimal calculateRentFinalPrice(Rent rent, LocalDateTime start, LocalDateTime end) {
         if (carRepository.existsById(rent.getCar().getId()) && start != null && end != null && start.isBefore(end)) {
-            long age = ChronoUnit.YEARS.between(rent.getUser().getBirth(), LocalDate.now());
             BigDecimal pricePerDay = carRepository.getById(rent.getCar().getId()).getCarDetails().getPrice();
             long rentDays = ChronoUnit.DAYS.between(start, end);
-            double discount = 0;
-            if (age > 26) {
-                discount = discount + 0.05;
-            }
-            if (rentDays > 7) {
-                discount = discount + 0.03;
-            }
-            if (rentDays > 14) {
-                discount = discount + 0.03;
-            }
-            if (discount > 0) {
-                return BigDecimal.valueOf(
-                        (pricePerDay.doubleValue() * rentDays) - ((pricePerDay.doubleValue() * rentDays) * discount));
-            } else {
-                return BigDecimal.valueOf(pricePerDay.doubleValue() * rentDays);
-            }
+            return BigDecimal.valueOf(pricePerDay.doubleValue() * rentDays);
+        }
+        return null;
+    }
+
+    public BigDecimal calculateRentFinalPrice(Long carId, LocalDateTime start, LocalDateTime end) {
+        if (carRepository.existsById(carId) && start != null && end != null && start.isBefore(end)) {
+            BigDecimal pricePerDay = carRepository.getById(carId).getCarDetails().getPrice();
+            long rentDays = ChronoUnit.DAYS.between(start, end);
+            return BigDecimal.valueOf(pricePerDay.doubleValue() * rentDays).setScale(2);
         }
         return null;
     }
