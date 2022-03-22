@@ -158,10 +158,9 @@
                                 <option th:each="color : ${colors}" th:value="${color}" th:utext="${color}" />
                             </select>
                         </div>
-                        <div class="col-sm d-flex justify-content-center">
-                            <div class="row">
-                                <button type="submit" class="btn btn-primary btn-lg">Search</button>
-                            </div>
+                        <div class="col-sm d-flex justify-content-center" style="margin-bottom: 5px;">
+                                <button type="submit" class="btn btn-primary btn-lg"
+                                        style="width: 100%; height: 90%;">Search</button>
                         </div>
                     </div>
                 </div>
@@ -203,10 +202,10 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-md-12 col-lg-6">
-                                            <h3><span class="float-start badge bg-secondary">A/C</span></h3>
+                                            <h3><span class="float-start badge bg-secondary">Segment: </span></h3>
                                         </div>
                                         <div class="col-md-12 col-lg-6">
-                                            <h3 th:text="${' '+car.carDetails.fuel}"> A/C</h3>
+                                            <h3 th:text="${' '+car.carDetails.segment}"> segment</h3>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -218,8 +217,8 @@
                                         </div>
                                     </div>
                                 </div>
-                                    <button type="submit" class="btn btn-primary btn-lg"
-                                            th:formaction="@{'/web/cars/offer/' + ${car.id}}">Check offer</button>
+                                    <center><button type="submit" class="btn btn-primary btn-lg"
+                                            th:formaction="@{'/web/cars/offer/' + ${car.id}}">Check offer</button></center>
 
                             </div>
                         </div>
