@@ -12,88 +12,112 @@
 </head>
 
 <body>
-<header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <img th:src="@{/images/logo.png}" width="100" height="30" class="d-inline-block align-top" alt="">
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container-fluid">
+                <img th:src="@{/images/logo.png}" width="100" height="30" class="d-inline-block align-top" alt="">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/}">About</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/web/cars/search}">Rent a car</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/web/users/login}">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/web/users/register}">Register</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" th:href="@{/contact}">Contact</a>
-                        </li>
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/}">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/web/cars/search}">Rent a car</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/web/users/login}">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/web/users/register}">Register</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" th:href="@{/contact}">Contact</a>
+                            </li>
+                        </ul>
                     </ul>
-                </ul>
+                </div>
             </div>
-        </div>
-    </nav>
-</header>
+        </nav>
+    </header>
 
-<section class="content">
-    <div class="container ">
-        <div class="row d-flex justify-content-center">
-            <div class="col-12 col-sm-10 col-md-8">
-                <h3>Rental</h3>
-                <hr />
+    <section class="content">
+        <div class="container ">
+            <div class="row d-flex justify-content-center">
+                <div class="col-12 col-sm-10 col-md-8">
+                    <h3>Rental</h3>
+                    <hr />
+                </div>
             </div>
-        </div>
-        <div class="row d-flex justify-content-center">
-
-        </div>
-        <br>
-        <div class="row justify-content-md-center">
-            <div class="col-12 col-sm-10 col-md-8">
-                <div class="container-center">
-                    <div class="row justify-content-md-center">
-                        <div class="col-12">
-                            <div class="d-flex justify-content-start">
-                                <h3><span class="badge bg-primary">Rental: </span></h3>
-                                <h3 th:text="${rental.city + ' ' + rental.postCode + ', ' + rental.street }">rental</h3>
+            <br>
+            <div class="row justify-content-center">
+                <div class="col-12 col-sm-10 col-md-8">
+                    <div class="d-flex flex-row-reverse">
+                        <div class="col-6" style="padding-left: 10px;">
+                            <div class="col-12">
+                                <div class="d-flex justify-content-start">
+                                    <h3><span class="badge bg-secondary">City: </span></h3>
+                                    <h3 th:text="${rental.city}">City
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex justify-content-start">
+                                    <h3><span class="badge bg-secondary">Post-code: </span></h3>
+                                    <h3 th:text="${rental.postCode}">ost-code
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex justify-content-start">
+                                    <h3><span class="badge bg-secondary">Street: </span></h3>
+                                    <h3 th:text="${rental.street }">Street
+                                    </h3>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="d-flex justify-content-start">
+                                    <h3><span class="badge bg-secondary">Phone: </span></h3>
+                                    <h3 th:text="${rental.phone}">Phone
+                                    </h3>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6" style="border: white   ; border-style: solid;">
+                            <div class="d-flex justify-content-center" align="center">
+                                <h3>HERE WILL BE A MAP</h3>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
-<br>
-<br>
-<br>
+    </section>
+    <br>
+    <br>
+    <br>
 
 
-<footer class="footer ">
-    <div class="container " id="git-footer ">
+    <footer class="footer ">
+        <div class="container " id="git-footer ">
             <span class="text-muted ">
                 <a href="https://github.com/s0bieskii ">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22 " height="22 " fill="currentColor "
-                         class="bi bi-github " viewBox="0 0 16 16 ">
+                        class="bi bi-github " viewBox="0 0 16 16 ">
                         <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95
         0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2
         0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z " />
                     </svg>
                 </a>
             </span>
-    </div>
-</footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js "
+        </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js "
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p "
         crossorigin="anonymous "></script>
 </body>

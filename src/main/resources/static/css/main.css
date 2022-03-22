@@ -9,6 +9,8 @@ body {
     border-left: 10px;
 }
 
+
+
 .btn-primary {
     color: rgb(0, 0, 0);
     background-color: #3366ff;
@@ -50,7 +52,7 @@ body {
     color: black;
 }
 
-.search-bar .form-control{
+.form-control{
     height: 40px;
     width: auto;
     margin-left: 5px;

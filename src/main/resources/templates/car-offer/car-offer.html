@@ -45,7 +45,7 @@
             </div>
         </nav>
     </header>
-
+    
     <section class="content">
         <div class="container ">
             <div class="row d-flex justify-content-center">
@@ -60,30 +60,33 @@
                         <img th:src="@{/images/cars/1.png}" width="400" height="auto" class="img-fluid" alt="">
                     </div>
                 </div>
-
-
                 <div class="col-12 col-sm-5 col-md-4">
                     <div class="row">
                         <form th:action="@{'/web/cars/offer/' + ${id}}" th:object="${searchCar}" method="post">
-                            <div class="col-12 d-flex justify-content-center">
+                            <div class="col-12 d-flex justify-content-start" >
                                 <h3><span class="badge rounded-pill bg-warning text-dark align-middle">Start</span></h3>
                                 <input type="datetime-local" class="form-control" th:attr="min=${searchCar.startDate}"
                                     th:field="*{start}">
                             </div>
-                            <div class="col-12 d-flex justify-content-center">
+                            <div class="col-12 d-flex justify-content-start">
                                 <h3><span class="badge rounded-pill bg-warning text-dark align-middle">End</span></h3>
                                 <input type="datetime-local" class="form-control" th:attr="min=${searchCar.endDate}"
                                     th:field="*{end}">
                             </div>
                             <div class="col-12">
                                 <div class="row d-flex justify-content-center">
-                                    <div class="col-12 col-md-6 d-flex justify-content-center">
+                                    <div class="col-6 col-md-6 d-flex justify-content-start">
                                         <h3>
                                             <span class="float-end badge rounded-pill bg-warning text-dark">Price/day:
                                                 <p th:text="${car.getCarDetails().getPrice()+' $'}"></p>
                                             </span>
+                                        </h3>
+                                    </div>
+                                    <div class="col-6 col-md-6 d-flex justify-content-start">
+                                        <h3>
                                             <span class="float-end badge rounded-pill bg-warning text-dark">Final price:
-                                                <p th:text="${price}+' $'"></p>
+                                                <p th:if="${price != null }" th:text="${price}+' $'"></p>
+                                                <p th:if="${price == null }" th:text="'$'"></p>
                                             </span>
                                         </h3>
                                     </div>
@@ -105,9 +108,9 @@
                         <div class="row justify-content-md-center">
                             <div class="col-12">
                                 <div class="d-flex justify-content-start">
-
                                     <h3><span class="badge bg-primary">Rental: </span></h3>
                                     <h3><a type="submit" class="link-primary" style="text-decoration: none;"
+                                           th:href="@{'/web/rentals/' + ${rental.id}}"
                                             th:text="${rental.city + ' ' + rental.postCode + ', ' + rental.street }" />
                                     </h3>
                                     </form>
@@ -142,9 +145,6 @@
                                     <h3><span class="badge bg-secondary">Fuel: </span></h3>
                                     <h3 th:text="${car.carDetails.fuel}">fuel</h3>
                                 </div>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <h3><span class="badge bg-secondary">A/C: </span> YES</h3>
                             </div>
                             <div class="col-12 col-sm-6">
                                 <div class="d-flex justify-content-start">
