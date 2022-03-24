@@ -98,4 +98,20 @@ public class CarService {
         LOGGER.info("getCarsModels()");
         return carRepository.getAllCarsModels();
     }
+
+    public CarSearchDto checkSearchStartAndEndDate(CarSearchDto carSearch){
+        LOGGER.info("checkSearchStartAndEndDate("+carSearch.getStart()+", "+carSearch.getEnd());
+        if(carSearch.getStart()!=null && carSearch.getEnd()!=null){
+            if(carSearch.getStart().isAfter(carSearch.getEnd())){
+                carSearch.setEnd(carSearch.getStart().plusDays(1));
+            }
+            if(!carSearch.getStart().isBefore(carSearch.getEnd())){
+                carSearch.setEnd(carSearch.getStart().plusDays(1));
+            }
+        }
+        return carSearch;
+    }
+
+
+
 }

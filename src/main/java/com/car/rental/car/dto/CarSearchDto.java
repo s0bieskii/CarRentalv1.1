@@ -1,10 +1,15 @@
 package com.car.rental.car.dto;
 
 import com.car.rental.utils.Config;
+import com.car.rental.utils.validators.carDateAvailableValid.CarDateAvailableValid;
+import com.car.rental.utils.validators.startAndEndDateValid.AfterDateValid;
+import com.car.rental.utils.validators.startAndEndDateValid.StartAndEndDateIsPresentValid;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,6 +20,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Setter
 @ToString
 @NoArgsConstructor
+@StartAndEndDateIsPresentValid
+@AfterDateValid
+@CarDateAvailableValid
 public class CarSearchDto {
 
     private Long id;
@@ -39,5 +47,19 @@ public class CarSearchDto {
     private LocalDate startDate;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
+
+    public String getStartLocalDateTimeAsString(){
+        LocalDateTime now = LocalDateTime.now();
+            DateTimeFormatter formatterDate = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+            return now.truncatedTo(ChronoUnit.MINUTES).format(formatterDate).toString();
+    }
+
+    public String getEndLocalDateTimeAsString(){
+        if(start!=null){
+            DateTimeFormatter formatterDate = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
+            return start.plusDays(1).truncatedTo(ChronoUnit.MINUTES).format(formatterDate).toString();
+        }
+        return "";
+    }
 
 }

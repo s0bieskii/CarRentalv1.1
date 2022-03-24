@@ -71,12 +71,10 @@
             var count = div.textContent * 1 - 1;
             div.textContent = count;
             if (count <= 0) {
-                window.location.replace("http://localhost:8080/web/users/login");
+                location.href = '/web/users/login';
             }
         }, 1000);
     </script>
-
-
 
     <footer class="footer">
         <div class="container" id="git-footer">

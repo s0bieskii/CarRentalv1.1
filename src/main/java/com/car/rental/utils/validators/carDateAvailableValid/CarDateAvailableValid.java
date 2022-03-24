@@ -1,8 +1,5 @@
-package com.car.rental.utils.validators.birthValidator;
+package com.car.rental.utils.validators.carDateAvailableValid;
 
-
-import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
-import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
@@ -12,13 +9,12 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-@Constraint(validatedBy = BirthDateValidator.class)
-@Target({ TYPE, FIELD, ANNOTATION_TYPE })
+@Constraint(validatedBy = CarDateAvailableValidator.class)
+@Target({TYPE})
 @Retention(RUNTIME)
 @Documented
-public @interface BirthDate {
-    String message() default "{You are under 18 years!}";
+public @interface CarDateAvailableValid {
+    String message() default "Car is not available in this date!";
     Class <?> [] groups() default {};
     Class <? extends Payload> [] payload() default {};
-
 }

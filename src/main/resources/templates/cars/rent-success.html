@@ -53,15 +53,26 @@
                 <hr />
             </div>
             <div class="p-2 bd-highlight">
-                <h3>Please confirm rent by click link in email</h3>
+                <h3>You can find rent in your rent history</h3>
             </div>
-            <p>Redirecting to home site</p>
+            <p>Redirecting to home site<div id="counter">5</div></p>
             <div class="spinner-border text-success" role="status">
                 <span class="visually-hidden">Redirecting to home site</span>
 
             </div>
         </div>
     </div>
+
+<script>
+        setInterval(function() {
+            var div = document.querySelector("#counter");
+            var count = div.textContent * 1 - 1;
+            div.textContent = count;
+            if (count <= 0) {
+                location.href = '';
+            }
+        }, 1000);
+    </script>
 
     <footer class="footer">
         <div class="container" id="git-footer">

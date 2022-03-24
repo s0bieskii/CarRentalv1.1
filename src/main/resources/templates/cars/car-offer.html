@@ -45,33 +45,35 @@
             </div>
         </nav>
     </header>
-    
+
     <section class="content">
-        <div class="container ">
-            <div class="row d-flex justify-content-center">
-                <div class="col-12 col-sm-10 col-md-8">
-                    <h3>Rent a car</h3>
-                    <hr />
-                </div>
-            </div>
-            <div class="row d-flex justify-content-center">
-                <div class="col-12 col-sm-5 col-md-4">
-                    <div class="d-flex align-items-start">
-                        <img th:src="@{/images/cars/1.png}" width="400" height="auto" class="img-fluid" alt="">
+        <form th:action="@{'/web/cars/offer/' + ${id}}" th:object="${searchCar}" method="post" name="lol">
+            <div class="container ">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-12 col-sm-10 col-md-8">
+                        <h3>Rent a car</h3>
+                        <hr />
                     </div>
                 </div>
-                <div class="col-12 col-sm-5 col-md-4">
-                    <div class="row">
-                        <form th:action="@{'/web/cars/offer/' + ${id}}" th:object="${searchCar}" method="post">
-                            <div class="col-12 d-flex justify-content-start" >
+
+                <div class="row d-flex justify-content-center">
+                    <div class="col-12 col-sm-5 col-md-4">
+                        <div class="d-flex align-items-start">
+                            <img th:src="@{/images/cars/1.png}" width="400" height="auto" class="img-fluid" alt="">
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-5 col-md-4">
+                        <div class="row">
+
+                            <div class="col-12 d-flex justify-content-start">
                                 <h3><span class="badge rounded-pill bg-warning text-dark align-middle">Start</span></h3>
-                                <input type="datetime-local" class="form-control" th:attr="min=${searchCar.startDate}"
-                                    th:field="*{start}">
+                                <input th:attr="min=${searchCar.getStartLocalDateTimeAsString()}" type="datetime-local"
+                                    class="form-control" th:field="*{start}">
                             </div>
                             <div class="col-12 d-flex justify-content-start">
                                 <h3><span class="badge rounded-pill bg-warning text-dark align-middle">End</span></h3>
-                                <input type="datetime-local" class="form-control" th:attr="min=${searchCar.endDate}"
-                                    th:field="*{end}">
+                                <input th:attr="min=${searchCar.getEndLocalDateTimeAsString()}" type="datetime-local"
+                                    class="form-control" th:field="*{end}">
                             </div>
                             <div class="col-12">
                                 <div class="row d-flex justify-content-center">
@@ -95,90 +97,97 @@
                                             <button type="submit" class="btn btn-primary btn-lg">Check price</button>
                                         </div>
                                     </div>
+
                                 </div>
                             </div>
-                        </form>
+
+                        </div>
                     </div>
                 </div>
-            </div>
-            <br>
-            <div class="row justify-content-md-center">
-                <div class="col-12 col-sm-10 col-md-8">
-                    <div class="container-center">
-                        <div class="row justify-content-md-center">
-                            <div class="col-12">
-                                <div class="d-flex justify-content-start">
-                                    <h3><span class="badge bg-primary">Rental: </span></h3>
-                                    <h3><a type="submit" class="link-primary" style="text-decoration: none;"
-                                           th:href="@{'/web/rentals/' + ${rental.id}}"
-                                            th:text="${rental.city + ' ' + rental.postCode + ', ' + rental.street }" />
+                <div class="row d-flex justify-content-center">
+                    <div class="col-12 col-sm-5 col-md-4 justify-content-start">
+                        <p style="color: #FF0000;" th:if="${#fields.hasErrors('global')}" th:errors="*{global}">
+                            Name Error</p>
+                    </div>
+                </div>
+                <br>
+                <div class="row justify-content-md-center">
+                    <div class="col-12 col-sm-10 col-md-8">
+                        <div class="container-center">
+                            <div class="row justify-content-md-center">
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-start">
+                                        <h3><span class="badge bg-primary">Rental: </span></h3>
+                                        <h3><a class="link-primary" style="text-decoration: none;"
+                                                th:href="@{'/web/rentals/' + ${rental.id}}"
+                                                th:text="${rental.city + ' ' + rental.postCode + ', ' + rental.street }" />
+                                        </h3>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="d-flex justify-content-start">
+                                        <h3><span class="badge bg-secondary">Brand: </span></h3>
+                                        <h3 th:text="${car.brand}">brand</h3>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="d-flex justify-content-start">
+                                        <h3><span class="badge bg-secondary">Model: </span></h3>
+                                        <h3 th:text="${car.model}">model</h3>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="d-flex justify-content-start">
+                                        <h3><span class="badge bg-secondary">Segment: </span></h3>
+                                        <h3 th:text="${car.carDetails.segment}">segment</h3>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="d-flex justify-content-start">
+                                        <h3><span class="badge bg-secondary">Color: </span></h3>
+                                        <h3 th:text="${car.carDetails.color}">color</h3>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="d-flex justify-content-start">
+                                        <h3><span class="badge bg-secondary">Fuel: </span></h3>
+                                        <h3 th:text="${car.carDetails.fuel}">fuel</h3>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="d-flex justify-content-start">
+                                        <h3><span class="badge bg-secondary">Doors: </span></h3>
+                                        <h3 th:text="${car.carDetails.doors}">doors</h3>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="d-flex justify-content-start">
+                                        <h3><span class="badge bg-secondary">Seats: </span></h3>
+                                        <h3 th:text="${car.carDetails.seats}">seats</h3>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-sm-6">
+                                    <div class="d-flex justify-content-start">
+                                        <h3><span class="badge bg-secondary">Transmission: </span></h3>
+                                        <h3 th:text="${car.carDetails.transmission}">transmission</h3>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 d-flex justify-content-center">
+                                    <h3>
+                                        <div class="text-center my-3">
+                                            <button type="submit" class="btn btn-primary btn-lg"
+                                                    th:formaction="@{'/web/cars/offer/success/' + ${id}}"
+                                                style="width: 100%; height: 90%;">Rent a car</button>
+                                        </div>
                                     </h3>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <div class="d-flex justify-content-start">
-                                    <h3><span class="badge bg-secondary">Brand: </span></h3>
-                                    <h3 th:text="${car.brand}">brand</h3>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <div class="d-flex justify-content-start">
-                                    <h3><span class="badge bg-secondary">Model: </span></h3>
-                                    <h3 th:text="${car.model}">model</h3>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <div class="d-flex justify-content-start">
-                                    <h3><span class="badge bg-secondary">Segment: </span></h3>
-                                    <h3 th:text="${car.carDetails.segment}">segment</h3>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <div class="d-flex justify-content-start">
-                                    <h3><span class="badge bg-secondary">Color: </span></h3>
-                                    <h3 th:text="${car.carDetails.color}">color</h3>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <div class="d-flex justify-content-start">
-                                    <h3><span class="badge bg-secondary">Fuel: </span></h3>
-                                    <h3 th:text="${car.carDetails.fuel}">fuel</h3>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <div class="d-flex justify-content-start">
-                                    <h3><span class="badge bg-secondary">Doors: </span></h3>
-                                    <h3 th:text="${car.carDetails.doors}">doors</h3>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <div class="d-flex justify-content-start">
-                                    <h3><span class="badge bg-secondary">Seats: </span></h3>
-                                    <h3 th:text="${car.carDetails.seats}">seats</h3>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-6">
-                                <div class="d-flex justify-content-start">
-                                    <h3><span class="badge bg-secondary">Transmission: </span></h3>
-                                    <h3 th:text="${car.carDetails.transmission}">transmission</h3>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-6">
 
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <h3>
-            <div class="text-center my-3">
-                <a href="#" class="btn btn-primary">
-                    <h3>Confirm offer</h3>
-                </a>
-            </div>
-        </h3>
+        </form>
     </section>
     <br>
     <br>

@@ -8,7 +8,7 @@
     <title>Car Rental</title>
     <link th:href="@{/css/bootstrap.min.css}" th:rel="stylesheet">
     <link th:href="@{/css/main.css}" th:rel="stylesheet">
-    <link rel="icon" th:href="@{/images/icon.png}">
+    <link rel="icon" type="image/png" th:href="@{/static/images/icon.png}">
 </head>
 
 <body>
@@ -45,7 +45,7 @@
             </div>
         </nav>
     </header>
-    <form th:action="@{/web/cars/search}" th:object="${searchCar}" method="post">
+    <form th:action="@{/web/cars/search}" name="lol" th:object="${searchCar}" method="post">
     <section class="search-bar">
         <div class="container">
             <div class="row">
@@ -54,7 +54,6 @@
                     <hr />
                 </div>
             </div>
-
                 <div class="row" id="search-badge">
                     <div class="col-sm">
                         <h3><span class="badge rounded-pill bg-warning text-dark align-middle">Search option</span></h3>
@@ -62,14 +61,14 @@
                     <div class="col-sm">
                         <div class="d-flex flex-row bd-highlight">
                             <h3><span class="badge rounded-pill bg-warning text-dark align-middle">Start</span></h3>
-                            <input th:attr="min=${searchCar.startDate}" th:field="*{start}" type="datetime-local"
+                            <input th:onchange="lol.submit()" th:attr="min=${searchCar.getStartLocalDateTimeAsString()}" th:field="*{start}" type="datetime-local"
                                 class="form-control">
                         </div>
                     </div>
                     <div class="col-sm">
                         <div class="d-flex flex-row bd-highlight">
                             <h3><span class="badge rounded-pill bg-warning text-dark align-middle">End</span></h3>
-                            <input th:attr="min=${searchCar.endDate}" th:field="*{end}"
+                            <input th:onchange="lol.submit()" th:attr="min=${searchCar.getEndLocalDateTimeAsString()}" th:field="*{end}"
                                 type="datetime-local" class="form-control">
                         </div>
                     </div>
@@ -164,6 +163,14 @@
                         </div>
                     </div>
                 </div>
+            <div class="row">
+                <div class="d-flex justify-content-center">
+                    <p style="color: #FF0000;" th:if="${#fields.hasErrors('global')}"
+                       th:errors="*{global}">
+                        Name Error</p>
+                </div>
+
+            </div>
             </div>
         </section>
         <br>
