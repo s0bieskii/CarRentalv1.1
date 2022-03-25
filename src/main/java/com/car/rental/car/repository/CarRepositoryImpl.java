@@ -82,8 +82,8 @@ public class CarRepositoryImpl implements CarSearchRepository {
             CriteriaBuilder cb = entityManager.getCriteriaBuilder();
             CriteriaQuery<Rent> cq = cb.createQuery(Rent.class);
             Root<Rent> rent = cq.from(Rent.class);
-            LocalDateTime start = carDto.getStart().minusHours(Config.timeDelayUntilNextRent);
-            LocalDateTime end = carDto.getEnd().plusHours(Config.timeDelayUntilNextRent);
+            LocalDateTime start = carDto.getStart().minusHours(Config.TIME_DELAY_UNTIL_NEXT_RENT);
+            LocalDateTime end = carDto.getEnd().plusHours(Config.TIME_DELAY_UNTIL_NEXT_RENT);
 
             for (Car car : carListToFilter) {
                 boolean check = true;

@@ -61,8 +61,8 @@ public class RentRepositoryImpl implements RentSearchRepository {
         LOGGER.info("filterByRentalId(" + rentDto + ", " + rentsListToFilter + ")");
         if (rentDto.getStart() != null && rentDto.getEnd() != null && !rentsListToFilter.isEmpty()) {
             List<Rent> rentsToReturn = new ArrayList<>();
-            LocalDateTime start = rentDto.getStart().minusHours(Config.timeDelayUntilNextRent);
-            LocalDateTime end = rentDto.getEnd().plusHours(Config.timeDelayUntilNextRent);
+            LocalDateTime start = rentDto.getStart().minusHours(Config.TIME_DELAY_UNTIL_NEXT_RENT);
+            LocalDateTime end = rentDto.getEnd().plusHours(Config.TIME_DELAY_UNTIL_NEXT_RENT);
             for (Rent rentToCheck : rentsListToFilter) {
                 LocalDateTime rentCheckStart = rentToCheck.getStart();
                 LocalDateTime rentCheckEnd = rentToCheck.getEnd();

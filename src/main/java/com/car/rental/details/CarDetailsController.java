@@ -25,6 +25,6 @@ public class CarDetailsController {
         LOGGER.info("PostMapping requestBody :" + carDetailsDto);
         CarDetails carDetails = carDetailsService.create(carDetailsDto);
         LOGGER.info("Car after mapping " + carDetails);
-        return ResponseEntity.created(URI.create(Config.applicationPath + carDetails)).build();
+        return ResponseEntity.created(URI.create(Config.APPLICATION_PATH + carDetails)).build();
     }
 }

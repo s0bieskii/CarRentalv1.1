@@ -36,7 +36,7 @@ public class ReturnReportController {
     public ResponseEntity create(@RequestBody ReturnReportAddDto returnDto) {
         LOGGER.info("PostMapping create(" + returnDto + ")");
         ReturnReport report = returnReportService.addReturnReport(returnDto);
-        return ResponseEntity.created(URI.create(Config.applicationPath + report.getId())).build();
+        return ResponseEntity.created(URI.create(Config.APPLICATION_PATH + report.getId())).build();
     }
 
     @GetMapping

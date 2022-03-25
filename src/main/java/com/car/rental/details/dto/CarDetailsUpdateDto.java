@@ -24,9 +24,9 @@ public class CarDetailsUpdateDto {
     private Integer seats;
     private String registrationNumber;
     private Integer mileage;
-    @JsonFormat(pattern = Config.globalLocalDataTimeFormat)
+    @JsonFormat(pattern = Config.GLOBAL_LOCAL_DATA_TIME_FORMAT)
     private LocalDate inspection;
-    @JsonFormat(pattern = Config.globalLocalDataTimeFormat)
+    @JsonFormat(pattern = Config.GLOBAL_LOCAL_DATA_TIME_FORMAT)
     private LocalDate insurance;
     private String fuel;
     private Double averageConsumption;

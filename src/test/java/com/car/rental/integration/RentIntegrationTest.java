@@ -276,7 +276,7 @@ public class RentIntegrationTest {
         dtoSecond.setUserId(1L);
         dtoSecond.setStart(LocalDateTime.of(2024, 2, 2, 12, 30));
         LocalDateTime end = LocalDateTime.of(2024, 2, 10, 12, 30);
-        end = end.minusHours(Config.timeDelayUntilNextRent);
+        end = end.minusHours(Config.TIME_DELAY_UNTIL_NEXT_RENT);
         dtoSecond.setEnd(end);
         //when
         Rent rent = rentService.addRent(dtoFirst);
@@ -323,7 +323,7 @@ public class RentIntegrationTest {
         dtoSecond.setCarId(5L);
         dtoSecond.setUserId(1L);
         LocalDateTime start = LocalDateTime.of(2024, 2, 15, 12, 30);
-        start = start.plusHours(Config.timeDelayUntilNextRent);
+        start = start.plusHours(Config.TIME_DELAY_UNTIL_NEXT_RENT);
         dtoSecond.setStart(start);
         LocalDateTime end = LocalDateTime.of(2024, 2, 20, 12, 30);
         dtoSecond.setEnd(end);

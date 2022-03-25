@@ -36,7 +36,7 @@ public class UserController {
     public ResponseEntity create(@RequestBody UserAddDto userDto) {
         LOGGER.info("PostMapping create(" + userDto + ")");
         User user = userService.addUser(userDto);
-        return ResponseEntity.created(URI.create(Config.applicationPath + user.getId())).build();
+        return ResponseEntity.created(URI.create(Config.APPLICATION_PATH + user.getId())).build();
     }
 
     @GetMapping

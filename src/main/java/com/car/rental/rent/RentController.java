@@ -39,7 +39,7 @@ public class RentController {
         if (rent == null) {
             return ResponseEntity.badRequest().body("Something gone wrong!");
         }
-        return ResponseEntity.created(URI.create(Config.applicationPath + rent.getId())).build();
+        return ResponseEntity.created(URI.create(Config.APPLICATION_PATH + rent.getId())).build();
     }
 
     @GetMapping

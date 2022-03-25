@@ -113,8 +113,8 @@ public class RentService {
 
     private boolean checkRentIsPossibleInGivenData(Long carId, LocalDateTime start, LocalDateTime end) {
         if (start != null && end != null && carRepository.existsById(carId)) {
-            LocalDateTime startCopy = start.minusHours(Config.timeDelayUntilNextRent);
-            LocalDateTime endCopy = end.plusHours(Config.timeDelayUntilNextRent);
+            LocalDateTime startCopy = start.minusHours(Config.TIME_DELAY_UNTIL_NEXT_RENT);
+            LocalDateTime endCopy = end.plusHours(Config.TIME_DELAY_UNTIL_NEXT_RENT);
             List<Rent> rents = rentRepository.findRentByCarId(carId);
             for (Rent rentCheck : rents) {
                 LocalDateTime rentCheckStart = rentCheck.getStart();

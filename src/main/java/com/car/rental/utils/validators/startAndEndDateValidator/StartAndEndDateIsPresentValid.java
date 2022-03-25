@@ -1,4 +1,4 @@
-package com.car.rental.utils.validators.carDateAvailableValid;
+package com.car.rental.utils.validators.startAndEndDateValidator;
 
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
@@ -9,12 +9,12 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-@Constraint(validatedBy = CarDateAvailableValidator.class)
-@Target({TYPE})
+@Constraint(validatedBy = StartAndEndDateIsPresentValidator.class)
+@Target({ TYPE})
 @Retention(RUNTIME)
 @Documented
-public @interface CarDateAvailableValid {
-    String message() default "Car is not available in this date!";
+public @interface StartAndEndDateIsPresentValid {
+    String message() default "Start and end date must be given!";
     Class <?> [] groups() default {};
     Class <? extends Payload> [] payload() default {};
 }

@@ -476,7 +476,7 @@ public class CarIntegrationTest {
     @Test
     void searchMethodWithGivenCarIdAndStartDateAndEndDateShouldReturnAvailableCarsInThisDateRangeHavingAgainRentalDelayTrueAttempt() {
         //given
-        int delayInHours = Config.timeDelayUntilNextRent;
+        int delayInHours = Config.TIME_DELAY_UNTIL_NEXT_RENT;
         CarSearchDto carSearchDto = new CarSearchDto();
         LocalDateTime start = LocalDateTime.of(2022, 2, 15, 12, 30).plusHours(delayInHours).plusMinutes(1);
         LocalDateTime end = LocalDateTime.of(2022, 2, 20, 12, 30);

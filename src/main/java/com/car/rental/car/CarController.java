@@ -35,7 +35,7 @@ public class CarController {
     public ResponseEntity create(@RequestBody CarAddDto dto) {
         LOGGER.info("PostMapping create(" + dto + ")");
         Car returnedCar = carService.addCar(dto);
-        return ResponseEntity.created(URI.create(Config.applicationPath + returnedCar.getId())).build();
+        return ResponseEntity.created(URI.create(Config.APPLICATION_PATH + returnedCar.getId())).build();
     }
 
     @GetMapping()

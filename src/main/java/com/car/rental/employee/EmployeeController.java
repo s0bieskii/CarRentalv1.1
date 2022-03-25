@@ -36,7 +36,7 @@ public class EmployeeController {
     public ResponseEntity create(@RequestBody EmployeeAddDto dto) {
         LOGGER.info("PostMapping create(" + dto + ")");
         Employee employee = employeeService.addEmployee(dto);
-        return ResponseEntity.created(URI.create(Config.applicationPath + employee.getId())).build();
+        return ResponseEntity.created(URI.create(Config.APPLICATION_PATH + employee.getId())).build();
     }
 
     @GetMapping()

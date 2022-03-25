@@ -1,4 +1,4 @@
-package com.car.rental.utils.validators.startAndEndDateValid;
+package com.car.rental.utils.validators.addCarAvailableValidator;
 
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
@@ -9,12 +9,13 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-@Constraint(validatedBy = AfterDateValidator.class)
+@Constraint(validatedBy = AddCarAvailableValidator.class)
 @Target({ TYPE})
 @Retention(RUNTIME)
 @Documented
-public @interface AfterDateValid {
-    String message() default "Start date is after end date!";
+public @interface AddCarAvailableValid {
+
+    String message() default "Car cant be available with no assigned rental office!";
     Class <?> [] groups() default {};
     Class <? extends Payload> [] payload() default {};
 }

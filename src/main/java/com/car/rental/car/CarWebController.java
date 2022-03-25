@@ -1,8 +1,10 @@
 package com.car.rental.car;
 
+import com.car.rental.car.dto.CarAddDto;
 import com.car.rental.car.dto.CarDto;
 import com.car.rental.car.dto.CarSearchDto;
 import com.car.rental.details.CarDetailsService;
+import com.car.rental.details.dto.CarDetailsAddDto;
 import com.car.rental.rent.RentService;
 import com.car.rental.rent.dto.RentAddDto;
 import com.car.rental.rental.RentalService;
@@ -175,6 +177,27 @@ public class CarWebController {
         rent.setComment("Nice try");
         rentService.addRent(rent);
         return "cars/rent-success.html";
+    }
+
+    @GetMapping("/add")
+    public String getAddCarView(ModelMap modelMap) {
+        CarAddDto carAddDto = new CarAddDto();
+        carAddDto.setCarDetails(new CarDetailsAddDto());
+        modelMap.addAttribute("addCar", carAddDto);
+        modelMap.addAttribute("rentals", rentalService.findAll());
+        return "cars/add-car.html";
+    }
+
+    @PostMapping("/add")
+    public String addNewCar(@Valid @ModelAttribute("addCar") CarAddDto carAddDto, BindingResult bindingResult,
+                            ModelMap modelMap) {
+        modelMap.addAttribute("addCar", carAddDto);
+        modelMap.addAttribute("rentals", rentalService.findAll());
+        if(bindingResult.hasErrors()){
+            return "cars/add-car.html";
+        }
+        carService.addCar(carAddDto);
+        return "main/aboutView.html";
     }
 
 }

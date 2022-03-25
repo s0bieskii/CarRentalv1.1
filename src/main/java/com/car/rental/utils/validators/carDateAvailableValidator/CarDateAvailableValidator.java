@@ -1,4 +1,4 @@
-package com.car.rental.utils.validators.carDateAvailableValid;
+package com.car.rental.utils.validators.carDateAvailableValidator;
 
 import com.car.rental.car.dto.CarSearchDto;
 import com.car.rental.car.repository.CarRepository;
@@ -26,8 +26,8 @@ public class CarDateAvailableValidator implements ConstraintValidator<CarDateAva
     public boolean isValid(CarSearchDto carSearch, ConstraintValidatorContext context) {
 
         if (carSearch.getStart() != null && carSearch.getEnd() != null && carSearch.getId() != null) {
-            LocalDateTime start = carSearch.getStart().minusHours(Config.timeDelayUntilNextRent);
-            LocalDateTime end = carSearch.getEnd().plusHours(Config.timeDelayUntilNextRent);
+            LocalDateTime start = carSearch.getStart().minusHours(Config.TIME_DELAY_UNTIL_NEXT_RENT);
+            LocalDateTime end = carSearch.getEnd().plusHours(Config.TIME_DELAY_UNTIL_NEXT_RENT);
             List<Rent> rents = rentRepository.findRentForNotReturnedCarsByCarId(carSearch.getId());
             for (Rent rentCheck : rents) {
                 LocalDateTime rentCheckStart = rentCheck.getStart();
@@ -37,8 +37,7 @@ public class CarDateAvailableValidator implements ConstraintValidator<CarDateAva
                     return false;
                 }
             }
-            return true;
         }
-        return false;
+        return true;
     }
 }

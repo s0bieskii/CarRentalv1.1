@@ -34,9 +34,9 @@ public class CarDetails {
     private Integer seats;
     private String registrationNumber;
     private int mileage;
-    @JsonFormat(pattern = Config.globalLocalDataFormat)
+    @JsonFormat(pattern = Config.GLOBAL_LOCAL_DATA_FORMAT)
     private LocalDate inspection;
-    @JsonFormat(pattern = Config.globalLocalDataFormat)
+    @JsonFormat(pattern = Config.GLOBAL_LOCAL_DATA_FORMAT)
     private LocalDate insurance;
     private String fuel;
     private double averageConsumption;

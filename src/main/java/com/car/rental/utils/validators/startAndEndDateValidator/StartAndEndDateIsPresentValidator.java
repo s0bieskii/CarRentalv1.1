@@ -1,4 +1,4 @@
-package com.car.rental.utils.validators.startAndEndDateValid;
+package com.car.rental.utils.validators.startAndEndDateValidator;
 
 import com.car.rental.car.dto.CarSearchDto;
 import javax.validation.ConstraintValidator;

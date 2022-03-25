@@ -1,9 +1,9 @@
 package com.car.rental.car.dto;
 
 import com.car.rental.utils.Config;
-import com.car.rental.utils.validators.carDateAvailableValid.CarDateAvailableValid;
-import com.car.rental.utils.validators.startAndEndDateValid.AfterDateValid;
-import com.car.rental.utils.validators.startAndEndDateValid.StartAndEndDateIsPresentValid;
+import com.car.rental.utils.validators.carDateAvailableValidator.CarDateAvailableValid;
+import com.car.rental.utils.validators.startAndEndDateValidator.AfterDateValid;
+import com.car.rental.utils.validators.startAndEndDateValidator.StartAndEndDateIsPresentValid;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -37,10 +37,10 @@ public class CarSearchDto {
     private Integer seats;
     private String fuel;
     private String transmission;
-    @JsonFormat(pattern = Config.globalLocalDataTimeFormat)
+    @JsonFormat(pattern = Config.GLOBAL_LOCAL_DATA_TIME_FORMAT)
     @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm")
     private LocalDateTime start;
-    @JsonFormat(pattern = Config.globalLocalDataTimeFormat)
+    @JsonFormat(pattern = Config.GLOBAL_LOCAL_DATA_TIME_FORMAT)
     @DateTimeFormat(pattern="yyyy-MM-dd'T'HH:mm")
     private LocalDateTime end;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -51,13 +51,13 @@ public class CarSearchDto {
     public String getStartLocalDateTimeAsString(){
         LocalDateTime now = LocalDateTime.now();
             DateTimeFormatter formatterDate = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-            return now.truncatedTo(ChronoUnit.MINUTES).format(formatterDate).toString();
+            return now.minusMinutes(10).truncatedTo(ChronoUnit.MINUTES).format(formatterDate).toString();
     }
 
     public String getEndLocalDateTimeAsString(){
         if(start!=null){
             DateTimeFormatter formatterDate = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-            return start.plusDays(1).truncatedTo(ChronoUnit.MINUTES).format(formatterDate).toString();
+            return start.plusDays(1).minusMinutes(10).truncatedTo(ChronoUnit.MINUTES).format(formatterDate).toString();
         }
         return "";
     }

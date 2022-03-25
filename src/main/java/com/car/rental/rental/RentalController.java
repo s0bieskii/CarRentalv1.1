@@ -37,7 +37,7 @@ public class RentalController {
     public ResponseEntity create(@RequestBody RentalAddDto rentalDto) {
         LOGGER.info("PostMapping create(" + rentalDto + ")");
         Rental rental = rentalService.addRental(rentalDto);
-        return ResponseEntity.created(URI.create(Config.applicationPath + rental.getId())).build();
+        return ResponseEntity.created(URI.create(Config.APPLICATION_PATH + rental.getId())).build();
     }
 
     @GetMapping
