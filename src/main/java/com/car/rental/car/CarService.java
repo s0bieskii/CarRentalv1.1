@@ -9,12 +9,19 @@ import com.car.rental.car.repository.CarRepository;
 import com.car.rental.details.dto.CarDetailsAddDto;
 import com.car.rental.rental.repository.RentalRepository;
 import com.car.rental.utils.PageWrapper;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 public class CarService {
@@ -37,7 +44,37 @@ public class CarService {
             dto.setCarDetails(new CarDetailsAddDto());
         }
         Car carToSave = carMapper.carAddToCar(dto);
+        if(dto.getCarDetails().getRentalId()!=null){
+            rentalRepository.getById(dto.getCarDetails().getRentalId()).getCars().add(carToSave);
+        }
+
         Car savedCar = carRepository.save(carToSave);
+        return savedCar;
+    }
+
+    public Car addCarWithImage(CarAddDto dto, MultipartFile file) {
+        LOGGER.info("addCar(" + dto + ")");
+        if (dto.getCarDetails() == null) {
+            LOGGER.info("Auto-create CarDetails to added car");
+            dto.setCarDetails(new CarDetailsAddDto());
+        }
+        Car carToSave = carMapper.carAddToCar(dto);
+        if(dto.getCarDetails().getRentalId()!=null){
+            rentalRepository.getById(dto.getCarDetails().getRentalId()).getCars().add(carToSave);
+        }
+
+        Car savedCar = carRepository.save(carToSave);
+
+        if(!file.isEmpty()){
+            String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+            try {
+                Path path = Paths.get("/static/images/cars/" + savedCar.getId());
+                Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
         return savedCar;
     }
 
