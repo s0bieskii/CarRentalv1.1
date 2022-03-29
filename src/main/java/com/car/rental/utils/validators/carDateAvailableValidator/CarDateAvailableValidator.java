@@ -30,8 +30,8 @@ public class CarDateAvailableValidator implements ConstraintValidator<CarDateAva
             LocalDateTime end = carSearch.getEnd().plusHours(Config.TIME_DELAY_UNTIL_NEXT_RENT);
             List<Rent> rents = rentRepository.findRentForNotReturnedCarsByCarId(carSearch.getId());
             for (Rent rentCheck : rents) {
-                LocalDateTime rentCheckStart = rentCheck.getStart();
-                LocalDateTime rentCheckEnd = rentCheck.getEnd();
+                LocalDateTime rentCheckStart = rentCheck.getStartDate();
+                LocalDateTime rentCheckEnd = rentCheck.getEndDate();
                 if (rentCheck.isDeleted() == false &&
                         (rentCheckEnd.isAfter(start) && rentCheckStart.isBefore(end))) {
                     return false;

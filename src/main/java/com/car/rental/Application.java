@@ -10,6 +10,7 @@ public class Application {
         System.setProperty("java.runtime.version", "11");
         SpringApplication.run(Application.class, args);
 
+
     }
 
 }

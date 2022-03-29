@@ -16,7 +16,6 @@ import com.car.rental.report.dto.ReturnReportDto;
 import com.car.rental.report.dto.ReturnReportSearchDto;
 import com.car.rental.report.dto.ReturnReportUpdateDto;
 import javax.sql.DataSource;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +25,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
-import org.springframework.test.jdbc.JdbcTestUtils;
 
 @SpringBootTest
 public class ReturnReportIntegrationTest {
@@ -44,15 +42,16 @@ public class ReturnReportIntegrationTest {
 
     @BeforeEach
     void prepareDb() {
+        cleanDb();
         ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator(false, false,
                 "UTF-8", new ClassPathResource("data.sql"));
         resourceDatabasePopulator.execute(dataSource);
     }
 
-    @AfterEach
-    void tearDown() {
-        JdbcTestUtils.deleteFromTables(jdbcTemplate, "car", "car_details", "employee", "rental", "rental_cars",
-                "rental_employees", "rents", "return_report", "users", "users_rents");
+    void cleanDb() {
+        ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator(false, false,
+                "UTF-8", new ClassPathResource("clearDatabase.sql"));
+        resourceDatabasePopulator.execute(dataSource);
     }
 
     @Test
@@ -171,7 +170,7 @@ public class ReturnReportIntegrationTest {
         //given
         PageRequest page = PageRequest.of(0, 6);
         //when
-        tearDown();
+        cleanDb();
         Page<ReturnReportDto> reports = returnReportService.getAll(page);
         //then
         assertAll(

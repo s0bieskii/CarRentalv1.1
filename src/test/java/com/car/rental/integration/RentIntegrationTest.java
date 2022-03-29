@@ -21,7 +21,6 @@ import com.car.rental.utils.Config;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import javax.sql.DataSource;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +30,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
-import org.springframework.test.jdbc.JdbcTestUtils;
 
 @SpringBootTest
 public class RentIntegrationTest {
@@ -49,15 +47,16 @@ public class RentIntegrationTest {
 
     @BeforeEach
     void prepareDb() {
+        cleanDb();
         ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator(false, false,
                 "UTF-8", new ClassPathResource("data.sql"));
         resourceDatabasePopulator.execute(dataSource);
     }
 
-    @AfterEach
-    void tearDown() {
-        JdbcTestUtils.deleteFromTables(jdbcTemplate, "car", "car_details", "employee", "rental", "rental_cars",
-                "rental_employees", "rents", "return_report", "users", "users_rents");
+    void cleanDb() {
+        ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator(false, false,
+                "UTF-8", new ClassPathResource("clearDatabase.sql"));
+        resourceDatabasePopulator.execute(dataSource);
     }
 
     @Test
@@ -66,8 +65,8 @@ public class RentIntegrationTest {
         RentAddDto dto = new RentAddDto();
         dto.setCarId(2L);
         dto.setUserId(1L);
-        dto.setStart(LocalDateTime.of(2025, 1, 10, 12, 30));
-        dto.setEnd(LocalDateTime.of(2025, 1, 15, 12, 30));
+        dto.setStartDate(LocalDateTime.of(2025, 1, 10, 12, 30));
+        dto.setEndDate(LocalDateTime.of(2025, 1, 15, 12, 30));
         //when
         Rent rent = rentService.addRent(dto);
         //then
@@ -84,8 +83,8 @@ public class RentIntegrationTest {
         RentAddDto dto = new RentAddDto();
         dto.setCarId(2L);
         dto.setUserId(1L);
-        dto.setStart(LocalDateTime.of(2023, 1, 10, 12, 30));
-        dto.setEnd(LocalDateTime.of(2023, 1, 15, 12, 30));
+        dto.setStartDate(LocalDateTime.of(2023, 1, 10, 12, 30));
+        dto.setEndDate(LocalDateTime.of(2023, 1, 15, 12, 30));
         //when
         rentService.addRent(dto);
         Rent secondRent = rentService.addRent(dto);
@@ -94,13 +93,13 @@ public class RentIntegrationTest {
     }
 
     @Test
-    void addRentWithGivenDataRangeEqualToExistingRentShouldFailed1() {
+    void addRentWithGivenDataRangeEqualToExistingRentShouldFailed() {
         //given
         RentAddDto dto = new RentAddDto();
         dto.setCarId(5L);
         dto.setUserId(1L);
-        dto.setStart(LocalDateTime.of(2022, 2, 10, 12, 30));
-        dto.setEnd(LocalDateTime.of(2022, 2, 15, 12, 30));
+        dto.setStartDate(LocalDateTime.of(2022, 2, 10, 12, 30));
+        dto.setEndDate(LocalDateTime.of(2022, 2, 15, 12, 30));
         //when
         Rent rent = rentService.addRent(dto);
         //then
@@ -108,13 +107,13 @@ public class RentIntegrationTest {
     }
 
     @Test
-    void addRentWithGivenDataRangeStartBeforeExistingRentStartAndGivenEndEqualToExistingRentEndShouldFailed2() {
+    void addRentWithGivenDataRangeStartBeforeExistingRentStartAndGivenEndEqualToExistingRentEndShouldFailed() {
         //given
         RentAddDto dto = new RentAddDto();
         dto.setCarId(5L);
         dto.setUserId(1L);
-        dto.setStart(LocalDateTime.of(2022, 2, 5, 12, 30));
-        dto.setEnd(LocalDateTime.of(2022, 2, 15, 12, 30));
+        dto.setStartDate(LocalDateTime.of(2022, 2, 5, 12, 30));
+        dto.setEndDate(LocalDateTime.of(2022, 2, 15, 12, 30));
         //when
         Rent rent = rentService.addRent(dto);
         //then
@@ -122,13 +121,13 @@ public class RentIntegrationTest {
     }
 
     @Test
-    void addRentWithGivenDataRangeStartEqualExistingRentStartAndGivenEndAfterToExistingRentEndShouldFailed3() {
+    void addRentWithGivenDataRangeStartEqualExistingRentStartAndGivenEndAfterToExistingRentEndShouldFailed() {
         //given
         RentAddDto dto = new RentAddDto();
         dto.setCarId(5L);
         dto.setUserId(1L);
-        dto.setStart(LocalDateTime.of(2022, 2, 10, 12, 30));
-        dto.setEnd(LocalDateTime.of(2022, 2, 20, 12, 30));
+        dto.setStartDate(LocalDateTime.of(2022, 2, 10, 12, 30));
+        dto.setEndDate(LocalDateTime.of(2022, 2, 20, 12, 30));
         //when
         Rent rent = rentService.addRent(dto);
         //then
@@ -136,13 +135,13 @@ public class RentIntegrationTest {
     }
 
     @Test
-    void addRentWithGivenDataRangeStartAfterExistingRentStartAndGivenEndEqualToExistingRentEndShouldFailed4() {
+    void addRentWithGivenDataRangeStartAfterExistingRentStartAndGivenEndEqualToExistingRentEndShouldFailed() {
         //given
         RentAddDto dto = new RentAddDto();
         dto.setCarId(5L);
         dto.setUserId(1L);
-        dto.setStart(LocalDateTime.of(2022, 2, 13, 12, 30));
-        dto.setEnd(LocalDateTime.of(2022, 2, 15, 12, 30));
+        dto.setStartDate(LocalDateTime.of(2022, 2, 13, 12, 30));
+        dto.setEndDate(LocalDateTime.of(2022, 2, 15, 12, 30));
         //when
         Rent rent = rentService.addRent(dto);
         //then
@@ -150,13 +149,13 @@ public class RentIntegrationTest {
     }
 
     @Test
-    void addRentWithGivenDataRangeStartEqualExistingRentStartAndGivenEndBeforeToExistingRentEndShouldFailed5() {
+    void addRentWithGivenDataRangeStartEqualExistingRentStartAndGivenEndBeforeToExistingRentEndShouldFailed() {
         //given
         RentAddDto dto = new RentAddDto();
         dto.setCarId(5L);
         dto.setUserId(1L);
-        dto.setStart(LocalDateTime.of(2022, 2, 10, 12, 30));
-        dto.setEnd(LocalDateTime.of(2022, 2, 13, 12, 30));
+        dto.setStartDate(LocalDateTime.of(2022, 2, 10, 12, 30));
+        dto.setEndDate(LocalDateTime.of(2022, 2, 13, 12, 30));
         //when
         Rent rent = rentService.addRent(dto);
         //then
@@ -164,13 +163,13 @@ public class RentIntegrationTest {
     }
 
     @Test
-    void addRentWithGivenDataRangeStartAfterExistingRentStartAndGivenEndBeforeToExistingRentEndShouldFailed6() {
+    void addRentWithGivenDataRangeStartAfterExistingRentStartAndGivenEndBeforeToExistingRentEndShouldFailed() {
         //given
         RentAddDto dto = new RentAddDto();
         dto.setCarId(5L);
         dto.setUserId(1L);
-        dto.setStart(LocalDateTime.of(2022, 2, 11, 12, 30));
-        dto.setEnd(LocalDateTime.of(2022, 2, 13, 12, 30));
+        dto.setStartDate(LocalDateTime.of(2022, 2, 11, 12, 30));
+        dto.setEndDate(LocalDateTime.of(2022, 2, 13, 12, 30));
         //when
         Rent rent = rentService.addRent(dto);
         //then
@@ -178,13 +177,13 @@ public class RentIntegrationTest {
     }
 
     @Test
-    void addRentWithGivenDataRangeStartBeforeExistingRentStartAndGivenEndBetweenToExistingRentStartAndEndShouldFailed7() {
+    void addRentWithGivenDataRangeStartBeforeExistingRentStartAndGivenEndBetweenToExistingRentStartAndEndShouldFailed() {
         //given
         RentAddDto dto = new RentAddDto();
         dto.setCarId(5L);
         dto.setUserId(1L);
-        dto.setStart(LocalDateTime.of(2022, 2, 8, 12, 30));
-        dto.setEnd(LocalDateTime.of(2022, 2, 13, 12, 30));
+        dto.setStartDate(LocalDateTime.of(2022, 2, 8, 12, 30));
+        dto.setEndDate(LocalDateTime.of(2022, 2, 13, 12, 30));
         //when
         Rent rent = rentService.addRent(dto);
         //then
@@ -192,13 +191,13 @@ public class RentIntegrationTest {
     }
 
     @Test
-    void addRentWithGivenDataRangeStartBetweenExistingRentStartAndEndAndGivenEndAfterToExistingRentEndShouldFailed8() {
+    void addRentWithGivenDataRangeStartBetweenExistingRentStartAndEndAndGivenEndAfterToExistingRentEndShouldFailed() {
         //given
         RentAddDto dto = new RentAddDto();
         dto.setCarId(5L);
         dto.setUserId(1L);
-        dto.setStart(LocalDateTime.of(2022, 2, 12, 12, 30));
-        dto.setEnd(LocalDateTime.of(2022, 2, 18, 12, 30));
+        dto.setStartDate(LocalDateTime.of(2022, 2, 12, 12, 30));
+        dto.setEndDate(LocalDateTime.of(2022, 2, 18, 12, 30));
         //when
         Rent rent = rentService.addRent(dto);
         //then
@@ -211,8 +210,8 @@ public class RentIntegrationTest {
         RentAddDto dto = new RentAddDto();
         dto.setCarId(5L);
         dto.setUserId(1L);
-        dto.setStart(LocalDateTime.of(2024, 2, 10, 12, 30));
-        dto.setEnd(LocalDateTime.of(2024, 2, 15, 12, 30));
+        dto.setStartDate(LocalDateTime.of(2024, 2, 10, 12, 30));
+        dto.setEndDate(LocalDateTime.of(2024, 2, 15, 12, 30));
         //when
         Rent rent = rentService.addRent(dto);
         //then
@@ -228,8 +227,8 @@ public class RentIntegrationTest {
         RentAddDto dto = new RentAddDto();
         dto.setCarId(5L);
         dto.setUserId(1L);
-        dto.setStart(LocalDateTime.of(2024, 2, 10, 12, 30));
-        dto.setEnd(LocalDateTime.of(2024, 2, 15, 12, 30));
+        dto.setStartDate(LocalDateTime.of(2024, 2, 10, 12, 30));
+        dto.setEndDate(LocalDateTime.of(2024, 2, 15, 12, 30));
         //when
         Rent rent = rentService.addRent(dto);
         Rent second = rentService.addRent(dto);
@@ -246,13 +245,13 @@ public class RentIntegrationTest {
         RentAddDto dtoFirst = new RentAddDto();
         dtoFirst.setCarId(5L);
         dtoFirst.setUserId(1L);
-        dtoFirst.setStart(LocalDateTime.of(2024, 2, 10, 12, 30));
-        dtoFirst.setEnd(LocalDateTime.of(2024, 2, 15, 12, 30));
+        dtoFirst.setStartDate(LocalDateTime.of(2024, 2, 10, 12, 30));
+        dtoFirst.setEndDate(LocalDateTime.of(2024, 2, 15, 12, 30));
         RentAddDto dtoSecond = new RentAddDto();
         dtoSecond.setCarId(5L);
         dtoSecond.setUserId(1L);
-        dtoSecond.setStart(LocalDateTime.of(2024, 2, 2, 12, 30));
-        dtoSecond.setEnd(LocalDateTime.of(2024, 2, 10, 12, 20));
+        dtoSecond.setStartDate(LocalDateTime.of(2024, 2, 2, 12, 30));
+        dtoSecond.setEndDate(LocalDateTime.of(2024, 2, 10, 12, 20));
         //when
         Rent rent = rentService.addRent(dtoFirst);
         Rent second = rentService.addRent(dtoFirst);
@@ -269,15 +268,15 @@ public class RentIntegrationTest {
         RentAddDto dtoFirst = new RentAddDto();
         dtoFirst.setCarId(5L);
         dtoFirst.setUserId(1L);
-        dtoFirst.setStart(LocalDateTime.of(2024, 2, 10, 12, 30));
-        dtoFirst.setEnd(LocalDateTime.of(2024, 2, 15, 12, 30));
+        dtoFirst.setStartDate(LocalDateTime.of(2024, 2, 10, 12, 30));
+        dtoFirst.setEndDate(LocalDateTime.of(2024, 2, 15, 12, 30));
         RentAddDto dtoSecond = new RentAddDto();
         dtoSecond.setCarId(5L);
         dtoSecond.setUserId(1L);
-        dtoSecond.setStart(LocalDateTime.of(2024, 2, 2, 12, 30));
+        dtoSecond.setStartDate(LocalDateTime.of(2024, 2, 2, 12, 30));
         LocalDateTime end = LocalDateTime.of(2024, 2, 10, 12, 30);
         end = end.minusHours(Config.TIME_DELAY_UNTIL_NEXT_RENT);
-        dtoSecond.setEnd(end);
+        dtoSecond.setEndDate(end);
         //when
         Rent rent = rentService.addRent(dtoFirst);
         Rent second = rentService.addRent(dtoSecond);
@@ -294,13 +293,13 @@ public class RentIntegrationTest {
         RentAddDto dtoFirst = new RentAddDto();
         dtoFirst.setCarId(5L);
         dtoFirst.setUserId(1L);
-        dtoFirst.setStart(LocalDateTime.of(2024, 2, 10, 12, 30));
-        dtoFirst.setEnd(LocalDateTime.of(2024, 2, 15, 12, 30));
+        dtoFirst.setStartDate(LocalDateTime.of(2024, 2, 10, 12, 30));
+        dtoFirst.setEndDate(LocalDateTime.of(2024, 2, 15, 12, 30));
         RentAddDto dtoSecond = new RentAddDto();
         dtoSecond.setCarId(5L);
         dtoSecond.setUserId(1L);
-        dtoSecond.setStart(LocalDateTime.of(2024, 2, 15, 15, 30));
-        dtoSecond.setEnd(LocalDateTime.of(2024, 2, 20, 12, 20));
+        dtoSecond.setStartDate(LocalDateTime.of(2024, 2, 15, 15, 30));
+        dtoSecond.setEndDate(LocalDateTime.of(2024, 2, 20, 12, 20));
         //when
         Rent rent = rentService.addRent(dtoFirst);
         Rent second = rentService.addRent(dtoFirst);
@@ -317,16 +316,16 @@ public class RentIntegrationTest {
         RentAddDto dtoFirst = new RentAddDto();
         dtoFirst.setCarId(5L);
         dtoFirst.setUserId(1L);
-        dtoFirst.setStart(LocalDateTime.of(2024, 2, 10, 12, 30));
-        dtoFirst.setEnd(LocalDateTime.of(2024, 2, 15, 12, 30));
+        dtoFirst.setStartDate(LocalDateTime.of(2024, 2, 10, 12, 30));
+        dtoFirst.setEndDate(LocalDateTime.of(2024, 2, 15, 12, 30));
         RentAddDto dtoSecond = new RentAddDto();
         dtoSecond.setCarId(5L);
         dtoSecond.setUserId(1L);
         LocalDateTime start = LocalDateTime.of(2024, 2, 15, 12, 30);
         start = start.plusHours(Config.TIME_DELAY_UNTIL_NEXT_RENT);
-        dtoSecond.setStart(start);
+        dtoSecond.setStartDate(start);
         LocalDateTime end = LocalDateTime.of(2024, 2, 20, 12, 30);
-        dtoSecond.setEnd(end);
+        dtoSecond.setEndDate(end);
         //when
         Rent rent = rentService.addRent(dtoFirst);
         Rent second = rentService.addRent(dtoSecond);
@@ -343,8 +342,8 @@ public class RentIntegrationTest {
         RentAddDto dto = new RentAddDto();
         dto.setCarId(5L);
         dto.setUserId(1L);
-        dto.setStart(LocalDateTime.of(2024, 2, 10, 12, 30));
-        dto.setEnd(LocalDateTime.of(2024, 2, 15, 12, 30));
+        dto.setStartDate(LocalDateTime.of(2024, 2, 10, 12, 30));
+        dto.setEndDate(LocalDateTime.of(2024, 2, 15, 12, 30));
         //when
         Rent rent = rentService.addRent(dto);
         //then
@@ -356,9 +355,9 @@ public class RentIntegrationTest {
         //given
         RentAddDto dto = new RentAddDto();
         dto.setCarId(5L);
-        dto.setUserId(1L);
-        dto.setStart(LocalDateTime.of(2024, 2, 10, 12, 30));
-        dto.setEnd(LocalDateTime.of(2024, 2, 15, 12, 30));
+        dto.setUserId(8L);
+        dto.setStartDate(LocalDateTime.of(2024, 2, 10, 12, 30));
+        dto.setEndDate(LocalDateTime.of(2024, 2, 15, 12, 30));
         double carPricePerDay = 150.00;
         int rentDays = 5;
         BigDecimal finalPrice = BigDecimal.valueOf(rentDays * carPricePerDay);
@@ -377,8 +376,8 @@ public class RentIntegrationTest {
         RentAddDto dto = new RentAddDto();
         dto.setCarId(5L);
         dto.setUserId(1L);
-        dto.setStart(LocalDateTime.of(2024, 2, 10, 12, 30));
-        dto.setEnd(LocalDateTime.of(2024, 2, 18, 12, 30));
+        dto.setStartDate(LocalDateTime.of(2024, 2, 10, 12, 30));
+        dto.setEndDate(LocalDateTime.of(2024, 2, 18, 12, 30));
         double carPricePerDay = 150.00;
         int rentDays = 8;
         double discount = 0.03;
@@ -394,36 +393,13 @@ public class RentIntegrationTest {
     }
 
     @Test
-    void addRentShouldAutomaticallyCalculatePriceWithDiscountForRentsAtLeastFourteenDays() {
-        //given
-        RentAddDto dto = new RentAddDto();
-        dto.setCarId(5L);
-        dto.setUserId(1L);
-        dto.setStart(LocalDateTime.of(2024, 2, 10, 12, 30));
-        dto.setEnd(LocalDateTime.of(2024, 2, 28, 12, 30));
-        double carPricePerDay = 150.00;
-        int rentDays = 18;
-        double discount = 0.06;
-        BigDecimal finalPrice =
-                BigDecimal.valueOf((rentDays * carPricePerDay) - (rentDays * carPricePerDay) * discount);
-        //when
-        Rent rent = rentService.addRent(dto);
-        //then
-        assertAll(
-                () -> assertNotNull(rent.getFinalPrice()),
-                () -> assertEquals(finalPrice, rent.getFinalPrice())
-        );
-    }
-
-
-    @Test
     void addRentShouldAutomaticallyCalculatePriceWithDiscountForUsersWithTwentySixYearsOld() {
         //given
         RentAddDto dto = new RentAddDto();
         dto.setCarId(5L);
         dto.setUserId(2L);
-        dto.setStart(LocalDateTime.of(2024, 2, 10, 12, 30));
-        dto.setEnd(LocalDateTime.of(2024, 2, 15, 12, 30));
+        dto.setStartDate(LocalDateTime.of(2024, 2, 10, 12, 30));
+        dto.setEndDate(LocalDateTime.of(2024, 2, 15, 12, 30));
         double carPricePerDay = 150.00;
         int rentDays = 5;
         double discount = 0.05;
@@ -444,8 +420,8 @@ public class RentIntegrationTest {
         RentAddDto dto = new RentAddDto();
         dto.setCarId(555L);
         dto.setUserId(2L);
-        dto.setStart(LocalDateTime.of(2024, 2, 10, 12, 30));
-        dto.setEnd(LocalDateTime.of(2024, 2, 15, 12, 30));
+        dto.setStartDate(LocalDateTime.of(2024, 2, 10, 12, 30));
+        dto.setEndDate(LocalDateTime.of(2024, 2, 15, 12, 30));
         //when
         Rent rent = rentService.addRent(dto);
         //then
@@ -458,8 +434,8 @@ public class RentIntegrationTest {
         RentAddDto dto = new RentAddDto();
         dto.setCarId(2L);
         dto.setUserId(666L);
-        dto.setStart(LocalDateTime.of(2024, 2, 10, 12, 30));
-        dto.setEnd(LocalDateTime.of(2024, 2, 15, 12, 30));
+        dto.setStartDate(LocalDateTime.of(2024, 2, 10, 12, 30));
+        dto.setEndDate(LocalDateTime.of(2024, 2, 15, 12, 30));
         //when
         Rent rent = rentService.addRent(dto);
         //then
@@ -502,7 +478,7 @@ public class RentIntegrationTest {
         PageRequest page = PageRequest.of(pageNumber, size);
         int expectingRentsQuantity = 0;
         //when
-        tearDown();
+        cleanDb();
         Page<RentDto> rents = rentService.getAll(page);
         //then
         assertEquals(expectingRentsQuantity, rents.getTotalElements());
@@ -601,7 +577,7 @@ public class RentIntegrationTest {
         RentSearchDto dto = new RentSearchDto();
         int expectingRentsQuantity = 0;
         //when
-        tearDown();
+        cleanDb();
         Page<RentDto> rents = rentService.search(page, dto);
         //then
         assertEquals(expectingRentsQuantity, rents.getTotalElements());

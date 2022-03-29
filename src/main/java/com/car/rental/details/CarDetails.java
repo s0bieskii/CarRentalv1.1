@@ -4,6 +4,7 @@ import com.car.rental.utils.Config;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -25,6 +26,7 @@ public class CarDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(unique = true)
     private String vin;
     private String color;
     private Integer registrationYear;
@@ -32,6 +34,7 @@ public class CarDetails {
     private String segment;
     private Integer doors;
     private Integer seats;
+    
     private String registrationNumber;
     private int mileage;
     @JsonFormat(pattern = Config.GLOBAL_LOCAL_DATA_FORMAT)

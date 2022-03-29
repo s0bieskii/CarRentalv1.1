@@ -14,7 +14,6 @@ import com.car.rental.employee.dto.EmployeeDto;
 import com.car.rental.employee.dto.EmployeeSearchDto;
 import com.car.rental.employee.dto.EmployeeUpdateDto;
 import javax.sql.DataSource;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +24,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
-import org.springframework.test.jdbc.JdbcTestUtils;
 
 @SpringBootTest
 public class EmployeeIntegrationTest {
@@ -44,15 +42,16 @@ public class EmployeeIntegrationTest {
 
     @BeforeEach
     void prepareDb() {
+        cleanDb();
         ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator(false, false,
                 "UTF-8", new ClassPathResource("data.sql"));
         resourceDatabasePopulator.execute(dataSource);
     }
 
-    @AfterEach
     void cleanDb() {
-        JdbcTestUtils.deleteFromTables(jdbcTemplate, "car", "car_details", "employee", "rental", "rental_cars",
-                "rental_employees", "rents", "return_report", "users", "users_rents");
+        ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator(false, false,
+                "UTF-8", new ClassPathResource("clearDatabase.sql"));
+        resourceDatabasePopulator.execute(dataSource);
     }
 
     @Test
@@ -195,7 +194,7 @@ public class EmployeeIntegrationTest {
         PageRequest page = PageRequest.of(0, 5);
         EmployeeSearchDto employeeSearchDto = new EmployeeSearchDto();
         employeeSearchDto.setFirstName("Kaska");
-        Long totalEmployeeMatchingToValuesInDatabase = 1L;
+        Long totalEmployeeMatchingToValuesInDatabase = 0L;
         //when
         Page<EmployeeDto> employeeDtoPage = employeeService.search(page, employeeSearchDto);
         //then
@@ -208,7 +207,7 @@ public class EmployeeIntegrationTest {
         PageRequest page = PageRequest.of(0, 5);
         EmployeeSearchDto employeeSearchDto = new EmployeeSearchDto();
         employeeSearchDto.setFirstName("Patryk");
-        Long totalEmployeeMatchingToValuesInDatabase = 2L;
+        Long totalEmployeeMatchingToValuesInDatabase = 1L;
         //when
         Page<EmployeeDto> employeeDtoPage = employeeService.search(page, employeeSearchDto);
         //then
@@ -222,14 +221,13 @@ public class EmployeeIntegrationTest {
         EmployeeSearchDto employeeSearchDto = new EmployeeSearchDto();
         String firstName = "Patryk";
         employeeSearchDto.setFirstName(firstName);
-        Long totalEmployeeMatchingToValuesInDatabase = 2L;
+        Long totalEmployeeMatchingToValuesInDatabase = 1L;
         //when
         Page<EmployeeDto> employeeDtoPage = employeeService.search(page, employeeSearchDto);
         //then
         assertAll(
                 () -> assertEquals(totalEmployeeMatchingToValuesInDatabase, employeeDtoPage.getContent().size()),
-                () -> assertEquals(firstName, employeeDtoPage.getContent().get(0).getFirstName()),
-                () -> assertEquals(firstName, employeeDtoPage.getContent().get(1).getFirstName())
+                () -> assertEquals(firstName, employeeDtoPage.getContent().get(0).getFirstName())
         );
     }
 

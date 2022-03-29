@@ -71,6 +71,8 @@ public class MainWebController {
 
     @GetMapping("/contact")
     public String contactView(ModelMap modelMap){
+
+        modelMap.addAttribute("rentals", rentalService.findAll());
         return "main/contact.html";
     }
 }

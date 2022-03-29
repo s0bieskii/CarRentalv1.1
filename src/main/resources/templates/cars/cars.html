@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 
 <head>
@@ -8,8 +9,9 @@
     <title>Car Rental</title>
     <link th:href="@{/css/bootstrap.min.css}" th:rel="stylesheet">
     <link th:href="@{/css/main.css}" th:rel="stylesheet">
-    <link rel="icon" th:href="@{/images/icon.png}">
+    <link rel="icon" th:href="@{/images/favicon.ico}">
 </head>
+
 <body>
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -24,22 +26,40 @@
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{/}">About</a>
+                            <a class="nav-link" th:href="@{/}">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" th:href="@{/web/cars/search}">Rent a car</a>
+                            <a sec:authorize="hasRole('ROLE_USER')" class="nav-link" th:href="@{/web/cars/search}">Rent a car</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link"  th:href="@{/web/users/login}">Login</a>
+                            <a sec:authorize="isAnonymous()" class="nav-link" th:href="@{/web/cars/search}">Rent a car</a>
                         </li>
-                        <li class="nav-item">
+                        <li sec:authorize="isAnonymous()" class="nav-item">
+                            <a class="nav-link" th:href="@{/web/users/login}">Login</a>
+                        </li>
+                        <li sec:authorize="isAnonymous()" class="nav-item">
                             <a class="nav-link" th:href="@{/web/users/register}">Register</a>
                         </li>
-                        <li class="nav-item">
+                        <li sec:authorize="isAnonymous()" class="nav-item">
                             <a class="nav-link" th:href="@{/contact}">Contact</a>
                         </li>
-                        <li class="nav-item">
+                        <li sec:authorize="hasRole('ROLE_USER')" class="nav-item">
+                            <a class="nav-link" th:href="@{/contact}">Contact</a>
+                        </li>
+                        <li sec:authorize="hasRole('ROLE_EMPLOYEE')"  class="nav-item">
+                            <a class="nav-link" th:href="@{/web/cars/add}">Rental management</a>
+                        </li>
+                        <li sec:authorize="hasRole('ROLE_EMPLOYEE')"  class="nav-item">
                             <a class="nav-link" th:href="@{/web/cars/add}">Add a car</a>
+                        </li>
+                        <li sec:authorize="hasRole('ROLE_ADMIN')"  class="nav-item">
+                            <a class="nav-link" th:href="@{/#}">Menage panel</a>
+                        </li>
+                        <li class="nav-item">
+                            <a sec:authorize="isAuthenticated()" class="nav-link" th:href="@{/web/users/account}" style="color: #3366ff;">My account</a>
+                        </li>
+                        <li class="nav-item d-flex justify-content-end">
+                            <a sec:authorize="isAuthenticated()" class="nav-link" th:href="@{/logout}" style="color: red;">Logout</a>
                         </li>
                     </ul>
                 </ul>

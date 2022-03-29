@@ -1,21 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
 
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Car Rental</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link href="../../static/css/main.css" rel="stylesheet">
-    <link rel="icon" href="../../static/images/icon.png">
+    <link th:href="@{/css/bootstrap.min.css}" th:rel="stylesheet">
+    <link th:href="@{/css/main.css}" th:rel="stylesheet">
+    <link rel="icon" th:href="@{/images/favicon.ico}">
 </head>
 
 <body>
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container-fluid">
-                <img src="../../static/images/logo.png" width="100" height="30" class="d-inline-block align-top" alt="">
+                <img th:src="@{/images/logo.png}" width="100" height="30" class="d-inline-block align-top" alt="">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -25,24 +26,46 @@
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="#">About</a>
+                                <a class="nav-link" th:href="@{/}">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Rent a car</a>
+                                <a sec:authorize="hasRole('ROLE_USER')" class="nav-link"
+                                    th:href="@{/web/cars/search}">Rent a car</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Login</a>
+                                <a sec:authorize="isAnonymous()" class="nav-link" th:href="@{/web/cars/search}">Rent a
+                                    car</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Register</a>
+                            <li sec:authorize="isAnonymous()" class="nav-item">
+                                <a class="nav-link" th:href="@{/web/users/login}">Login</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Contact</a>
+                            <li sec:authorize="isAnonymous()" class="nav-item">
+                                <a class="nav-link" th:href="@{/web/users/register}">Register</a>
                             </li>
-                            <li class="nav-item">
+                            <li sec:authorize="isAnonymous()" class="nav-item">
+                                <a class="nav-link" th:href="@{/contact}">Contact</a>
+                            </li>
+                            <li sec:authorize="hasRole('ROLE_USER')" class="nav-item">
+                                <a class="nav-link" th:href="@{/contact}">Contact</a>
+                            </li>
+                            <li sec:authorize="hasRole('ROLE_EMPLOYEE')" class="nav-item">
+                                <a class="nav-link" th:href="@{/web/cars/add}">Rental management</a>
+                            </li>
+                            <li sec:authorize="hasRole('ROLE_EMPLOYEE')" class="nav-item">
                                 <a class="nav-link" th:href="@{/web/cars/add}">Add a car</a>
                             </li>
-                        </ul>
+                            <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
+                                <a class="nav-link" th:href="@{/#}">Menage panel</a>
+                            </li>
+                            <li class="nav-item">
+                                <a sec:authorize="isAuthenticated()" class="nav-link" th:href="@{/web/users/account}"
+                                    style="color: #3366ff;">My account</a>
+                            </li>
+                            <li class="nav-item d-flex justify-content-end">
+                                <a sec:authorize="isAuthenticated()" class="nav-link" th:href="@{/logout}"
+                                    style="color: red;">Logout</a>
+                            </li>
+                        </ul>       
                     </ul>
                 </div>
             </div>
@@ -51,8 +74,8 @@
     <section class="my-account">
         <div class="container ">
             <div class="row d-flex justify-content-center">
-                <div class="col-5">
-                    <form>
+                <div class="col-10 col-sm-7">
+                    <form th:action="@{/web/users/account/edit}" th:object="${userEdit}" method="post">
                         <div class="row">
                             <div class="col-12">
                                 <h3>Edit account</h3>
@@ -60,72 +83,69 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-12 col-md-6">
+                            <div class="d-flex col-12 col-md-6 justify-content-center justify-content-sm-start">
                                 <h3><span class="badge bg-secondary">First name:</span></h3>
                             </div>
-                            <div class="col-12 col-md-6">
-                                <div class="d-flex"><input type="text" th:field="*{email}" class="form-control"
-                                        id="email" placeholder="First name"></div>
+                            <div class="d-flex col-12 col-md-6 justify-content-center justify-content-sm-start">                                <div class="d-flex">
+                                    <input type="text" th:name="firstName" class="form-control"
+                                           th:value="${user.firstName}" th:placeholder="${user.firstName}">
+                                </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-12 col-md-6">
-                                <h3><span class="badge bg-secondary">Last name:&nbsp;</span></h3>
+                            <div class="d-flex col-12 col-md-6 justify-content-center justify-content-sm-start">                                <h3><span class="badge bg-secondary">Last name:</span></h3>
                             </div>
-                            <div class="col-12 col-md-6">
-                                <div class="d-flex"><input type="text" th:field="*{email}" class="form-control"
+                            <div class="d-flex col-12 col-md-6 justify-content-center justify-content-sm-start">                                <div class="d-flex">
+                                    <input type="text" th:name="lastName" class="form-control"
+                                           th:value="${user.lastName}" th:placeholder="${user.lastName}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="d-flex col-12 col-md-6 justify-content-center justify-content-sm-start">                                <h3><span
+                                        class="badge bg-secondary">Birth:</span>
+                                </h3>
+                            </div>
+                            <div class="d-flex col-12 col-md-6 justify-content-center justify-content-sm-start">                                <div class="d-flex">
+                                    <input type="date" th:name="birth" class="form-control"
+                                        th:value="${user.birth}" th:placeholder="${user.birth}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="d-flex col-12 col-md-6 justify-content-center justify-content-sm-start">                                <h3><span
+                                        class="badge bg-secondary">Email:</span>
+                                </h3>
+                            </div>
+                            <div class="d-flex col-12 col-md-6 justify-content-center justify-content-sm-start">                                <div class="d-flex" ><input  class="form-control" type="email" th:name="email"
+                                        th:value="${user.email}" th:placeholder="${user.email}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="d-flex col-12 col-md-6 justify-content-center justify-content-sm-start">                                <h3><span class="badge bg-secondary">Password:&nbsp;&nbsp;</span></h3>
+                            </div>
+                            <div class="d-flex col-12 col-md-6 justify-content-center justify-content-sm-start">                                <div class="d-flex justify-content-start"><input type="password" th:name="password" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="d-flex col-12 col-md-6 justify-content-center justify-content-sm-start">                                <h3><span class="badge bg-secondary">Repeat password:&nbsp;&nbsp;</span></h3>
+                            </div>
+                            <div class="d-flex col-12 col-md-6 justify-content-center justify-content-sm-start">                                <div class="d-flex"><input type="password" class="form-control"
                                         id="email" placeholder="Last name">
                                 </div>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-12 col-md-6">
-                                <h3><span class="badge bg-secondary">Birth:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></h3>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="d-flex"><input type="date" th:field="*{email}" class="form-control"
-                                        id="email" placeholder="Birth">
-                                </div>
-                            </div>
+                        <div class="d-flex justify-content-center">
+                            <button type="submit" class="btn btn-primary btn-lg">Save account</button>
                         </div>
-                        <div class="row">
-                            <div class="col-12 col-md-6">
-                                <h3><span class="badge bg-secondary">Email:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></h3>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="d-flex justify-content-end"><input type="email" th:field="*{email}"
-                                        class="form-control" id="email" placeholder="Email">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 col-md-6">
-                                <h3><span class="badge bg-secondary">Password:&nbsp;&nbsp;</span></h3>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="d-flex"><input type="text" th:field="*{email}" class="form-control"
-                                        id="email" placeholder="Last name">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 col-md-6">
-                                <h3><span class="badge bg-secondary">Password:&nbsp;&nbsp;</span></h3>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <div class="d-flex"><input type="text" th:field="*{email}" class="form-control"
-                                        id="email" placeholder="Last name">
-                                </div>
-                            </div>
+                        <div class="d-flex justify-content-center">
+                            <div class="text-center my-2"><a href="#" class="btn btn-danger">Delete account</a></div>
                         </div>
                     </form>
                     <br>
-                    <div class="d-flex justify-content-center">
-                        <div class="text-center my-2"><a href="#" class="btn btn-primary">Save edits</a></div>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <div class="text-center my-2"><a href="#" class="btn btn-danger">Delete account</a></div>
-                    </div>
+
                     <br>
 
                 </div>

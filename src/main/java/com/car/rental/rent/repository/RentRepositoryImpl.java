@@ -64,8 +64,8 @@ public class RentRepositoryImpl implements RentSearchRepository {
             LocalDateTime start = rentDto.getStart().minusHours(Config.TIME_DELAY_UNTIL_NEXT_RENT);
             LocalDateTime end = rentDto.getEnd().plusHours(Config.TIME_DELAY_UNTIL_NEXT_RENT);
             for (Rent rentToCheck : rentsListToFilter) {
-                LocalDateTime rentCheckStart = rentToCheck.getStart();
-                LocalDateTime rentCheckEnd = rentToCheck.getEnd();
+                LocalDateTime rentCheckStart = rentToCheck.getStartDate();
+                LocalDateTime rentCheckEnd = rentToCheck.getEndDate();
                 boolean check = !rentToCheck.isDeleted() && !rentToCheck.isConfirmed() &&
                         (!start.isAfter(rentCheckStart) || !start.isBefore(rentCheckEnd)) &&
                         (!start.isBefore(rentCheckStart) || !end.isAfter(rentCheckEnd)) &&

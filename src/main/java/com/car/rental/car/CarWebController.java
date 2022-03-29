@@ -172,8 +172,8 @@ public class CarWebController {
         RentAddDto rent = new RentAddDto();
         rent.setCarId(id);
         rent.setUserId(2L);
-        rent.setStart(carSearch.getStart());
-        rent.setEnd(carSearch.getEnd());
+        rent.setStartDate(carSearch.getStart());
+        rent.setEndDate(carSearch.getEnd());
         rent.setComment("Nice try");
         rentService.addRent(rent);
         return "cars/rent-success.html";
