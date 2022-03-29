@@ -17,9 +17,9 @@ public class RentAddDto {
     private Long carId;
     private Long userId;
     @JsonFormat(pattern = Config.GLOBAL_LOCAL_DATA_TIME_FORMAT)
-    private LocalDateTime start;
+    private LocalDateTime startDate;
     @JsonFormat(pattern = Config.GLOBAL_LOCAL_DATA_TIME_FORMAT)
-    private LocalDateTime end;
+    private LocalDateTime endDate;
     private String comment;
     private boolean confirmed;
 }

@@ -91,8 +91,8 @@ public class CarRepositoryImpl implements CarSearchRepository {
                         .where(cb.equal(rent.get("car"), car.getId()))
                         .distinct(true)).getResultList();
                 for (Rent rentCheck : rents) {
-                    LocalDateTime rentCheckStart = rentCheck.getStart();
-                    LocalDateTime rentCheckEnd = rentCheck.getEnd();
+                    LocalDateTime rentCheckStart = rentCheck.getStartDate();
+                    LocalDateTime rentCheckEnd = rentCheck.getEndDate();
                     if (rentCheck.isDeleted() == false &&
                             (rentCheckEnd.isAfter(start) && rentCheckStart.isBefore(end))) {
                         check = false;

@@ -1,8 +1,8 @@
 package com.car.rental.user;
 
+import com.car.rental.security.Role;
 import com.car.rental.rent.Rent;
 import java.time.LocalDate;
-import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -40,8 +40,9 @@ public class User {
     private String password;
     @OneToMany(cascade = CascadeType.ALL)
     private Set<Rent> rents;
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    private List<Role> roles;
+    //TODO Collections.unmodifiableSet()
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Role> roles;
     private boolean activated;
     private boolean deleted;
 

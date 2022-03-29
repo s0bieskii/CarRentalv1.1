@@ -4,39 +4,65 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1448cd2-8819-4532-8efc-e0244a619617" name="Changes" comment="Fix application:&#10;-remove swagger">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/utils/FlywayConfiguration.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V2__insert_values.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/main/aboutView.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/main/contact.html" afterDir="false" />
+    <list default="true" id="a1448cd2-8819-4532-8efc-e0244a619617" name="Changes" comment="Add create car view with validation">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/security/config/MyUserDetails.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/security/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/security/config/UserDetailsServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/security/repository/RoleRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V2__init.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/user/account.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/resources/newdata.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/car/CarService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/car/CarService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/Application.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/Application.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/car/CarWebController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/car/CarWebController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/car/dto/CarSearchDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/car/dto/CarSearchDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/car/repository/CarCriteriaBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/car/repository/CarCriteriaBuilder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/car/repository/CarRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/car/repository/CarRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/car/repository/CarRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/car/repository/CarRepositoryImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/details/CarDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/details/CarDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/details/CarDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/details/CarDetailsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/details/repository/CarDetailsRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/details/repository/CarDetailsRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/employee/Employee.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/employee/Employee.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/main/MainWebController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/main/MainWebController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/rent/Rent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/rent/Rent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/rent/RentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/rent/RentService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/rent/dto/RentAddDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/rent/dto/RentAddDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/rent/repository/RentRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/rent/repository/RentRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/user/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/security/Role.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/user/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/user/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/user/UserWebController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/user/UserWebController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/user/dto/UserUpdateDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/user/dto/UserUpdateDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/utils/FlywayConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/utils/FlywayConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/utils/validators/carDateAvailableValidator/CarDateAvailableValidator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/utils/validators/carDateAvailableValidator/CarDateAvailableValidator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/js/bootstrap.bundle.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/js/bootstrap.bundle.min.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/car-offer/car-offer-confirm.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/car-offer/car-offer-confirm.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/car-offer/car-offer.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/car-offer/car-offer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/car-offer/rent-a-car.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/car-offer/rent-a-car.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/car-offer/rent-success.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/car-offer/rent-success.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V2__insert_values.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/images/icon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/images/favicon.ico" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/cars/add-car.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/cars/add-car.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/cars/car-offer-confirm.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/cars/car-offer-confirm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/cars/car-offer.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/cars/car-offer.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/cars/cars.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/cars/cars.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/cars/create-car.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/cars/create-car.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/cars/create-car.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/cars/rent-a-car.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/cars/rent-a-car.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/cars/rent-success.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/cars/rent-success.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/error.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/error.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login/forgot-password.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/login/forgot-password.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/login/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/main/aboutView.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/main/aboutView.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/main/contact.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/main/contact.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/register/register-success.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/register/register-success.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/register/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/register/register.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/rent/single-rent.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/rent/single-rent.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/rental/rental.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/rental/rental.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/template.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/template.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/user/account-edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/user/account-edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/user/my-account.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/user/user-rents.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/user/user-rents.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/test/java/com/car/rental/integration/CarIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/car/rental/integration/CarIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/car/rental/integration/EmployeeIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/car/rental/integration/EmployeeIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/car/rental/integration/RentIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/car/rental/integration/RentIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/car/rental/integration/RentalIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/car/rental/integration/RentalIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/car/rental/integration/ReturnReportIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/car/rental/integration/ReturnReportIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/car/rental/integration/UserIntegrationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/car/rental/integration/UserIntegrationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/clearDatabase.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/clearDatabase.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/resources/data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/data.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,6 +77,7 @@
       <list>
         <option value="Interface" />
         <option value="HTML File" />
+        <option value="AnnotationType" />
         <option value="Class" />
       </list>
     </option>
@@ -71,7 +98,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="848940a2123daed9c9ecbeab6d7ba3df17ed6189" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -103,13 +130,6 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="MavenImportPreferences">
-    <option name="generalSettings">
-      <MavenGeneralSettings>
-        <option name="useMavenConfig" value="true" />
-      </MavenGeneralSettings>
-    </option>
-  </component>
   <component name="ProjectId" id="240zxBjSj3XVVaNcfgmIgTxhQFE" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -124,8 +144,10 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/com/car/rental/car/dto" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates/main" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/GroomerSalon-master" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -133,29 +155,32 @@
   </component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
+      <recent name="com.car.rental.user" />
       <recent name="com.car.rental.rental.dto" />
       <recent name="com.car.rental.employee.dto" />
       <recent name="com.car.rental.car" />
       <recent name="com.car.rental.car.integration" />
-      <recent name="com.car.rental.rental" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Patryk Java\SpringLearning\Car Rental v1.1\src\main\resources\templates\rental" />
       <recent name="D:\Patryk Java\SpringLearning\Car Rental v1.1\src\main\resources\templates\main" />
       <recent name="D:\Patryk Java\SpringLearning\Car Rental v1.1\src\main\resources\templates" />
       <recent name="D:\Patryk Java\SpringLearning\Car Rental v1.1\src" />
       <recent name="D:\Patryk Java\SpringLearning\Car Rental v1.1" />
-      <recent name="D:\Patryk Java\SpringLearning\Car Rental v1.1\node_modules" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Patryk Java\SpringLearning\Car Rental v1.1\src\main\resources\db\migration" />
+      <recent name="D:\Patryk Java\SpringLearning\Car Rental v1.1\src\main\resources" />
+      <recent name="D:\Patryk Java\SpringLearning\Car Rental v1.1\src\main\resources\static\images" />
       <recent name="D:\Patryk Java\SpringLearning\Car Rental v1.1\src\main\resources\static" />
-      <recent name="D:\Patryk Java\SpringLearning\Car Rental v1.1" />
-      <recent name="C:\Users\Patryk\Desktop\Car Rental v1.1" />
-      <recent name="C:\Users\Patryk\Desktop\Car Rental v1.1\src\test\resources" />
+      <recent name="D:\Patryk Java\SpringLearning\Car Rental v1.1\src\main\resources\templates\cars" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Application">
-    <configuration name="Application" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.ApplicationDEV">
+    <configuration name="ApplicationDEV" type="Application" factoryName="Application" temporary="true">
+      <envs>
+        <env name="spring.active.profile" value="dev" />
+      </envs>
       <option name="MAIN_CLASS_NAME" value="com.car.rental.Application" />
       <module name="car.rental" />
       <extension name="coverage">
@@ -168,32 +193,55 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CarIntegrationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="ApplicationTests" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="car.rental" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.car.rental.car.integration.*" />
+          <option name="PATTERN" value="com.car.rental.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.car.rental.car.integration" />
-      <option name="MAIN_CLASS_NAME" value="com.car.rental.car.integration.CarIntegrationTest" />
+      <option name="PACKAGE_NAME" value="com.car.rental" />
+      <option name="MAIN_CLASS_NAME" value="com.car.rental.ApplicationTests" />
+      <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
+      <envs>
+        <env name="spring.profiles.active" value="test" />
+      </envs>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CarIntegrationTest.searchMethodWithEmptyCarSearchDtoShouldReturnAllAvailableCarsFromDatabase" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="CarIntegrationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="car.rental" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.car.rental.car.integration.*" />
+          <option name="PATTERN" value="com.car.rental.integration.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.car.rental.car.integration" />
-      <option name="MAIN_CLASS_NAME" value="com.car.rental.car.integration.CarIntegrationTest" />
-      <option name="METHOD_NAME" value="searchMethodWithEmptyCarSearchDtoShouldReturnAllAvailableCarsFromDatabase" />
+      <option name="PACKAGE_NAME" value="com.car.rental.integration" />
+      <option name="MAIN_CLASS_NAME" value="com.car.rental.integration.CarIntegrationTest" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <envs>
+        <env name="spring.active.profile" value="test" />
+      </envs>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CarIntegrationTest.findAllMethodShouldReturnCarPageWithSomeCars" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="car.rental" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.car.rental.integration.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.car.rental.integration" />
+      <option name="MAIN_CLASS_NAME" value="com.car.rental.integration.CarIntegrationTest" />
+      <option name="METHOD_NAME" value="findAllMethodShouldReturnCarPageWithSomeCars" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -215,44 +263,127 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="CarIntegrationTest.searchMethodWithGivenStartDateAndEndDateShouldReturnAvailableCarsInThisDateRange" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="EmployeeIntegrationTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
       <module name="car.rental" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.car.rental.car.integration.*" />
+          <option name="PATTERN" value="com.car.rental.integration.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="com.car.rental.car.integration" />
-      <option name="MAIN_CLASS_NAME" value="com.car.rental.car.integration.CarIntegrationTest" />
-      <option name="METHOD_NAME" value="searchMethodWithGivenStartDateAndEndDateShouldReturnAvailableCarsInThisDateRange" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="EmployeeIntegrationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="car.rental" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.car.rental.car.integration.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.car.rental.car.integration" />
-      <option name="MAIN_CLASS_NAME" value="com.car.rental.car.integration.EmployeeIntegrationTest" />
+      <option name="PACKAGE_NAME" value="com.car.rental.integration" />
+      <option name="MAIN_CLASS_NAME" value="com.car.rental.integration.EmployeeIntegrationTest" />
+      <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
+      <envs>
+        <env name="spring.active.profile" value="test" />
+      </envs>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="RentIntegrationTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+      <module name="car.rental" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.car.rental.integration.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.car.rental.integration" />
+      <option name="MAIN_CLASS_NAME" value="com.car.rental.integration.RentIntegrationTest" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <envs>
+        <env name="spring.active.profile" value="test" />
+      </envs>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RentIntegrationTest.addRentShouldAutomaticallyCalculatePrice" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="car.rental" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.car.rental.integration.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.car.rental.integration" />
+      <option name="MAIN_CLASS_NAME" value="com.car.rental.integration.RentIntegrationTest" />
+      <option name="METHOD_NAME" value="addRentShouldAutomaticallyCalculatePrice" />
+      <option name="TEST_OBJECT" value="method" />
+      <envs>
+        <env name="spring.active.profile" value="test" />
+      </envs>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RentalIntegrationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="car.rental" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.car.rental.integration.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.car.rental.integration" />
+      <option name="MAIN_CLASS_NAME" value="com.car.rental.integration.RentalIntegrationTest" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <envs>
+        <env name="spring.active.profile" value="test" />
+      </envs>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ReturnReportIntegrationTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
+      <module name="car.rental" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.car.rental.integration.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.car.rental.integration" />
+      <option name="MAIN_CLASS_NAME" value="com.car.rental.integration.ReturnReportIntegrationTest" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="class" />
+      <envs>
+        <env name="spring.active.profile" value="test" />
+      </envs>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Application" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="car.rental" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.car.rental.Application" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.ApplicationDEV" />
+      <item itemvalue="JUnit.ApplicationTests" />
+      <item itemvalue="JUnit.CarIntegrationTest.searchMethodWithGivenRentalIdShouldReturnAllAvailableCarsFromRental" />
+      <item itemvalue="JUnit.EmployeeIntegrationTest (1)" />
+      <item itemvalue="JUnit.RentIntegrationTest" />
+      <item itemvalue="JUnit.ReturnReportIntegrationTest" />
+      <item itemvalue="JUnit.CarIntegrationTest" />
+      <item itemvalue="JUnit.CarIntegrationTest.findAllMethodShouldReturnCarPageWithSomeCars" />
+      <item itemvalue="JUnit.RentalIntegrationTest" />
+      <item itemvalue="JUnit.RentIntegrationTest.addRentShouldAutomaticallyCalculatePrice" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.Application" />
-        <item itemvalue="JUnit.EmployeeIntegrationTest" />
-        <item itemvalue="JUnit.CarIntegrationTest.searchMethodWithGivenStartDateAndEndDateShouldReturnAvailableCarsInThisDateRange" />
-        <item itemvalue="JUnit.CarIntegrationTest.searchMethodWithEmptyCarSearchDtoShouldReturnAllAvailableCarsFromDatabase" />
+        <item itemvalue="Application.ApplicationDEV" />
         <item itemvalue="JUnit.CarIntegrationTest" />
+        <item itemvalue="JUnit.CarIntegrationTest.findAllMethodShouldReturnCarPageWithSomeCars" />
+        <item itemvalue="JUnit.RentIntegrationTest.addRentShouldAutomaticallyCalculatePrice" />
+        <item itemvalue="JUnit.RentalIntegrationTest" />
       </list>
     </recent_temporary>
   </component>
@@ -264,6 +395,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1642782538491</updated>
+      <workItem from="1648232825096" duration="280000" />
     </task>
     <task id="LOCAL-00001" summary="Application updated">
       <created>1643740162378</created>
@@ -482,8 +614,60 @@
       <option name="project" value="LOCAL" />
       <updated>1647460241838</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="single car first view and bug fix in main screen and rent-a-car">
+      <created>1647937083351</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1647937083351</updated>
+    </task>
+    <task id="LOCAL-00033" summary="single car first refactor and refactor rent-a-car.html">
+      <created>1647988503661</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1647988503661</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Heroku config and application deploy">
+      <created>1647989866816</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1647989866816</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Change some CSS">
+      <created>1647990037374</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1647990037374</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Add validate date when pick and some refactor and bug fix">
+      <created>1648129831602</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1648129831602</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Add create car view with validation">
+      <created>1648207131689</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1648207131689</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Add create car view with validation">
+      <created>1648207178900</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1648207178900</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -496,7 +680,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="master" />
+                        <option value="main" />
                       </list>
                     </value>
                   </entry>
@@ -512,12 +696,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/battle-ships/battle-ships" />
     </ignored-roots>
-    <MESSAGE value="Add integration test for employeeService, fix bugs in employeeService and code refactor" />
-    <MESSAGE value="Fix car search and rebuild carCriteriaBuilder and change package" />
-    <MESSAGE value="Code refactor and fix carIntegrationTest" />
-    <MESSAGE value="Code refactor and fix carIntegrationTest part 2" />
-    <MESSAGE value="Fixed search car only by rental&#10;Refactor code- deleted update by reflection method" />
-    <MESSAGE value="Add to carSearch method option search by date available" />
     <MESSAGE value="Global code refactor and clean code." />
     <MESSAGE value="Fix commit merge" />
     <MESSAGE value="Add search employee by rentalId" />
@@ -537,7 +715,13 @@
     <MESSAGE value="Add user Controller.&#10;Add registration form with validation&#10;Add login form" />
     <MESSAGE value="Add .idea starte config to repository" />
     <MESSAGE value="Fix application:&#10;-remove swagger" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix application:&#10;-remove swagger" />
+    <MESSAGE value="single car first view and bug fix in main screen and rent-a-car" />
+    <MESSAGE value="single car first refactor and refactor rent-a-car.html" />
+    <MESSAGE value="Heroku config and application deploy" />
+    <MESSAGE value="Change some CSS" />
+    <MESSAGE value="Add validate date when pick and some refactor and bug fix" />
+    <MESSAGE value="Add create car view with validation" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add create car view with validation" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -547,8 +731,32 @@
           <line>345</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/com/car/rental/main/MainWebController.java</url>
+          <line>74</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/test/java/com/car/rental/integration/CarIntegrationTest.java</url>
+          <line>168</line>
+          <properties class="com.car.rental.integration.CarIntegrationTest" method="findAllMethodShouldReturnCarPageWithSomeCars">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="org.springframework.data.domain.PageImpl" memberName="total" />
+      </pinned-members>
+    </pin-to-top-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="userAddDto" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -44,14 +44,14 @@ public class RentService {
     public Rent addRent(RentAddDto dto) {
         LOGGER.info("addRent(" + dto + ")");
         if (carRepository.existsById(dto.getCarId()) && userRepository.existsById(dto.getUserId())
-                && dto.getStart() != null && dto.getEnd() != null &&
-                checkRentIsPossibleInGivenData(dto.getCarId(), dto.getStart(), dto.getEnd())) {
+                && dto.getStartDate() != null && dto.getEndDate() != null &&
+                checkRentIsPossibleInGivenData(dto.getCarId(), dto.getStartDate(), dto.getEndDate())) {
             Rent rentToAdd = rentMapper.rentAddDtoToRent(dto);
             rentToAdd.setReport(new ReturnReport());
             rentToAdd.setCar(carRepository.getById(dto.getCarId()));
             User userToSet = userRepository.getById(dto.getUserId());
             rentToAdd.setUser(userToSet);
-            rentToAdd.setFinalPrice(calculateRentFinalPrice(rentToAdd, dto.getStart(), dto.getEnd()));
+            rentToAdd.setFinalPrice(calculateRentFinalPrice(rentToAdd, dto.getStartDate(), dto.getEndDate()));
             Rent savedRent = rentRepository.save(rentToAdd);
             return savedRent;
         }
@@ -117,8 +117,8 @@ public class RentService {
             LocalDateTime endCopy = end.plusHours(Config.TIME_DELAY_UNTIL_NEXT_RENT);
             List<Rent> rents = rentRepository.findRentByCarId(carId);
             for (Rent rentCheck : rents) {
-                LocalDateTime rentCheckStart = rentCheck.getStart();
-                LocalDateTime rentCheckEnd = rentCheck.getEnd();
+                LocalDateTime rentCheckStart = rentCheck.getStartDate();
+                LocalDateTime rentCheckEnd = rentCheck.getEndDate();
                 if (rentCheck.isDeleted() == false &&
                         (rentCheckEnd.isAfter(startCopy) && rentCheckStart.isBefore(endCopy))) {
                     return false;

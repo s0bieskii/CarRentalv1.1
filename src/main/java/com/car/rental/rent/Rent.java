@@ -39,9 +39,9 @@ public class Rent {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private ReturnReport report;
     @JsonFormat(pattern = Config.GLOBAL_LOCAL_DATA_TIME_FORMAT)
-    private LocalDateTime start;
+    private LocalDateTime startDate;
     @JsonFormat(pattern = Config.GLOBAL_LOCAL_DATA_TIME_FORMAT)
-    private LocalDateTime end;
+    private LocalDateTime endDate;
     private String comment;
     private BigDecimal finalPrice;
     private boolean confirmed;

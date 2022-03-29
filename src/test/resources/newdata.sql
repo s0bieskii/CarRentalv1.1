@@ -49,9 +49,9 @@ insert into role (id, name) values
 
 insert into users (dtype, id, first_name, last_name, email, birth, password, activated, deleted,
             employment_position, salary_per_hour) values
-            ('Employee', 1, 'Patryk', 'Chojnacki', 'patryk@chojnacki.pl', '1996-06-12', '$2a$12$rtZtnVoK9h7OGlvUtd7wU.dMGf6amRFjiP7X5OKjuhqGBeGyWzRVe',
+            ('Employee', 1, 'Patryk', 'Chojnacki', 'admin@admin.pl', '1996-06-12', '$2a$12$rtZtnVoK9h7OGlvUtd7wU.dMGf6amRFjiP7X5OKjuhqGBeGyWzRVe',
             true, false, 'boss', 120),
-            ('Employee', 2, 'John', 'Snow', 'john@snow.pl', '1970-06-12', '$2a$12$rtZtnVoK9h7OGlvUtd7wU.dMGf6amRFjiP7X5OKjuhqGBeGyWzRVe',
+            ('Employee', 2, 'John', 'Snow', 'employee@employee.pl', '1970-06-12', '$2a$12$rtZtnVoK9h7OGlvUtd7wU.dMGf6amRFjiP7X5OKjuhqGBeGyWzRVe',
             true, false, 'dealer', 12),
             ('Employee', 3, 'Polly', 'Shelby', 'polly@shelby.pl', '1990-06-12', '$2a$12$rtZtnVoK9h7OGlvUtd7wU.dMGf6amRFjiP7X5OKjuhqGBeGyWzRVe',
             true, false, 'dealer', 14),
@@ -68,7 +68,7 @@ insert into rental_employees (rental_id, employees_id) values
         (1,1), (1,2), (1,3), (2,4), (2,5), (3,6), (3,7);
 
 insert into users (dtype, id, first_name, last_name, email, birth, password, activated, deleted) values
-            ('User', 8, 'user1', 'user1', 'user1@user.pl', '1996-06-10', '$2a$12$rtZtnVoK9h7OGlvUtd7wU.dMGf6amRFjiP7X5OKjuhqGBeGyWzRVe',
+            ('User', 8, 'user1', 'user1', 'user@user.pl', '1996-06-10', '$2a$12$rtZtnVoK9h7OGlvUtd7wU.dMGf6amRFjiP7X5OKjuhqGBeGyWzRVe',
             true, false),
             ('User', 9, 'user2', 'user2', 'user2@user.pl', '1999-04-11', '$2a$12$rtZtnVoK9h7OGlvUtd7wU.dMGf6amRFjiP7X5OKjuhqGBeGyWzRVe',
             false, false),
@@ -80,7 +80,8 @@ insert into users (dtype, id, first_name, last_name, email, birth, password, act
             true, true);
 
             insert into users_roles(user_id, roles_id) values
-            (1, 3), (2, 2), (3, 2), (4, 2), (5, 2), (6, 2), (7, 2), (8, 1), (9, 1), (10, 1), (11, 1);
+            (1, 3), (1, 2), (1, 1), (2, 2), (2, 1), (3, 2), (4, 2), (5, 2),
+            (6, 2), (7, 2), (8, 1), (9, 1), (10, 1), (11, 1);
 
 insert into rents(id, comment, start_date, end_date, final_price, confirmed, returned, deleted) values
         (1, 'my comment 1', '2022-01-10T12:30:00', '2022-01-20T12:30:00', 1100, true, false, false),

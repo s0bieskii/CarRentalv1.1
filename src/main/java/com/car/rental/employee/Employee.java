@@ -1,5 +1,6 @@
 package com.car.rental.employee;
 
+import com.car.rental.user.User;
 import java.math.BigDecimal;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +16,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 @Entity
-public class Employee {
+public class Employee extends User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -17,7 +17,6 @@ import com.car.rental.user.dto.UserSearchDto;
 import com.car.rental.user.dto.UserUpdateDto;
 import java.time.LocalDate;
 import javax.sql.DataSource;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
-import org.springframework.test.jdbc.JdbcTestUtils;
 
 @SpringBootTest
 public class UserIntegrationTest {
@@ -45,15 +43,16 @@ public class UserIntegrationTest {
 
     @BeforeEach
     void prepareDb() {
+        cleanDb();
         ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator(false, false,
                 "UTF-8", new ClassPathResource("data.sql"));
         resourceDatabasePopulator.execute(dataSource);
     }
 
-    @AfterEach
-    void tearDown() {
-        JdbcTestUtils.deleteFromTables(jdbcTemplate, "car", "car_details", "employee", "rental", "rental_cars",
-                "rental_employees", "rents", "return_report", "users", "users_rents");
+    void cleanDb() {
+        ResourceDatabasePopulator resourceDatabasePopulator = new ResourceDatabasePopulator(false, false,
+                "UTF-8", new ClassPathResource("clearDatabase.sql"));
+        resourceDatabasePopulator.execute(dataSource);
     }
 
     @Test
@@ -62,6 +61,7 @@ public class UserIntegrationTest {
         UserAddDto userDto = new UserAddDto();
         userDto.setFirstName("Name");
         userDto.setLastName("LastName");
+        userDto.setPassword("password");
         //when
         User user = userService.addUser(userDto);
         //then
@@ -77,6 +77,7 @@ public class UserIntegrationTest {
         UserAddDto userDto = new UserAddDto();
         userDto.setFirstName("Name");
         userDto.setLastName("LastName");
+        userDto.setPassword("password");
         //when
         User user = userService.addUser(userDto);
         //then
@@ -90,6 +91,7 @@ public class UserIntegrationTest {
         userDto.setFirstName("Name");
         userDto.setLastName("LastName");
         userDto.setEmail("email@email.com");
+        userDto.setPassword("password");
         //when
         User user = userService.addUser(userDto);
         //then
@@ -104,8 +106,8 @@ public class UserIntegrationTest {
     @Test
     void getAllShouldReturnPageWithAllUsersInDatabase() {
         //given
-        PageRequest page = PageRequest.of(0, 6);
-        int expectingQuantity = 4;
+        PageRequest page = PageRequest.of(0, 11);
+        int expectingQuantity = 11;
         //when
         Page<UserDto> users = userService.getAll(page);
         //then
@@ -194,16 +196,16 @@ public class UserIntegrationTest {
         //given
         PageRequest page = PageRequest.of(0, 6);
         UserSearchDto userDto = new UserSearchDto();
-        userDto.setFirstName("Penelopa");
-        userDto.setLastName("Czopa");
+        userDto.setFirstName("user1");
+        userDto.setLastName("user1");
         int expectingQuantity = 1;
         //when
         Page<UserDto> users = userService.search(page, userDto);
         //then
         assertAll(
                 () -> assertEquals(expectingQuantity, users.getTotalElements()),
-                () -> assertEquals("Penelopa", users.getContent().get(0).getFirstName()),
-                () -> assertEquals("Czopa", users.getContent().get(0).getLastName())
+                () -> assertEquals("user1", users.getContent().get(0).getFirstName()),
+                () -> assertEquals("user1", users.getContent().get(0).getLastName())
         );
     }
 
@@ -228,7 +230,7 @@ public class UserIntegrationTest {
         UserSearchDto userDto = new UserSearchDto();
         LocalDate birth = LocalDate.of(1996, 6, 12);
         userDto.setBirth(birth);
-        int expectingQuantity = 1;
+        int expectingQuantity = 4;
         //when
         Page<UserDto> users = userService.search(page, userDto);
         //then
@@ -257,7 +259,7 @@ public class UserIntegrationTest {
         //given
         PageRequest page = PageRequest.of(0, 6);
         UserSearchDto userDto = new UserSearchDto();
-        String email = "email@email.pl";
+        String email = "user1@user.pl";
         userDto.setEmail(email);
         int expectingQuantity = 1;
         //when
@@ -290,7 +292,7 @@ public class UserIntegrationTest {
         UserSearchDto userDto = new UserSearchDto();
         boolean activated = true;
         userDto.setActivated(activated);
-        int expectingQuantity = 3;
+        int expectingQuantity = 10;
         //when
         Page<UserDto> users = userService.search(page, userDto);
         //then
@@ -302,7 +304,7 @@ public class UserIntegrationTest {
         //given
         PageRequest page = PageRequest.of(0, 6);
         UserSearchDto userDto = new UserSearchDto();
-        int expectingQuantity = 4;
+        int expectingQuantity = 11;
         //when
         Page<UserDto> updatedUser = userService.search(page, userDto);
         //then
@@ -335,7 +337,7 @@ public class UserIntegrationTest {
     void updateUserShouldReturnUserWithUpdatedFieldsWhenUpdateIsSuccessful() {
         //given
         UserUpdateDto userDto = new UserUpdateDto();
-        Long id = 1L;
+        Long id = 12L;
         String firstNameAfter = "NewName";
         String lastNameAfter = "NewLastName";
         LocalDate birthAfter = LocalDate.of(6666, 4, 12);
