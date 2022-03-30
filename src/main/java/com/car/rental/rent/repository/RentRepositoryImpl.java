@@ -38,9 +38,10 @@ public class RentRepositoryImpl implements RentSearchRepository {
                 .addCriteria("confirmed", rentSearchDto.getConfirmed())
                 .addCriteria("returned", rentSearchDto.getReturned())
                 .addCriteria("damaged", rentSearchDto.getDamaged())
-                .addCriteria("deleted", false);
+                .addCriteria("deleted", rentSearchDto.getDeleted());
 
         Predicate predicate = rentCriteriaBuilder.getPredicate();
+
         List<Rent> rentList;
         if (predicate == null) {
             LOGGER.info("Predicate is null");
@@ -66,10 +67,9 @@ public class RentRepositoryImpl implements RentSearchRepository {
             for (Rent rentToCheck : rentsListToFilter) {
                 LocalDateTime rentCheckStart = rentToCheck.getStartDate();
                 LocalDateTime rentCheckEnd = rentToCheck.getEndDate();
-                boolean check = !rentToCheck.isDeleted() && !rentToCheck.isConfirmed() &&
-                        (!start.isAfter(rentCheckStart) || !start.isBefore(rentCheckEnd)) &&
-                        (!start.isBefore(rentCheckStart) || !end.isAfter(rentCheckEnd)) &&
-                        (!end.isAfter(rentCheckStart) || !end.isBefore(rentCheckEnd));
+                boolean check = !rentToCheck.isDeleted() &&
+                        (!rentCheckStart.isBefore(start) && rentCheckStart.isBefore(end)) ||
+                        (!rentCheckEnd.isBefore(start) && rentCheckEnd.isBefore(end));
                 if (check) {
                     rentsToReturn.add(rentToCheck);
                 }

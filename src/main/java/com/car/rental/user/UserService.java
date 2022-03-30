@@ -1,7 +1,5 @@
 package com.car.rental.user;
 
-import com.car.rental.security.Role;
-import com.car.rental.security.repository.RoleRepository;
 import com.car.rental.user.dto.UserAddDto;
 import com.car.rental.user.dto.UserDto;
 import com.car.rental.user.dto.UserSearchDto;
@@ -9,6 +7,8 @@ import com.car.rental.user.dto.UserUpdateDto;
 import com.car.rental.user.mapper.UserMapper;
 import com.car.rental.user.repository.UserRepository;
 import com.car.rental.utils.PageWrapper;
+import com.car.rental.web.security.Role;
+import com.car.rental.web.security.repository.RoleRepository;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Logger;

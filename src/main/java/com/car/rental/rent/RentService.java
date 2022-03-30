@@ -85,6 +85,21 @@ public class RentService {
         return PageWrapper.listToPage(pageable, rentResultList);
     }
 
+    public List<RentDto> search(RentSearchDto rentSearchDto) {
+        LOGGER.info("search(" + rentSearchDto + ")");
+        List<RentDto> rentResultList = rentRepository.find(rentSearchDto).stream()
+                .map(rentMapper::rentToRentDto).collect(Collectors.toList());
+        LOGGER.info("Found: " + rentResultList);
+        return rentResultList;
+    }
+
+    public List<RentDto> getAllRentsByUserId(Long id){
+        LOGGER.info("getAllRentsByUserId(" + id + ")");
+        List<RentDto> rentList = rentRepository.findRentsByUserId(id).stream().map(rentMapper::rentToRentDto).collect(
+                Collectors.toList());
+        return rentList;
+    }
+
     public RentDto updateRent(RentUpdateDto dto) {
         LOGGER.info("updateRent(" + dto + ")");
         if (dto.getId() != null && rentRepository.existsById(dto.getId())) {
@@ -144,5 +159,9 @@ public class RentService {
             return BigDecimal.valueOf(pricePerDay.doubleValue() * rentDays).setScale(2);
         }
         return null;
+    }
+
+    public boolean existById(Long id){
+        return rentRepository.existsById(id);
     }
 }

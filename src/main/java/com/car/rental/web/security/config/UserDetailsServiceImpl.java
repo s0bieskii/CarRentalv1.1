@@ -1,4 +1,4 @@
-package com.car.rental.security.config;
+package com.car.rental.web.security.config;
 
 import com.car.rental.user.User;
 import com.car.rental.user.repository.UserRepository;

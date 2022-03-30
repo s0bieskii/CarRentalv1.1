@@ -1,4 +1,4 @@
-package com.car.rental.security;
+package com.car.rental.web.security;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,6 +1,6 @@
 package com.car.rental.user;
 
-import com.car.rental.security.Role;
+import com.car.rental.web.security.Role;
 import com.car.rental.rent.Rent;
 import java.time.LocalDate;
 import java.util.Set;

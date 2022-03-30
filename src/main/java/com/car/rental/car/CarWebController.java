@@ -8,6 +8,7 @@ import com.car.rental.details.dto.CarDetailsAddDto;
 import com.car.rental.rent.RentService;
 import com.car.rental.rent.dto.RentAddDto;
 import com.car.rental.rental.RentalService;
+import com.car.rental.user.UserService;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -37,13 +38,15 @@ public class CarWebController {
     final private CarDetailsService carDetailsService;
     final private RentalService rentalService;
     final private RentService rentService;
+    final private UserService userService;
 
     public CarWebController(CarService carService, CarDetailsService carDetailsService, RentalService rentalService,
-                            RentService rentService) {
+                            RentService rentService, UserService userService) {
         this.carDetailsService = carDetailsService;
         this.carService = carService;
         this.rentalService = rentalService;
         this.rentService = rentService;
+        this.userService = userService;
     }
 
     @InitBinder
@@ -170,14 +173,16 @@ public class CarWebController {
             return "cars/car-offer.html";
         }
         RentAddDto rent = new RentAddDto();
+        rent.setUserId(userService.getCurrentLoggedUser().getId());
         rent.setCarId(id);
-        rent.setUserId(2L);
+        rent.setCarId(id);
         rent.setStartDate(carSearch.getStart());
         rent.setEndDate(carSearch.getEnd());
-        rent.setComment("Nice try");
+        rent.setComment("");
         rentService.addRent(rent);
         return "cars/rent-success.html";
     }
+
 
     @GetMapping("/add")
     public String getAddCarView(ModelMap modelMap) {

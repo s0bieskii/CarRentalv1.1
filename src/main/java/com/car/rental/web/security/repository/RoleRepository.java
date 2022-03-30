@@ -1,6 +1,6 @@
-package com.car.rental.security.repository;
+package com.car.rental.web.security.repository;
 
-import com.car.rental.security.Role;
+import com.car.rental.web.security.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

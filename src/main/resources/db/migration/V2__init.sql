@@ -83,21 +83,20 @@ insert into users (dtype, id, first_name, last_name, email, birth, password, act
             (1, 3), (1, 2), (1, 1), (2, 2), (2, 1), (3, 2), (4, 2), (5, 2),
             (6, 2), (7, 2), (8, 1), (9, 1), (10, 1), (11, 1);
 
-insert into rents(id, comment, start_date, end_date, final_price, confirmed, returned, deleted) values
-        (1, 'my comment 1', '2022-01-10T12:30:00', '2022-01-20T12:30:00', 1100, true, false, false),
-        (2, 'my comment 2', '2022-03-05T12:30:00', '2022-03-15T12:30:00', 780, true, false, false),
-        (3, 'my comment 3', '2022-03-10T12:30:00', '2022-03-10T12:30:00', 800, true, false, false),
-        (4, 'my comment 4', '2021-02-15T12:30:00', '2021-02-24T12:30:00', 1200, true, true, false),
-        (5, 'my comment 5', '2021-11-15T12:30:00', '2021-12-22T12:30:00', 1000, true, true, false),
-        (6, 'my comment 6', '2021-10-15T12:30:00', '2021-10-27T12:30:00', 1300, true, true, false),
-        (7, 'my comment 7', '2021-09-01T12:30:00', '2021-09-22T12:30:00', 970, true, true, false),
-        (8, 'my comment 8', '2022-08-10T12:30:00', '2022-08-18T12:30:00', 999, true, true, false),
-        (9, 'my comment 9', '2021-07-15T12:30:00', '2021-07-27T12:30:00', 888, true, true, true),
-        (10, 'my comment 10', '2021-06-09T12:30:00', '2021-06-23T12:30:00', 777, false, false, true),
-        (11, 'my comment 11', '2022-05-06T12:30:00', '2022-05-19T12:30:00', 666, false, false, false),
-        (12, 'my comment 12', '2021-05-06T12:30:00', '2021-05-19T12:30:00', 555, false, false, false),
-        (13, 'my comment 13', '2021-04-01T12:30:00', '2021-04-22T12:30:00', 970, false, false, false);
-
+insert into rents(id, user_id, car_id, comment, start_date, end_date, final_price, confirmed, returned, deleted) values
+        (1, 8, 1, 'my comment 1', '2022-01-10T12:30:00', '2022-01-20T12:30:00', 1100, true, false, false),
+        (2, 8, 6, 'my comment 2', '2022-03-05T12:30:00', '2022-03-15T12:30:00', 780, true, false, false),
+        (3, 8, 2, 'my comment 3', '2022-03-10T12:30:00', '2022-03-10T12:30:00', 800, true, false, false),
+        (4, 9, 3, 'my comment 4', '2021-02-15T12:30:00', '2021-02-24T12:30:00', 1200, true, true, false),
+        (5, 9, 1, 'my comment 5', '2021-11-15T12:30:00', '2021-12-22T12:30:00', 1000, true, true, false),
+        (6, 9, 2, 'my comment 6', '2021-10-15T12:30:00', '2021-10-27T12:30:00', 1300, true, true, false),
+        (7, 10, 4, 'my comment 7', '2021-09-01T12:30:00', '2021-09-22T12:30:00', 970, true, true, false),
+        (8, 8, 5, 'my comment 8', '2022-08-10T12:30:00', '2022-08-18T12:30:00', 999, true, true, false),
+        (9, 12, 3, 'my comment 9', '2021-07-15T12:30:00', '2021-07-27T12:30:00', 888, true, true, true),
+        (10, 10, 3, 'my comment 10', '2021-06-09T12:30:00', '2021-06-23T12:30:00', 777, false, false, true),
+        (11, 11, 8, 'my comment 11', '2022-05-06T12:30:00', '2022-05-19T12:30:00', 666, false, false, false),
+        (12, 8, 1, 'my comment 12', '2021-05-06T12:30:00', '2021-05-19T12:30:00', 555, false, false, false),
+        (13, 9, 1, 'my comment 13', '2021-04-01T12:30:00', '2021-04-22T12:30:00', 970, false, false, false);
 
 
 insert into return_report(id, damaged, note, car_id, employee_id, deleted) values

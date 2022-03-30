@@ -69,74 +69,107 @@
 </header>
 
     <section class="my-account">
+        <div class="content">
+            <div class="row d-flex justify-content-center">
+                <div class="col-10 col-sm-8">
+                    <form th:action="@{/web/users/account/rents}" th:object="${rentSearch}" method="get">
+                    <div class="col-12">
+                        <h3>My rents</h3>
+                        <hr/>
+                    </div>
+                    <div class="col-12">
+                        <div class="d-flex justify-content-center justify-content-sm-start">
+                            <h3><span class="badge rounded-pill bg-warning text-dark align-middle">Search option</span></h3>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="d-flex flex-row">
+                                <h3><span class="badge rounded-pill bg-warning text-dark align-middle">From date</span></h3>
+                                <input th:field="*{start}" type="datetime-local"
+                                       class="form-control">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex flex-row">
+                                <h3><span class="badge rounded-pill bg-warning text-dark align-middle">To date</span></h3>
+                                <input th:field="*{end}" type="datetime-local"
+                                       class="form-control">
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="col-12 col-sm-6 col-md-3">
+                            <select th:field="*{carId}" class="d-inline form-select"
+                                    aria-label="Default select example">
+                                <option th:value="${null}" selected>Car</option>
+                                <option th:each="car : ${cars}" th:value="${car.id}"
+                                        th:utext="${car.brand+' '+car.model}">Brand</option>
+
+                            </select>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-3">
+                            <select th:field="${rentSearch.damaged}" class="d-inline form-select"
+                                    aria-label="Default select example">
+                                <option th:value="null">Damaged</option>
+                                <option th:value="true">Yes</option>
+                                <option th:value="false" >No</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-3">
+                            <select th:field="${rentSearch.returned}" class="d-inline form-select"
+                                    aria-label="Default select example">
+                                <option th:value="null">Returned</option>
+                                <option th:value="true">Yes</option>
+                                <option th:value="false" >No</option>
+                            </select>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-3 d-flex justify-content-center justify-content-sm-start">
+                            <button type="submit" class="btn btn-primary btn-lg">Search</button>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        </br>
         <div class="d-flex justify-content-center align-items-center">
             <div class="back" id="form-container">
                 <div class="container">
-                    <h3>My rents</h3>
-                    <hr/>
-
                     <table class="table table-dark table-striped">
                         <thead>
                             <tr>
-                                <th scope="col">Id</th>
+                                <th scope="col">No.</th>
                                 <th scope="col">Brand</th>
                                 <th scope="col">Model</th>
-                                <th scope="col">From</th>
-                                <th scope="col">Date</th>
-                                <th scope="col">Confirmed</th>
+                                <th scope="col">Start date</th>
+                                <th scope="col">End date</th>
+<!--                                <th scope="col">Confirmed</th>-->
                                 <th scope="col">Returned</th>
                                 <th scope="col">Details</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>BMW</td>
-                                <td>X3</td>
-                                <td>Poznan</td>
-                                <td>21.12.2022</td>
+                            <tr th:each="rent: ${rents}">
+                                <th th:text="${rents.indexOf(rent)+1}">1</th>
+                                <td th:text="*{rent.car.brand}">BMW</td>
+                                <td th:text="*{rent.car.model}">X3</td>
+                                <td th:text="${rent.starDateGetString()}">dd/mm/yyyy</td>
+                                <td th:text="${rent.endDateGetString()}">dd/mm/yyyy</td>
                                 <td>
-                                    <center><span class="badge bg-success">X</span></center>
+                                    <center><span th:if="${rent.returned == true}" class="badge bg-success">X</span>
+                                            <span th:if="${rent.returned == false}" class="badge bg-danger">X</span>
+                                    </center>
                                 </td>
-                                <td>
-                                    <center><span class="badge bg-danger">X</span></center>
-                                </td>
-                                <td><a href="#" class="button">Show</a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>BMW</td>
-                                <td>X3</td>
-                                <td>Poznan</td>
-                                <td>21.12.2022</td>
-                                <td>
-                                    <center><span class="badge bg-success">X</span></center>
-                                </td>
-                                <td>
-                                    <center><span class="badge bg-danger">X</span></center>
-                                </td>
-                                <td><a href="#" class="button">Show</a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>BMW</td>
-                                <td>X3</td>
-                                <td>Poznan</td>
-                                <td>21.12.2022</td>
-                                <td>
-                                    <center><span class="badge bg-success">X</span></center>
-                                </td>
-                                <td>
-                                    <center><span class="badge bg-danger">X</span></center>
-                                </td>
-                                <td><a href="#" class="button">Show</a></td>
+                                <td><a th:href="@{'/web/users/account/rent/' + ${rent.id}}" class="button">Show</a></td>
                             </tr>
                         </tbody>
                     </table>
 
                     <br>
                     <div class="d-flex justify-content-center">
-                        <div class="text-center my-2"><a href="#" class="btn btn-primary">Back</a></div>
+                        <div class="text-center my-2"><a th:href="@{/web/users/account}" class="btn btn-primary">Back</a></div>
                     </div>
 
                 </div>

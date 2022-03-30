@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Getter
 @Setter
@@ -14,12 +15,23 @@ import lombok.ToString;
 @ToString
 public class RentDto {
 
+    //TODO Add Rental from which was rented
     private Long id;
-    private CarDto   car;
+    private CarDto car;
     private UserDto user;
-    private LocalDateTime start;
-    private LocalDateTime end;
+    @DateTimeFormat(pattern="dd-MM-yyyy HH:mm")
+    private LocalDateTime startDate;
+    @DateTimeFormat(pattern="dd-MM-yyyy HH:mm")
+    private LocalDateTime endDate;
     private Double finalPrice;
     private boolean confirmed;
     private boolean returned;
+
+    public String starDateGetString(){
+        return startDate.toString().replaceAll("T", " ");
+    }
+
+    public String endDateGetString(){
+        return endDate.toString().replaceAll("T", " ");
+    }
 }

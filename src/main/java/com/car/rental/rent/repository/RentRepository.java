@@ -11,6 +11,9 @@ public interface RentRepository extends JpaRepository<Rent, Long>, RentSearchRep
     @Query(value = "SELECT * FROM rents WHERE car_id = :id", nativeQuery = true)
     List<Rent> findRentByCarId(@Param("id") Long id);
 
+    @Query(value = "SELECT * FROM rents WHERE user_id = :id", nativeQuery = true)
+    List<Rent> findRentsByUserId(@Param("id") Long id);
+
     @Query(value = "SELECT * FROM rents WHERE returned = false AND car_id = :id", nativeQuery = true)
     List<Rent> findRentForNotReturnedCarsByCarId(@Param("id") Long id);
 }
