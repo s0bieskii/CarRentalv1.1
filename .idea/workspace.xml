@@ -4,32 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1448cd2-8819-4532-8efc-e0244a619617" name="Changes" comment="Fix application:&#10;-remove swagger">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/user/rent-delete.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/user/single-rent.html" afterDir="false" />
+    <list default="true" id="a1448cd2-8819-4532-8efc-e0244a619617" name="Changes" comment="Update about-view.html and site footer">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/car/CarWebController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/car/CarWebController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/rent/RentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/rent/RentService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/rent/dto/RentDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/rent/dto/RentDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/rent/dto/RentSearchDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/rent/dto/RentSearchDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/rent/repository/RentRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/rent/repository/RentRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/rent/repository/RentRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/rent/repository/RentRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/security/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/web/security/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/security/config/MyUserDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/web/security/config/MyUserDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/security/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/web/security/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/security/config/UserDetailsServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/web/security/config/UserDetailsServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/security/repository/RoleRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/web/security/repository/RoleRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/user/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/user/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/user/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/user/UserWebController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/user/UserWebController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/db/migration/V2__init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/db/migration/V2__init.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/cars/car-offer-confirm.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/cars/car-offer-confirm.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/cars/car-offer.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/cars/car-offer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/error.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/error.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/rent/single-rent.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/cars/cars.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/cars/rent-a-car.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/cars/rent-a-car.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/cars/rent-success.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/cars/rent-success.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login/forgot-password.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/login/forgot-password.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/main/aboutView.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/main/aboutView.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/main/contact.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/main/contact.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/register/register-success.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/register/register-success.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/register/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/register/register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/rental/rental.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/rental/rental.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/user/account-edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/user/account-edit.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/user/account.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/user/account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/user/user-rents.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/user/user-rents.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/user/single-rent.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/user/single-rent.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +53,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="master" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -77,6 +65,17 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/main/resources/db/migration/V2__init.sql" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/resources/templates/login/login.html" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/car/rental/user/User.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/car/rental/car/CarWebController.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/resources/templates/main/aboutView.html" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/pom.xml" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/car/rental/details/dto/CarDetailsDto.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/java/com/car/rental/user/UserWebController.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/src/main/resources/application.properties" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="JpbToolWindowState">
     <option name="myId2FirstActivated">
@@ -114,7 +113,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/com/car/rental/car/dto" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/templates/user" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/WarriorGame-main" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -347,10 +346,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.ApplicationDEV" />
-        <item itemvalue="JUnit.CarIntegrationTest" />
-        <item itemvalue="JUnit.CarIntegrationTest.findAllMethodShouldReturnCarPageWithSomeCars" />
         <item itemvalue="JUnit.RentIntegrationTest.addRentShouldAutomaticallyCalculatePrice" />
         <item itemvalue="JUnit.RentalIntegrationTest" />
+        <item itemvalue="JUnit.CarIntegrationTest.findAllMethodShouldReturnCarPageWithSomeCars" />
+        <item itemvalue="JUnit.CarIntegrationTest" />
       </list>
     </recent_temporary>
   </component>
@@ -630,7 +629,35 @@
       <option name="project" value="LOCAL" />
       <updated>1648207178900</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Config security and finish customer/user views and logic">
+      <created>1648644544463</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1648644544463</updated>
+    </task>
+    <task id="LOCAL-00040" summary="Fix init data">
+      <created>1648680810467</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1648680810467</updated>
+    </task>
+    <task id="LOCAL-00041" summary="Heroku deploy">
+      <created>1648681217499</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1648681217499</updated>
+    </task>
+    <task id="LOCAL-00042" summary="Update about-view.html and site footer">
+      <created>1648725921500</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1648725921500</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -663,10 +690,6 @@
     <ignored-roots>
       <path value="$PROJECT_DIR$/battle-ships/battle-ships" />
     </ignored-roots>
-    <MESSAGE value="Global code refactor and clean code." />
-    <MESSAGE value="Fix commit merge" />
-    <MESSAGE value="Add search employee by rentalId" />
-    <MESSAGE value="Add rental controller and service class" />
     <MESSAGE value="Add test for rental service" />
     <MESSAGE value="Add Rent service and controller, and some test for that.&#10;Fix some bugs on other classes" />
     <MESSAGE value="Update commit" />
@@ -688,7 +711,11 @@
     <MESSAGE value="Change some CSS" />
     <MESSAGE value="Add validate date when pick and some refactor and bug fix" />
     <MESSAGE value="Add create car view with validation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add create car view with validation" />
+    <MESSAGE value="Config security and finish customer/user views and logic" />
+    <MESSAGE value="Fix init data" />
+    <MESSAGE value="Heroku deploy" />
+    <MESSAGE value="Update about-view.html and site footer" />
+    <option name="LAST_COMMIT_MESSAGE" value="Update about-view.html and site footer" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

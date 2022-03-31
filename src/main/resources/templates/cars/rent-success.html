@@ -78,7 +78,7 @@
             <div class="p-2 bd-highlight">
                 <h3>You can find rent in your rent history</h3>
             </div>
-            <p>Redirecting to home site<div id="counter">5</div></p>
+            <p>Redirecting to rent history<div id="counter">3</div></p>
             <div class="spinner-border text-success" role="status">
                 <span class="visually-hidden">Redirecting to home site</span>
 
@@ -92,7 +92,7 @@
             var count = div.textContent * 1 - 1;
             div.textContent = count;
             if (count <= 0) {
-                location.href = '/';
+                location.href = '/web/users/account/rents';
             }
         }, 1000);
     </script>
