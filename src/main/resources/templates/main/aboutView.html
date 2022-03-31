@@ -1,171 +1,234 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-                xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Car Rental</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link th:href="@{/css/bootstrap.min.css}" th:rel="stylesheet">
   <link th:href="@{/css/main.css}" th:rel="stylesheet">
   <link rel="icon" th:href="@{/images/favicon.ico}">
 </head>
 
 <body>
-<header>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <img th:src="@{/images/logo.png}" width="100" height="30" class="d-inline-block align-top" alt="">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-              aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-              <a class="nav-link" th:href="@{/}">Home</a>
-            </li>
-            <li class="nav-item">
-              <a sec:authorize="hasRole('ROLE_USER')" class="nav-link" th:href="@{/web/cars/search}">Rent a car</a>
-            </li>
-            <li class="nav-item">
-              <a sec:authorize="isAnonymous()" class="nav-link" th:href="@{/web/cars/search}">Rent a car</a>
-            </li>
-            <li sec:authorize="isAnonymous()" class="nav-item">
-              <a class="nav-link" th:href="@{/web/users/login}">Login</a>
-            </li>
-            <li sec:authorize="isAnonymous()" class="nav-item">
-              <a class="nav-link" th:href="@{/web/users/register}">Register</a>
-            </li>
-            <li sec:authorize="isAnonymous()" class="nav-item">
-              <a class="nav-link" th:href="@{/contact}">Contact</a>
-            </li>
-            <li sec:authorize="hasRole('ROLE_USER')" class="nav-item">
-              <a class="nav-link" th:href="@{/contact}">Contact</a>
-            </li>
-            <li sec:authorize="hasRole('ROLE_EMPLOYEE')"  class="nav-item">
-              <a class="nav-link" th:href="@{/web/cars/add}">Rental management</a>
-            </li>
-            <li sec:authorize="hasRole('ROLE_EMPLOYEE')"  class="nav-item">
-              <a class="nav-link" th:href="@{/web/cars/add}">Add a car</a>
-            </li>
-            <li sec:authorize="hasRole('ROLE_ADMIN')"  class="nav-item">
-              <a class="nav-link" th:href="@{/#}">Menage panel</a>
-            </li>
-            <li class="nav-item">
-              <a sec:authorize="isAuthenticated()" class="nav-link" th:href="@{/web/users/account}" style="color: #3366ff;">My account</a>
-            </li>
-            <li class="nav-item d-flex justify-content-end">
-              <a sec:authorize="isAuthenticated()" class="nav-link" th:href="@{/logout}" style="color: red;">Logout</a>
-            </li>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <img th:src="@{/images/logo.png}" width="100" height="30" class="d-inline-block align-top" alt="">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" th:href="@{/}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a sec:authorize="hasRole('ROLE_USER')" class="nav-link" th:href="@{/web/cars/search}">Rent a car</a>
+              </li>
+              <li class="nav-item">
+                <a sec:authorize="isAnonymous()" class="nav-link" th:href="@{/web/cars/search}">Rent a car</a>
+              </li>
+              <li sec:authorize="isAnonymous()" class="nav-item">
+                <a class="nav-link" th:href="@{/web/users/login}">Login</a>
+              </li>
+              <li sec:authorize="isAnonymous()" class="nav-item">
+                <a class="nav-link" th:href="@{/web/users/register}">Register</a>
+              </li>
+              <li sec:authorize="isAnonymous()" class="nav-item">
+                <a class="nav-link" th:href="@{/contact}">Contact</a>
+              </li>
+              <li sec:authorize="hasRole('ROLE_USER')" class="nav-item">
+                <a class="nav-link" th:href="@{/contact}">Contact</a>
+              </li>
+              <li sec:authorize="hasRole('ROLE_EMPLOYEE')" class="nav-item">
+                <a class="nav-link" th:href="@{/web/cars/add}">Rental management</a>
+              </li>
+              <li sec:authorize="hasRole('ROLE_EMPLOYEE')" class="nav-item">
+                <a class="nav-link" th:href="@{/web/cars/add}">Add a car</a>
+              </li>
+              <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
+                <a class="nav-link" th:href="@{/#}">Menage panel</a>
+              </li>
+              <li class="nav-item">
+                <a sec:authorize="isAuthenticated()" class="nav-link" th:href="@{/web/users/account}"
+                  style="color: #3366ff;">My account</a>
+              </li>
+              <li class="nav-item d-flex justify-content-end">
+                <a sec:authorize="isAuthenticated()" class="nav-link" th:href="@{/logout}"
+                  style="color: red;">Logout</a>
+              </li>
+            </ul>
           </ul>
-        </ul>
+        </div>
       </div>
-    </div>
-  </nav>
-</header>
+    </nav>
+  </header>
 
-<div class="container-fluid" id="car-container">
-  <div class="container">
-    <div class='row'>
-      <div class="col-12">
-        <div class="row d-flex justify-content-center">
-          <div class="col-12 col-sm-10 col-md-8">
-            <h3>About project</h3>
-            <hr />
-            <div class="row d-flex justify-content-center">
-              <div class="col-12">
-                  <h2 style="text-decoration: underline">Car rental 🚗</h2>
-                  <p>It is my first back-end app for portfolio. The app is write with Java 11, Spring Boot 2 and MySQL database.
-                    The application is for menagment a car rental network. I tried to use good practice in project like SOLID, DTO,
-                    Clean Code and Loggers etc. I created basic REST API and now i'm working on Model View Controller with Thymeleaf
-                    and Bootstrap beacuse i will create simple GUI (and it will teach me what frontend requires from backend).
-                    App is not finish in 100% but i working on it all the time and progress is still updating there.</p>
+  <div class="container-fluid" id="car-container">
+    <div class="container">
+      <div class='row'>
+        <div class="col-12">
+          <div class="row d-flex justify-content-center">
+            <div class="col-12 col-sm-10 col-md-8">
+              <br>
+              <h3>🚗 About project</h3>
+              <hr />
+              <div class="row d-flex justify-content-center">
+                <div class="col-12">
+                  <p>It is my main project which I'm still developing, it is a <strong>Spring web car rental
+                      application</strong>, that provides
+                    <strong>REST API</strong> for communication and <strong>MVC</strong> pattern. <br>
+                    The data is stored in a <strong>relational database</strong> which is
+                    accessed through <strong>JPA/Hibernate</strong>. The application is divided into client, employee,
+                    and administrator
+                    layers, thanks to which I increase its security. The main security features of the application
+                    are the use of <strong>DTOs, Spring Validation</strong>, and the most important
+                    <strong>Spring Security</strong>, which is responsible for user authentication.<br>
+                    - As a <strong>customer</strong> of a rental company we can register, login,
+                    <strong>dynamically filter available cars</strong>, rent a car, manage
+                    rentals, edit rentals and account details, delete account<br>
+                    - As an <strong>employee</strong> we can manage a calendar of rentals,
+                    control the current status of the rental, edit car data, receive and give cars to customers with
+                    the creation of reports of issuance and return report. <br>
+                    - As an <strong>administrator</strong> we can add new cars and assign them to rental branches,
+                    manage employees, add new employees, generate monthly reports.
+                    I created the front-end layer using <strong>Thymeleaf</strong> and <strong>Bootstrap</strong>.
+                  </p>
+                  <br>
 
-                <h2 style="text-decoration: underline">Tech/framework used 🔧</h2>
-                <ul>
-                  <li>Java 11</li>
-                  <li>Spring Boot 2</li>
-                  <li>Spring Validator</li>
-                  <li>JPA</li>
-                  <li>Criteria API</li>
-                  <li>MySQL</li>
-                  <li>Thymeleaf</li>
-                  <li>MapStruct</li>
-                  <li>Loombok1</li>
-                  <li>JUnit</li>
-                  <li>Bootstrap</li>
-                  <li>CSS/HTML</li>
-                </ul>
+                  <h3>🎉 Sandbox</h3>
+                  <hr />
+                  <div class="row">
+                    <div class="col-12 col-sm-6">
+                      <p>Here you will find the login information for the site.<br>
+                        <strong>Please do not change it.</strong><br>
+                        Please be aware that others may also use this login data at the same time.</p>
+                    </div>
+                    <div class="col-12 col-sm-6">
+                      <table class="table table-dark table-striped">
+                        <thead>
+                        <tr>
+                          <th scope="col">ROLE</th>
+                          <th scope="col">LOGIN</th>
+                          <th scope="col">PASSWORD</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                          <td>USER</td>
+                          <td>user@user.pl</td>
+                          <td>password</td>
+                        </tr>
+                        <tr>
+                          <td>EMPLOYEE</td>
+                          <td>employee@employee.pl</td>
+                          <td>password</td>
+                        </tr>
+                        <tr>
+                          <td>ADMIN</td>
+                          <td>admin@admin.pl</td>
+                          <td>password</td>
+                        </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <br>
+
+                  <h3>🔧 Tech/framework used</h3>
+                  <hr />
+                  <ul>
+                    <li>Java 11</li>
+                    <li>Spring (Boot, Validator, Security)</li>
+                    <li>JPA/hibernate</li>
+                    <li>SQL</li>
+                    <li>Criteria API</li>
+                    <li>JUnit</li>
+                    <li>H2 Database</li>
+                    <li>Flyway</li>
+                    <li>Lombok</li>
+                    <li>MapStruct</li>
+                    <li>Thymeleaf</li>
+                    <li>Bootstrap</li>
+                    <li>HTML/CSS</li>
+                  </ul>
+                </div>
+              </div>
+              <br><br>
+              <h3>📌 TODO </h3>
+              <hr />
+              <div class="row">
+                <div class="col-12 col-md-6">
+                  <h4>IN PROGRESS ❗</h4>
+                  <ul>
+                    <li>Management panel view for employee</li>
+                    <li>Management panel view for admin</li>
+                    <li><Add></Add> car image</li>
+                    <li>Add maps with marker to rental view</li>
+                    <li>Confirm registration by email link with JWT</li>
+                    <li>Add email sender</li>
+                    <li>Add bug report</li>
+                    <li>Fix some bugs</li>
+                  </ul>
+
+                </div>
+                <div class="col-12 col-md-6">
+                  <h4>DONE ✔</h4>
+                  <ul>
+                    <li>Design project architecture</li>
+                    <li>Implement REST API</li>
+                    <li>Create dynamically cars filter</li>
+                    <li>Implement ModelViewController</li>
+                    <li>Create site layout</li>
+                    <li>Create site views</li>
+                    <li>Implement pagination</li>
+                    <li>Add Spring Security</li>
+                    <li>Implement login</li>
+                    <li>Implement register</li>
+                    <li>Add Spring Validation</li>
+                    <li>Implement User stuff</li>
+                  </ul>
+                </div>
               </div>
             </div>
-            <p>It is my first back-end app for portfolio. The app is write with <strong>Java 11, Spring Boot 2 and MySQL</strong> database.
-              <br>
-              The application is for menagment a car rental network. I tried to use good practice in project like <strong>SOLID, DTO,
-              Clean Code and Loggers</strong> etc. I created basic REST API and now i'm working on Model View Controller with
-              Thymeleaf and Bootstrap beacuse i will create simple GUI (and it will teach me what frontend requires from
-              backend). App is not finish in 100% but i working on it all the time and progress is still updating there.</p>
-            <br><br>
-            <h4>What you can find in my project:</h4>
-            <ul>
-              <li>REST API</li>
-              <li>ModelViewController</li>
-              <li>CRUD</li>
-              <li>DTO</li>
-              <li>Dynamic entity search</li>
-              <li>Project patterns</li>
-              <li>Clean code</li>
-              <li>Integration tests</li>
-            </ul>
-            <h4>Tech/framework used:</h4>
-            <ul>
-              <li>Java 11</li>
-              <li>Spring Boot 2</li>
-              <li>Spring Validator</li>
-              <li>JPA</li>
-              <li>Criteria API</li>
-              <li>MySQL</li>
-              <li>Flyway</li>
-              <li>Thymeleaf</li>
-              <li>MapStruct</li>
-              <li>Loombok</li>
-              <li>JUnit</li>
-              <li>Bootstrap</li>
-              <li>CSS/HTML</li>
-            </ul>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
 
-<footer class="footer">
-  <div class="container" id="git-footer">
-            <span class="text-muted">
-                <a href="https://github.com/s0bieskii/CarRentalv1.1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor"
-                         class="bi bi-github" viewBox="0 0 16 16">
-                        <path
-                                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
-                    </svg>
-                </a>
-            </span>
-  </div>
-</footer>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
-</script>
+  <footer class="footer">
+    <div class="container-fluid">
+        <a href="https://github.com/s0bieskii/CarRentalv1.1">
+          <i class="fa fa-github" style="font-size:36px"></i>
+        </a>
+        <a>&nbsp;</a>
+        <a href="https://www.linkedin.com/in/patryk-chojnacki96/">
+          <i class="fa fa-linkedin-square" style="font-size:36px"></i>
+        </a>
+      <a>&nbsp;</a>
+        <a href="/" style="float: right;">
+          Report a bug
+        </a>
+    </div>
+  </footer>
 
 </body>
 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js "
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p "
+        crossorigin="anonymous "></script>
 </html>
