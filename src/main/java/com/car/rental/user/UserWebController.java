@@ -52,14 +52,14 @@ public class UserWebController {
     public String create(@Valid @ModelAttribute("user") UserAddDto user, BindingResult bindingResult,
                          ModelMap modelMap) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null || authentication instanceof AnonymousAuthenticationToken) {
-            return "redirect:/";
+        if (authentication == null || authentication instanceof AnonymousAuthenticationToken)  {
+            if (bindingResult.hasErrors()) {
+                return "register/register.html";
+            }
+            userService.addUser(user);
+            return "register/register-success.html";
         }
-        if (bindingResult.hasErrors()) {
-            return "register/register.html";
-        }
-        userService.addUser(user);
-        return "register/register-success.html";
+        return "redirect:/";
     }
 
     @GetMapping("/login")
