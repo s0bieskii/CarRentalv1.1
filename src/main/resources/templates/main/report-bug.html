@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Car Rental</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link th:href="@{/css/bootstrap.min.css}" th:rel="stylesheet">
+  <link th:href="@{/css/main.css}" th:rel="stylesheet">
+  <link rel="icon" th:href="@{/images/favicon.ico}">
+</head>
+
+<body>
+  <header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <img th:src="@{/images/logo.png}" width="100" height="30" class="d-inline-block align-top" alt="">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item">
+                <a class="nav-link" th:href="@{/}">Home</a>
+              </li>
+              <li class="nav-item">
+                <a sec:authorize="hasRole('ROLE_USER')" class="nav-link" th:href="@{/web/cars/search}">Rent a car</a>
+              </li>
+              <li class="nav-item">
+                <a sec:authorize="isAnonymous()" class="nav-link" th:href="@{/web/cars/search}">Rent a car</a>
+              </li>
+              <li sec:authorize="isAnonymous()" class="nav-item">
+                <a class="nav-link" th:href="@{/web/users/login}">Login</a>
+              </li>
+              <li sec:authorize="isAnonymous()" class="nav-item">
+                <a class="nav-link" th:href="@{/web/users/register}">Register</a>
+              </li>
+              <li sec:authorize="isAnonymous()" class="nav-item">
+                <a class="nav-link" th:href="@{/contact}">Contact</a>
+              </li>
+              <li sec:authorize="hasRole('ROLE_USER')" class="nav-item">
+                <a class="nav-link" th:href="@{/contact}">Contact</a>
+              </li>
+              <li sec:authorize="hasRole('ROLE_EMPLOYEE')" class="nav-item">
+                <a class="nav-link" th:href="@{/web/cars/add}">Rental management</a>
+              </li>
+              <li sec:authorize="hasRole('ROLE_EMPLOYEE')" class="nav-item">
+                <a class="nav-link" th:href="@{/web/cars/add}">Add a car</a>
+              </li>
+              <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
+                <a class="nav-link" th:href="@{/#}">Menage panel</a>
+              </li>
+              <li class="nav-item">
+                <a sec:authorize="isAuthenticated()" class="nav-link" th:href="@{/web/users/account}"
+                  style="color: #3366ff;">My account</a>
+              </li>
+              <li class="nav-item d-flex justify-content-end">
+                <a sec:authorize="isAuthenticated()" class="nav-link" th:href="@{/logout}"
+                  style="color: red;">Logout</a>
+              </li>
+            </ul>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container-fluid" id="car-container">
+    <div class="container">
+      <div class='row'>
+        <div class="col-12">
+          <div class="row d-flex justify-content-center">
+            <div class="col-12 col-sm-10 col-md-8">
+              <br>
+              <h3>Contact and bug report</h3>
+              <hr/>
+              <div class="col-12">
+                <form class="email-sender" th:action="@{/report-bug}" th:object="${email}" method="post">
+                  <div class="row ">
+                    <div class="col">
+                      <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" th:field="*{userName}" class="form-control" placeholder="Name">
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-group">
+                        <label>Email</label>
+                        <input type="text" th:field="*{from}" class="form-control" placeholder="Email">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="input-group">
+                      <textarea class="form-control" th:field="*{text}" aria-label="With textarea" placeholder="Message"
+                                style="width: 100%; height: 400px; resize: none;">
+                      </textarea>
+                    </div>
+                  </div>
+                  <div class="row  d-flex justify-content-center">
+                    <div class="col d-flex justify-content-center">
+                      <p style="color: #FF0000;" th:if="${#fields.hasErrors('userName')}"
+                         th:errors="*{userName}">
+                        Name Error <br></p>
+                      <p style="color: #FF0000;" th:if="${#fields.hasErrors('from')}"
+                         th:errors="*{from}">
+                        Name Error <br></p>
+                      <p style="color: #FF0000;" th:if="${#fields.hasErrors('text')}"
+                         th:errors="*{text}">
+                        Name Error <br></p>
+                    </div>
+                  </div>
+                  <div class="row d-flex justify-content-center">
+                    <div class="col-6 col-sm-3 d-flex justify-content-center">
+                      <button type="submit" class="btn btn-primary btn-lg"
+                              style="width: 100%; height: 90%;">Send
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+
+  <footer class="footer">
+    <div class="container-fluid">
+        <a href="https://github.com/s0bieskii/CarRentalv1.1">
+          <i class="fa fa-github" style="font-size:36px"></i>
+        </a>
+        <a>&nbsp;</a>
+        <a href="https://www.linkedin.com/in/patryk-chojnacki96/">
+          <i class="fa fa-linkedin-square" style="font-size:36px"></i>
+        </a>
+      <a>&nbsp;</a>
+        <a href="/" style="float: right;">
+          Report a bug
+        </a>
+    </div>
+  </footer>
+
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js "
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p "
+        crossorigin="anonymous "></script>
+</html>
