@@ -1,5 +1,4 @@
 # About project: :car:
-#### It is my first back-end app for my portfolio. The app is written with Java 11, Spring Boot 2, and MySQL database.
 It is my main project which I'm still developing, it is a Spring web car rental application, that provides REST API for communication and MVC pattern.
 The data is stored in a relational database which is accessed through JPA/Hibernate. The application is divided into client, employee, and administrator layers, thanks to which I increase its security. The main security features of the application are the use of DTOs, Spring Validation, and the most important Spring Security, which is responsible for user authentication.
 - As a customer of a rental company we can register, login, dynamically filter available cars, rent a car, manage rentals, edit rentals and account details, delete account
