@@ -9,6 +9,12 @@ import com.car.rental.rent.RentService;
 import com.car.rental.rent.dto.RentAddDto;
 import com.car.rental.rental.RentalService;
 import com.car.rental.user.UserService;
+import com.car.rental.utils.fileUpload.StorageService;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -29,6 +35,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping("/web/cars")
@@ -39,14 +46,16 @@ public class CarWebController {
     final private RentalService rentalService;
     final private RentService rentService;
     final private UserService userService;
+    final private StorageService storageService;
 
     public CarWebController(CarService carService, CarDetailsService carDetailsService, RentalService rentalService,
-                            RentService rentService, UserService userService) {
+                            RentService rentService, UserService userService, StorageService storageService) {
         this.carDetailsService = carDetailsService;
         this.carService = carService;
         this.rentalService = rentalService;
         this.rentService = rentService;
         this.userService = userService;
+        this.storageService = storageService;
     }
 
     @InitBinder
@@ -194,14 +203,25 @@ public class CarWebController {
     }
 
     @PostMapping("/add")
-    public String addNewCar(@Valid @ModelAttribute("addCar") CarAddDto carAddDto, BindingResult bindingResult,
-                            ModelMap modelMap) {
+        public String addNewCar(@RequestParam("file") MultipartFile file,
+                            @Valid @ModelAttribute("addCar") CarAddDto carAddDto, BindingResult bindingResult,
+                            ModelMap modelMap) throws IOException {
         modelMap.addAttribute("addCar", carAddDto);
         modelMap.addAttribute("rentals", rentalService.findAll());
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             return "cars/add-car.html";
         }
-        carService.addCar(carAddDto);
+        Car car = carService.addCar(carAddDto);
+        InputStream stream = file.getInputStream();
+        byte[] buffer = new byte[stream.available()];
+        stream.read(buffer);
+
+        File targetFile = new File("src/main/resources/static/images/upload/cars/"+car.getId()+".png");
+        try (OutputStream outStream = new FileOutputStream(targetFile)) {
+            outStream.write(buffer);
+            outStream.close();
+            stream.close();
+        }
         return "main/aboutView.html";
     }
 

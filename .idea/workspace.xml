@@ -4,20 +4,25 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a1448cd2-8819-4532-8efc-e0244a619617" name="Changes" comment="Update about-view.html and site footer">
+    <list default="true" id="a1448cd2-8819-4532-8efc-e0244a619617" name="Changes" comment="Fix user register">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/utils/fileUpload/FileSystemStorageService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/utils/fileUpload/StorageException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/utils/fileUpload/StorageFileNotFoundException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/utils/fileUpload/StorageProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/utils/fileUpload/StorageService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images/upload/cars/1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images/upload/cars/2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images/upload/cars/3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images/upload/cars/4.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images/upload/cars/5.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images/upload/cars/7.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images/upload/cars/8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/images/upload/cars/default.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/cars/cars.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/car/rental/car/CarWebController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/car/rental/car/CarWebController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/cars/add-car.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/cars/add-car.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/cars/car-offer.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/cars/car-offer.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/cars/rent-a-car.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/cars/rent-a-car.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/cars/rent-success.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/cars/rent-success.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login/forgot-password.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/login/forgot-password.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/main/aboutView.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/main/aboutView.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/main/contact.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/main/contact.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/register/register-success.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/register/register-success.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/register/register.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/register/register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/rental/rental.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/rental/rental.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/user/account-edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/user/account-edit.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/user/account.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/user/account.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/user/single-rent.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/user/single-rent.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,7 +58,7 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="master" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -113,7 +118,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/com/car/rental/car/dto" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/WarriorGame-main" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/resources/static/images/upload/cars" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -128,11 +133,11 @@
       <recent name="com.car.rental.car.integration" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Patryk Java\SpringLearning\Car Rental v1.1\src\main\resources\static\images\upload\cars" />
       <recent name="D:\Patryk Java\SpringLearning\Car Rental v1.1\src\main\resources\templates\user" />
       <recent name="D:\Patryk Java\SpringLearning\Car Rental v1.1\src\main\resources\templates\rental" />
       <recent name="D:\Patryk Java\SpringLearning\Car Rental v1.1\src\main\resources\templates\main" />
       <recent name="D:\Patryk Java\SpringLearning\Car Rental v1.1\src\main\resources\templates" />
-      <recent name="D:\Patryk Java\SpringLearning\Car Rental v1.1\src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\Patryk Java\SpringLearning\Car Rental v1.1\src\main\resources\templates\user" />
@@ -674,7 +679,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
+                        <option value="implement-add-car-image" />
                       </list>
                     </value>
                   </entry>
@@ -742,6 +747,15 @@
             <option name="WATCH_EXIT" value="false" />
           </properties>
           <option name="timeStamp" value="27" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/main/java/com/car/rental/utils/fileUpload/FileSystemStorageService.java</url>
+          <line>53</line>
+          <properties class="com.car.rental.utils.fileUpload.FileSystemStorageService" method="store">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="30" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

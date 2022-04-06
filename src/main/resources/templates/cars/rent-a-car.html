@@ -203,7 +203,7 @@
                 <div th:each="car : ${cars.content}" class='col-12 col-sm-6 col-md-4'>
                     <div class="col">
                         <!--<div class="card h-100 shadow-sm"><img th:src="@{/images/cars/{id}.png(id=${car.id})}" class="card-img-top" alt="..." -->
-                        <div class="card h-100 shadow-sm"><img th:src="@{/images/cars/1.png}" class="card-img-top"
+                        <div class="card h-100 shadow-sm"><img th:src="@{${'/images/upload/cars/' + car.id +'.png'}}" class="card-img-top"
                                 alt="...">
                             <div class="card-body">
                                 <div class="clearfix mb-3">
